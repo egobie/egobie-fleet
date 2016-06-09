@@ -1,0 +1,45 @@
+<ion-modal-view hide-nav-bar="true" cache-view="false"
+                ng-app="app.home.resident"
+                ng-controller="openingCtrl">
+    <ion-header-bar class="egobie-header-bar">
+        <button class="button button-icon icon ion-android-close"
+                ng-click="hideOpeningModal()"></button>
+        <h1 class="title">OPENINGS</h1>
+        <button class="button button-icon icon ion-android-refresh"
+                ng-click="reloadOpening()"></button>
+    </ion-header-bar>
+    <div class="egobie-bg-mask">
+        <div class="egobie-bg-mask-1"></div>
+        <div class="egobie-bg-mask-2"></div>
+    </div>
+    <ion-content overflow-scroll="true" class="has-header">
+        <!--<ion-list class="egobie-opening-list-left"></ion-list>-->
+        <ion-list class="list-margin-top-10 egobie-opening-list-right">
+            <ion-item class="egobie-opening-list"
+                      ng-repeat="opening in openings"
+                      ng-init="index = $index">
+                <div class="opening-day"
+                     ng-click="showOpening($index, opening.day)">
+                    <!--<i class="dot"/>-->
+                    <div class="day">{{opening.date}}</div>
+                    <div class="month-year-week">
+                        <i class="week">{{opening.weekday}}</i>
+                        <i class="month-year">{{opening.month}} {{opening.year}}</i>
+                    </div>
+                    <i class="more ion-navicon"></i>
+                </div>
+                <div class="opening-time-list"
+                     ng-show="index === showIndex">
+                    <div class="opening-time"
+                         ng-repeat="r in opening.range"
+                         ng-click="goToOrder(r.id, opening.day, r.start, r.end)"
+                         ng-model="selectedRange"
+                         ng-value="r.id">
+                        <i class="start">{{getTime(r.start)}}</i>
+                        <i class="end">{{getTime(r.end)}}</i>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,46 @@
+<ion-modal-view hide-nav-bar="true" cache-view="false"
+                ng-app="app.setting.work"
+                ng-controller="workEditCtrl">
+    <ion-header-bar class="egobie-header-bar">
+        <h1 class="title">WORK ADDRESS</h1>
+        <button class="button button-icon icon ion-android-close"
+                ng-click="hideEditWork()"></button>
+    </ion-header-bar>
+    <div class="egobie-bg-mask">
+        <div class="egobie-bg-mask-1"></div>
+        <div class="egobie-bg-mask-2"></div>
+    </div>
+    <ion-content overflow-scroll="true" padding="true" class="padding egobie-work-form-bg">
+        <ion-list class="egobie-work-form">
+            <ion-item>
+                <i class="icon-mask"></i>
+                <i class="icon ion-briefcase"></i>
+                <input type="text" placeholder="Street"
+                       ng-model="work.street"/>
+            </ion-item>
+            <ion-item>
+                <i class="icon-mask"></i>
+                <i class="icon"></i>
+                <input type="text" placeholder="City"
+                       ng-model="work.city"/>
+            </ion-item>
+            <ion-item>
+                <i class="icon-mask"></i>
+                <i class="icon"></i>
+                <select id="edithome-state" class="select-egobie"
+                        ng-model="work.state"
+                        ng-options="state as fullname for (state, fullname) in states">
+                    <option value="">Choose State</option>
+                </select>
+            </ion-item>
+            <ion-item>
+                <i class="icon-mask"></i>
+                <i class="icon"></i>
+                <input type="text" placeholder="Zip Code"
+                       ng-model="work.zip"/>
+            </ion-item>
+        </ion-list>
+        <button class="button button-block egobie-work-form-button"
+                ng-click="editWork()">Save</button>
+    </ion-content>
+</ion-modal-view>

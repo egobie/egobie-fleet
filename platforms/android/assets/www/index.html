@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        <title></title>
+
+        <link href="lib/custom/css/eGobie.css" rel="stylesheet"/>
+
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+        <script src="lib/ionic/js/moment/moment.min.js"></script>
+
+        <script src="lib/ionic-rating/ionic-rating.min.js"></script>
+
+        <!-- credit card -->
+        <script src="lib/angular-credit-cards/release/angular-credit-cards.js" type="text/javascript"></script>
+
+        <!-- IMPORTANT : SHOULD be after ionic bundle and before cordova.js -->
+        <!--<script src="lib/angular-animate/angular-animate.min.js"></script>-->
+
+        <!-- cordova script (this will be a 404 during development) -->
+        <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+        <script src="cordova.js"></script>
+
+        <!-- compiled css output -->
+        <link href="css/ionic.app.min.css" rel="stylesheet">
+
+        <script src="js/app.js"></script>
+
+        <script src="js/sign/sign.js"></script>
+        <script src="js/sign/signin.js"></script>
+        <script src="js/sign/signup.js"></script>
+
+        <script src="js/menu/menu.js"></script>
+
+        <script src="js/home/home.js"></script>
+        <script src="js/home/resident/resident.js"></script>
+        <script src="js/home/resident/reservation.js"></script>
+        <script src="js/home/resident/demand.js"></script>
+
+        <script src="js/home/mall/mall.js"></script>
+        <script src="js/home/business/business.js"></script>
+
+        <script src="js/car/car.js"></script>
+        <script src="js/car/add.js"></script>
+        <script src="js/car/edit.js"></script>
+
+        <script src="js/service/service.js"></script>
+        <script src="js/service/detail.js"></script>
+
+        <script src="js/myservice/myservice.js"></script>
+        <script src="js/myservice/reservation.js"></script>
+        <script src="js/myservice/history.js"></script>
+
+        <script src="js/notification/notification.js"></script>
+        <script src="js/coupon/coupon.js"></script>
+
+        <script src="js/payment/payment.js"></script>
+        <script src="js/payment/add.js"></script>
+        <script src="js/payment/edit.js"></script>
+
+        <script src="js/setting/setting.js"></script>
+        <script src="js/setting/user.js"></script>
+        <script src="js/setting/password.js"></script>
+        <script src="js/setting/home.js"></script>
+        <script src="js/setting/work.js"></script>
+
+        <script src="js/about/about.js"></script>
+        <script src="js/about/feedback.js"></script>
+
+        <script src="js/task/task.js"></script>
+        <script src="js/tutorial/tutorial.js"></script>
+
+        <script src="js/util/shared.js"></script>
+        <script src="js/util/url.js"></script>
+        <script src="js/util/request.js"></script>
+
+        <!-- Only required for Tab projects w/ pages in multiple tabs 
+        <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
+        -->
+    </head>
+    <body ng-app="app" animation="slide-left-right-ios7">
+        <ion-nav-view></ion-nav-view>
+    </body>
+</html>

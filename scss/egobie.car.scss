@@ -1,0 +1,27 @@
+@import 'egobie';
+@import 'car';
+@import 'form';
+
+.egobie {
+    &-empty-car {
+        @extend .egobie-no-car;
+    }
+
+    &-car {
+        @extend .egobie-plate;
+    }
+
+    &-car-add, &-car-edit {
+        @extend .egobie-form;
+
+        .item {
+            input, select {
+                margin-left: 0px;
+            }
+
+            input {
+                padding-left: 14px;
+            }
+        }
+    }
+}

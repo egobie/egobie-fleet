@@ -1,0 +1,8 @@
+@import 'egobie';
+@import 'notification';
+
+.egobie {
+    &-empty-notification {
+        @extend .egobie-no-notification;
+    }
+}

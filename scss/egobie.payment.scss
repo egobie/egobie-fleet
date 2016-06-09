@@ -1,0 +1,32 @@
+@import 'egobie';
+@import 'payment';
+@import 'form';
+
+.egobie {
+
+    &-payment-header-bar {
+        @extend .egobie-header-bar;
+    }
+
+    &-empty-payment {
+        @extend .egobie-no-payment;
+    }
+
+    &-payment {
+        @extend .egobie-payment-visa;
+    }
+
+    &-payment-add, &-payment-edit {
+        @extend .egobie-form;
+
+        .item {
+            input, select {
+                margin-left: 0px;
+            }
+
+            input {
+                padding-left: 14px;
+            }
+        }
+    }
+}
