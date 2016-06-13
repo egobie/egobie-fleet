@@ -22,7 +22,7 @@ angular.module('util.url', [])
 
             services: host + "/fleet/service",
             addons: host + "/fleet/addon",
-            userReservations: host + "/service/reservation",
+            fleetReservations: host + "/fleet/reservation",
 
             openings: host + "/service/opening",
             ondemand: host + "/service/now",
@@ -30,13 +30,14 @@ angular.module('util.url', [])
             placeOrder: host + "/service/order",
             cancelOrder: host + "/service/cancel",
             forceCancelOrder: host + "/service/cancel/force",
-            demandService: host + "/service/demand",
-            readService: host + "/service/read/",
-            demandAddon: host + "/service/demand/addon",
-            demandOpening: host + "/service/demand/opening/",
 
-            userHistories: host + "/history",
-            ratingHistory: host + "/history/rating",
+            demandService: host + "/fleet/demand",
+            readService: host + "/fleet/read/",
+            demandAddon: host + "/fleet/demand/addon",
+            demandOpening: host + "/fleet/demand/opening/",
+
+            fleetHistories: host + "/fleet/history",
+            ratingHistory: host + "/fleet/history/rating",
 
             tasks: host + "/egobie/service/task",
             startTask: host + "/egobie/service/progress",
