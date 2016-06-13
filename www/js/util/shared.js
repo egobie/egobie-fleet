@@ -5,22 +5,22 @@ angular.module("util.shared", ["util.url"])
         var user = {
             id: "",
             token: "",
+            type: "",
             username: "",
             email: "",
-            coupon: "",
-            discount: 0,
             phone: "",
             first: "",
             last: "",
             middle: "",
-            home_state: "",
-            home_city: "",
-            home_zip: "",
-            home_street: "",
             work_state: "",
             work_city: "",
             work_zip: "",
-            work_street: ""
+            work_street: "",
+
+            fleet_setup: "",
+            fleet_id: "",
+            fleet_token: "",
+            fleet_name: ""
         };
 
         var states = {
@@ -37,10 +37,6 @@ angular.module("util.shared", ["util.url"])
             "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"
         };
 
-        var colors = [
-            'WHITE', 'BLACK', 'SILVER', 'GRAY', 'RED', 'BLUE', 'BROWN', 'YELLOW', 'GOLD', 'GREEN', 'PINK', 'OTHERS'
-        ];
-
         var weeks = [
             "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
         ];
@@ -50,32 +46,6 @@ angular.module("util.shared", ["util.url"])
             "August", "September", "October", "November", "December"
         ];
 
-        var cardTypes = [{
-            name: 'American Express',
-            pattern: /^3[47]/,
-            valid_length: [15]
-        }, {
-            name: 'Visa Electron',
-            pattern: /^(4026|417500|4508|4844|491(3|7))/,
-            valid_length: [16]
-        }, {
-            name: 'Visa',
-            pattern: /^4/,
-            valid_length: [16]
-        }, {
-            name: 'MasterCard',
-            pattern: /^5[1-5]/,
-            valid_length: [16]
-        }, {
-            name: 'Discover',
-            pattern: /^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)/,
-            valid_length: [16]
-        }];
-
-        var userCars = {};
-        var userPayments = {};
-        var carMakers = [];
-        var carModels = {};
         var services = {};
 
         var carWash = [];
@@ -89,7 +59,7 @@ angular.module("util.shared", ["util.url"])
         };
 
         var regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var regCoupon = /^([A-Z0-9]{5})$/;
+        var regFleetToken = /^([A-Z0-9]{5})$/;
         var regPhone = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
 
         var years = [];
@@ -128,18 +98,18 @@ angular.module("util.shared", ["util.url"])
                 user.middle = u.middle_name;
                 user.email = u.email;
                 user.phone = u.phone_number;
-                user.coupon = u.coupon;
-                user.discount = u.discount;
-
-                user.home_state = u.home_address_state;
-                user.home_city = u.home_address_city;
-                user.home_zip = u.home_address_zip;
-                user.home_street = u.home_address_street;
 
                 user.work_state = u.work_address_state;
                 user.work_city = u.work_address_city;
                 user.work_zip = u.work_address_zip;
                 user.work_street = u.work_address_street;
+
+                if (u.type && u.type === "FLEET") {
+                    user.fleet_setup = u.fleet_setup;
+                    user.fleet_id = u.fleet_id;
+                    user.fleet_name = u.fleet_name;
+                    user.fleet_token = u.fleet_token;
+                }
 
                 refreshScope();
             },
@@ -154,25 +124,8 @@ angular.module("util.shared", ["util.url"])
                 return user;
             },
 
-            isResidential: function() {
-                return user.type === "RESIDENTIAL";
-            },
-
-            useDiscount: function() {
-                if (user.discount > 0) {
-                    user.discount--;
-                }
-
-                refreshScope();
-            },
-
-            refreshHome: function(address) {
-                user.home_state = address.state;
-                user.home_city = address.city;
-                user.home_zip = address.zip;
-                user.home_street = address.street;
-
-                refreshScope();
+            isFleet: function() {
+                return user.type === "FLEET";
             },
 
             refreshWork: function(address) {
@@ -197,10 +150,6 @@ angular.module("util.shared", ["util.url"])
 
             getStates: function() {
                 return states;
-            },
-
-            getColors: function() {
-                return colors;
             },
 
             addServices: function(data) {
@@ -300,77 +249,6 @@ angular.module("util.shared", ["util.url"])
                     });
             },
 
-            getCarMakers: function() {
-                return carMakers;
-            },
-
-            addCarMakers: function(makers) {
-                carMakers = makers;
-            },
-
-            addCarModels: function(models) {
-                if (models) {
-                    Array.prototype.forEach.call(models, function(model) {
-                        if (!carModels.hasOwnProperty(model.maker_id)) {
-                            carModels[model.maker_id] = [];
-                        }
-                        carModels[model.maker_id].push(model);
-                    });
-                }
-            },
-
-            getCarModels: function(makerId) {
-                return carModels[makerId] || [];
-            },
-
-            getUserCars: function() {
-                return userCars;
-            },
-
-            addUserCars: function(cars) {
-                if (cars) {
-                    Array.prototype.forEach.call(cars, function(car) {
-                        car.full_state = states[car.state].toUpperCase();
-                        userCars[car.id] = car;
-                    });
-                }
-            },
-
-            addUserCar: function(car) {
-                userCars[car.id] = car;
-                // For selection use
-                userCars[car.id].checked = false;
-            },
-
-            deleteUserCar: function(id) {
-                delete userCars[id];
-                refreshScope();
-            },
-
-            getUserPayments: function() {
-                return userPayments;
-            },
-
-            addUserPayments: function(payments) {
-                if (payments) {
-                    Array.prototype.forEach.call(payments, function(payment) {
-                        userPayments[payment.id] = payment;
-                        // For selection use
-                        userPayments[payment.id].checked = false;
-                    });
-                }
-            },
-
-            addUserPayment: function(payment) {
-                userPayments[payment.id] = payment;
-                userPayments[payment.id].account_number = payment.account_number.substr(-4, 4);
-            },
-
-            deleteUserPayment: function(id) {
-                delete userPayments[id];
-                refreshScope();
-            },
-
             demandOpening: function(id) {
                 $http
                     .post(url.demandOpening + id, this.getRequestBody({}))
@@ -390,27 +268,12 @@ angular.module("util.shared", ["util.url"])
                 return regEmail.test(email);
             },
 
-            testCoupon: function(coupon) {
-                return regCoupon.test(coupon);
+            testFleetToken: function(token) {
+                return regFleetToken.test(token);
             },
 
             testPhone: function(phone) {
-                console.log(phone);
                 return regPhone.test(phone);
-            },
-
-            testCreditCard: function(accountNumber) {
-                if (accountNumber) {
-                    var len = ("" + accountNumber).length;
-
-                    for (var i in cardTypes) {
-                        if (cardTypes[i].pattern.test(accountNumber) && cardTypes[i].valid_length.indexOf(len) >= 0) {
-                            return cardTypes[i].name;
-                        }
-                    }
-                }
-
-                return "invalid";
             },
 
             processOpening: function(openings) {
@@ -464,7 +327,6 @@ angular.module("util.shared", ["util.url"])
                 $ionicPopup.alert({
                     title: data
                 });
-//                console.log(data);
             },
 
             goHome: function() {
@@ -563,46 +425,6 @@ angular.module("util.shared", ["util.url"])
                 $http.post(url.unselectExtra, this.getRequestBody({
                     data: id + ""
                 }));
-            },
-
-            signOut: function() {
-                $ionicHistory.clearHistory();
-                $ionicHistory.clearCache().then(function() {
-                    user = {
-                        id: "",
-                        token: "",
-                        username: "",
-                        email: "",
-                        coupon: "",
-                        discount: 0,
-                        phone: "",
-                        first: "",
-                        last: "",
-                        middle: "",
-                        home_state: "",
-                        home_city: "",
-                        home_zip: "",
-                        home_street: "",
-                        work_state: "",
-                        work_city: "",
-                        work_zip: "",
-                        work_street: ""
-                    };
-
-                    userCars = {};
-                    userPayments = {};
-                    carMakers = [];
-                    carModels = {};
-                    services = {};
-
-                    carWash = [];
-                    oilChange = [];
-                    detailing = [];
-
-                    years = [];
-
-                    $state.go('sign.in');
-                });
             }
         };
 

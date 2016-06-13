@@ -1,31 +1,19 @@
 angular.module('util.url', [])
 
     .factory('url', function() {
-//        var host = "http://localhost:8000";
-        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
+        var host = "http://localhost:8000";
+//        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
 
         return {
             website: "http://www.egobie.com/",
             faq: "http://www.egobie.com/#!faq/aifir",
 
-            checkEmail: host + "/check/email",
+            newFleetUser: host + "/sale/fleet/new",
+            allFleetUser: host + "/sale/fleet/all",
             checkUsername: host + "/check/name",
 
             signIn: host + "/signin",
-            signUp: host + "/signup",
-
-            carMaker: host + "/car/maker",
-            carModel: host + "/car/model",
-            cars: host + "/car/user",
-            newCar: host + "/car/new",
-            editCar: host + "/car/update",
-            deleteCar: host + "/car/delete",
-
-            payments: host + "/payment/user",
-            newPayment: host + "/payment/new",
-            editPayment: host + "/payment/update",
-            deletePayment: host + "/payment/delete",
-            pay: host + "/payment/pay",
+            signUp: host + "/signup/fleet",
 
             updateUser: host + "/user/update/user",
             updateHome: host + "/user/update/home",
