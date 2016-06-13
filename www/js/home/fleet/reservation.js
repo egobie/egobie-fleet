@@ -210,7 +210,7 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
         });
 
         $scope.showOpeningModal = function() {
-            $ionicModal.fromTemplateUrl("templates/home/resident/opening.html", {
+            $ionicModal.fromTemplateUrl("templates/home/fleet/opening.html", {
                 scope: $scope
             }).then(function(modal) {
                 $scope.openingModal = modal;

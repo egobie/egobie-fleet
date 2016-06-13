@@ -197,64 +197,64 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
         $stateProvider
 
             .state('menu.home.demand', {
-                url: '/resident/demand',
+                url: '/fleet/demand',
                 views: {
                     'resident-view': {
-                        templateUrl: 'templates/home/resident/demand/demand.html'
+                        templateUrl: 'templates/home/fleet/demand/demand.html'
                     }
                 }
             })
 
             .state('menu.home.demandOrder', {
-                url: '/resident/demand/order',
+                url: '/fleet/demand/order',
                 views: {
                     'resident-view': {
-                        templateUrl: 'templates/home/resident/demand/order.html'
+                        templateUrl: 'templates/home/fleet/demand/order.html'
                     }
                 }
             })
 
             .state('menu.home.reservation', {
-                url: '/resident/reservation',
+                url: '/fleet/reservation',
                 views: {
                     'resident-view': {
-                        templateUrl: 'templates/home/resident/reservation/reservation.html'
+                        templateUrl: 'templates/home/fleet/reservation/reservation.html'
                     }
                 }
             })
 
             .state('menu.home.residentCar', {
-                url: '/resident/reservation/car',
+                url: '/fleet/reservation/car',
                 views: {
                     'resident-view': {
-                        templateUrl: 'templates/home/resident/car.html'
+                        templateUrl: 'templates/home/fleet/car.html'
                     }
                 }
             })
 
             .state('menu.home.residentService', {
-                url: '/resident/reservation/service',
+                url: '/fleet/reservation/service',
                 views: {
                     'resident-view': {
-                        templateUrl: 'templates/home/resident/service.html'
+                        templateUrl: 'templates/home/fleet/service.html'
                     }
                 }
             })
 
             .state('menu.home.residentAddon', {
-                url: '/resident/reservation/addon',
+                url: '/fleet/reservation/addon',
                 views: {
                     'resident-view': {
-                        templateUrl: 'templates/home/resident/addon.html'
+                        templateUrl: 'templates/home/fleet/addon.html'
                     }
                 }
             })
 
             .state('menu.home.residentPayment', {
-                url: '/resident/reservation/payment',
+                url: '/fleet/reservation/payment',
                 views: {
                     'resident-view': {
-                        templateUrl: 'templates/home/resident/payment.html'
+                        templateUrl: 'templates/home/fleet/payment.html'
                     }
                 }
             });
