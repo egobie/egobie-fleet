@@ -1,7 +1,7 @@
 angular.module('app.home.fleet.demand', ['ionic', 'app.home.fleet', 'util.shared', 'util.url'])
 
     .controller('demandCtrl', function($scope, $state, $http, shared, url,
-            orderService, orderCar, orderPayment, orderOpening, orderAddon, order, demandOrder) {
+            orderService, orderOpening, orderAddon, order, demandOrder) {
         shared.goOndemand();
 
         $scope.services = orderService.services;
@@ -73,8 +73,6 @@ angular.module('app.home.fleet.demand', ['ionic', 'app.home.fleet', 'util.shared
             demandOrder.clear();
             orderService.clear();
             orderAddon.clear();
-            orderCar.clear();
-            orderPayment.clear();
             orderOpening.clear();
             order.clear();
             $scope.$ionicGoBack();

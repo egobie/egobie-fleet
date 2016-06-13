@@ -18,26 +18,6 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
         };
     })
 
-    .service('orderCar', function(shared) {
-        return {
-            cars: shared.getUserCars(),
-            selected: {
-                id: -1,
-                plate: ''
-            },
-            clear: function() {
-                for (var _id in this.cars) {
-                    this.cars[_id].checked = false;
-                }
-
-                this.selected = {
-                    id: -1,
-                    plate: ''
-                };
-            }
-        };
-    })
-
     .service('orderService', function(shared) {
         var _i = 0;
         var _temp = shared.getServices();
@@ -78,22 +58,24 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
         return obj;
     })
 
-    .service('orderPayment', function(shared) {
+    .service('fleetOrder', function() {
         return {
-            selected: {
-                id: -1,
-                account_number: ''
-            },
-            payments: shared.getUserPayments(),
-            clear: function() {
-                for (var _id in this.payments) {
-                    this.payments[_id].checked = false;
-                }
-
-                this.selected = {
-                    id: -1,
-                    account_number: ''
+            _id: 0,
+            reservations: {},
+            add: function(carCount, services, addons) {
+                this._id++;
+                this.reservations[this._id] = {
+                    car_count: carCount,
+                    services: services,
+                    addons: addons
                 };
+            },
+            remove: function(id) {
+                delete this.reservations[id];
+            },
+            clear: function() {
+                this._id = 0;
+                this.reservations = {};
             }
         };
     })

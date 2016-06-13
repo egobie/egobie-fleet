@@ -45,7 +45,7 @@
 
             <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title"
                       ng-click="toggleShownService('EXTRA')">
-                EXTRA SERVICES
+                {{serviceNames["EXTRA"].toUpperCase()}}
             </ion-item>
             <ion-item menu-close="" class="egobie-service-item"
                       ng-repeat="addon in addons"

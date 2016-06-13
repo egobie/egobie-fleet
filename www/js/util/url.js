@@ -27,7 +27,7 @@ angular.module('util.url', [])
             openings: host + "/service/opening",
             ondemand: host + "/service/now",
             addService: host + "/service/add",
-            placeOrder: host + "/service/order",
+            placeOrder: host + "/fleet/order",
             cancelOrder: host + "/service/cancel",
             forceCancelOrder: host + "/service/cancel/force",
 

@@ -197,7 +197,7 @@ angular.module('app.home.resident', ['ionic', 'util.shared'])
         $stateProvider
 
             .state('menu.home.demand', {
-                url: '/resident/demand',
+                url: '/fleet/demand',
                 views: {
                     'resident-view': {
                         templateUrl: 'templates/home/resident/demand/demand.html'
@@ -206,7 +206,7 @@ angular.module('app.home.resident', ['ionic', 'util.shared'])
             })
 
             .state('menu.home.demandOrder', {
-                url: '/resident/demand/order',
+                url: '/fleet/demand/order',
                 views: {
                     'resident-view': {
                         templateUrl: 'templates/home/resident/demand/order.html'
@@ -215,7 +215,7 @@ angular.module('app.home.resident', ['ionic', 'util.shared'])
             })
 
             .state('menu.home.reservation', {
-                url: '/resident/reservation',
+                url: '/fleet/reservation',
                 views: {
                     'resident-view': {
                         templateUrl: 'templates/home/resident/reservation/reservation.html'
@@ -224,7 +224,7 @@ angular.module('app.home.resident', ['ionic', 'util.shared'])
             })
 
             .state('menu.home.residentCar', {
-                url: '/resident/reservation/car',
+                url: '/fleet/reservation/car',
                 views: {
                     'resident-view': {
                         templateUrl: 'templates/home/resident/car.html'
@@ -233,7 +233,7 @@ angular.module('app.home.resident', ['ionic', 'util.shared'])
             })
 
             .state('menu.home.residentService', {
-                url: '/resident/reservation/service',
+                url: '/fleet/reservation/service',
                 views: {
                     'resident-view': {
                         templateUrl: 'templates/home/resident/service.html'
@@ -242,7 +242,7 @@ angular.module('app.home.resident', ['ionic', 'util.shared'])
             })
 
             .state('menu.home.residentAddon', {
-                url: '/resident/reservation/addon',
+                url: '/fleet/reservation/addon',
                 views: {
                     'resident-view': {
                         templateUrl: 'templates/home/resident/addon.html'
@@ -251,7 +251,7 @@ angular.module('app.home.resident', ['ionic', 'util.shared'])
             })
 
             .state('menu.home.residentPayment', {
-                url: '/resident/reservation/payment',
+                url: '/fleet/reservation/payment',
                 views: {
                     'resident-view': {
                         templateUrl: 'templates/home/resident/payment.html'

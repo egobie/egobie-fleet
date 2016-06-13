@@ -1,19 +1,42 @@
 angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.shared', 'util.url'])
 
-    .controller('reservationOrderCtrl', function($scope, shared, order) {
-        shared.goReservation();
-
-        $scope.order = order;
+    .controller('reservationOrderCtrl', function($scope, $ionicModal, shared, fleetOrder) {
+        $scope.order = fleetOrder;
 
         $scope.$watch(function() {
             return $scope.order;
         }, function (newValue, oldValue) {
             $scope.order = newValue;
         });
+
+        $ionicModal.fromTemplateUrl('templates/home/fleet/service.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.addReservationModal = modal;
+        });
+
+        $scope.showAddReservation = function() {
+            $scope.addReservationModal.show();
+        };
+
+        $scope.noReservation = function() {
+            return Object.keys($scope.order.reservations).length === 0;
+        };
+
+        $scope.getService = function(id) {
+            var service = shared.getService(id);
+
+            return service.name + (service.note ? " (" + service.note + ")" : "");
+        };
+
+        $scope.getAddon = function(id) {
+            var addon = shared.getAddon(id);
+
+            return addon.name + (addon.note ? " (" + addon.note + ")" : "");
+        };
     })
 
-    .controller('orderCtrl', function($scope, $state, $ionicActionSheet, $http,
-            shared, url, orderOpening, orderCar, orderService, orderAddon, orderPayment, demandOrder, order) {
+    .controller('orderCtrl', function($scope, $state, $ionicActionSheet, $http, shared, url, fleetOrder) {
         $scope.validateRequest = function(request) {
             if (request.car_id <= 0) {
                 shared.alert("Please choose a vehicle");
@@ -40,63 +63,70 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
 
         $scope.placeOrderSheet = function() {
             var request = {
-                car_id: orderCar.selected.id,
-                payment_id: orderPayment.selected.id,
                 note: "test",
-                opening: orderOpening.id,
+                types: "",
+                opening: 1,
                 services: [],
                 addons: [],
-                types: ""
+                day: "",
+                hour: ""
             };
-            var types = {};
 
-            if (!(shared.getUser().home_street || "")) {
-                shared.alert("Please provide address");
-                return;
-            }
+            var id = 0;
+            var reservation = null;
+            var addonInfo = null;
 
-            for (var _i = 0; _i < orderService.services.length; _i++) {
-                if (orderService.services[_i].checked) {
-                    request.services.push(orderService.services[_i].id);
-                    types[orderService.services[_i].type] = 1;
-                }
-            }
+            for (id in fleetOrder.reservations) {
+                reservation = fleetOrder.reservations[id];
 
-            for (var key in orderAddon.addons) {
-                if (orderAddon.addons[key].checked) {
-                    request.addons.push({
-                        id: orderAddon.addons[key].addon.id,
-                        amount: orderAddon.addons[key].addon.amount
+                if (reservation.services && reservation.services.length > 0) {
+                    request.services.push({
+                        car_count: reservation.car_count,
+                        services: reservation.services
                     });
                 }
+
+                if (reservation.addons && reservation.addons.length > 0) {
+                    addonInfo = {
+                        car_count: reservation.car_count,
+                        addons: []
+                    };
+
+                    Array.prototype.forEach.call(reservation.addons, function(addon) {
+                        addonInfo.addons.push({
+                            id: addon.id,
+                            amount: addon.amount
+                        });
+                    });
+
+                    request.addons.push(addonInfo);
+                }
             }
+
+            console.log(request);
+            return;
 
             if (!$scope.validateRequest(request)) {
                 return;
             }
 
-            request.types = Object.keys(types).length > 1 ? "BOTH" : Object.keys(types)[0];
-
             $scope.hideReservationSheet = $ionicActionSheet.show({
-                titleText: 'We process payment only after the service is done. We require you to cancel the reservation 24 hours ahead, otherwise we will charge 50% of the appointment cost.',
-                destructiveText: 'Place Order',
+                titleText: 'We will send estimated price to you later. We require you to cancel the reservation 24 hours ahead, otherwise we will charge 50% of the appointment cost.',
+                destructiveText: 'Confirm',
                 destructiveButtonClicked: function() {
                     shared.showLoading();
                     $http
                         .post(url.placeOrder, shared.getRequestBody(request))
                         .success(function(data, status, headers, config) {
-                            shared.useDiscount();
                             shared.hideLoading();
 
                             $scope.hideReservationSheet();
-                            $scope.clearReservation();
 
                             $state.go("menu.myservice.reservation");
                         })
                         .error(function(data, status, headers, config) {
                             $scope.hideReservationSheet();
                             shared.hideLoading();
-                            $scope.clearReservation();
                             shared.alert(data);
                         });
                 },
@@ -105,16 +135,6 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
                     
                 }
             });
-        };
-
-        $scope.clearReservation = function() {
-            orderOpening.clear();
-            orderCar.clear();
-            orderService.clear();
-            orderAddon.clear();
-            orderPayment.clear();
-            order.clear();
-            demandOrder.clear();
         };
     })
 
@@ -239,157 +259,6 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
         };
     })
 
-    .controller('carSelectCtrl', function($scope, $state, $timeout, $ionicModal, shared, orderCar) {
-        $scope.cars = orderCar.cars;
-        $scope.selectedCar = orderCar.selected;
-
-        $scope.$watch(function() {
-            return orderCar.selected;
-        }, function (newValue, oldValue) {
-            $scope.selectedCar = newValue;
-        });
-
-        $ionicModal.fromTemplateUrl('templates/car/add.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.addCarModal = modal;
-        });
-
-        $scope.showAddCar = function() {
-            $scope.addCarModal.show();
-        };
-
-        $scope.selectCar = function() {
-            shared.openCar();
-            $state.go('menu.home.residentCar');
-        };
-
-        $scope.pickCar = function(car) {
-            for (var _id in $scope.cars) {
-                $scope.cars[_id].checked = false;
-            }
-
-            car.checked = true;
-            orderCar.selected = car;
-
-            var t = $timeout(function() {
-                $scope.$ionicGoBack();
-                //$state.go("menu.home.reservation");
-                $timeout.cancel(t);
-            }, 200);
-        };
-
-        $scope.isCarSelected = function(selected) {
-            return {
-                "egobie-plate-disabled": !selected
-            };
-        };
-
-        $scope.noCar = function() {
-            return Object.keys($scope.cars).length === 0;
-        };
-    })
-
-    .controller('serviceSelectCtl', function($scope, $state, $ionicModal, shared, orderService, orderAddon, order, orderOpening) {
-        $scope.services = orderService.services;
-        $scope.serviceNames = shared.getServiceNames();
-        $scope.carWash = shared.getCarWashServices();
-        $scope.detailing = shared.getDetailingServices();
-        $scope.oilChange = shared.getOilChangeServices();
-        $scope.selectedService = null;
-
-        $scope.$watch(function() {
-            return orderService.services;
-        }, function(newValue, oldValue) {
-            $scope.services = orderService.services;
-        });
-
-        $scope.pickService = function() {
-            var ids = [];
-
-            for (var _i = 0; _i < $scope.services.length; _i++) {
-                if ($scope.services[_i].checked) {
-                    ids.push($scope.services[_i].id);
-                }
-            }
-
-            shared.demandService(ids);
-            $scope.$ionicGoBack();
-        };
-
-        $scope.selectService = function() {
-            shared.openService();
-            $state.go('menu.home.residentService');
-        };
-
-        $scope.toggleService = function(service, list) {
-            var pre = service.checked;
-
-            for (var _i = 0; _i < list.length; _i++) {
-                if (list[_i].checked) {
-                    order.price -= list[_i].price;
-                    order.time -= list[_i].time;
-
-                    orderAddon.remove(list[_i].charge);
-                    orderAddon.remove(list[_i].addons);
-                }
-
-                list[_i].checked = false;
-            }
-
-            service.checked = !pre;
-
-            if (service.checked) {
-                orderService.selected++;
-                order.price += service.price;
-                order.time += service.time;
-
-                orderAddon.add(service.charge);
-                orderAddon.add(service.addons);
-            }
-        };
-
-        $scope.unselectService = function($event, service) {
-            shared.unselectService(service.id);
-
-            if (service.id in orderService.index) {
-                orderService.services[orderService.index[service.id]].checked = false;
-
-                orderAddon.remove(orderService.services[orderService.index[service.id]].charge);
-                orderAddon.remove(orderService.services[orderService.index[service.id]].addons);
-            }
-
-            order.price -= service.price;
-            order.time -= service.time;
-
-            if (order.price <= 0 || order.time <= 0) {
-                order.price = 0;
-                order.time = 0;
-                orderOpening.clear();
-            }
-
-            $event.stopPropagation();
-        };
-
-        $ionicModal.fromTemplateUrl('templates/service/detail.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.serviceModel = modal;
-        });
-
-        $scope.showService = function(service) {
-            shared.readService(service.id);
-            $scope.selectedService = service;
-            $scope.serviceModel.show();
-        };
-
-        $scope.isServiceSelected = function(checked) {
-            return {
-                "egobie-service-disabled": !checked
-            };
-        };
-    })
-
     .controller('addonSelectCtl', function($scope, $state, shared, orderAddon, order) {
         $scope.addons = orderAddon.addons;
 
@@ -468,55 +337,5 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
             $scope.$ionicGoBack();
             //$state.go("menu.home.reservation");
         };
-    })
-
-    .controller('paymentSelectCtrl', function($scope, $state, $timeout, $ionicModal, shared, orderPayment) {
-        $scope.payments = orderPayment.payments;
-        $scope.selectedPayment = orderPayment.selected;
-
-        $scope.$watch(function() {
-            return orderPayment.selected;
-        }, function (newValue, oldValue) {
-            $scope.selectedPayment = newValue;
-        });
-
-        $ionicModal.fromTemplateUrl('templates/payment/add.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.addPaymentModal = modal;
-        });
-
-        $scope.showAddPayment = function() {
-            $scope.addPaymentModal.show();
-        };
-
-        $scope.selectPayment = function() {
-            shared.openPayment();
-            $state.go('menu.home.residentPayment');
-        };
-
-        $scope.pickPayment = function(selectedPayment) {
-            for (var _id in $scope.payments) {
-                $scope.payments[_id].checked = false;
-            }
-
-            selectedPayment.checked = true;
-            orderPayment.selected = selectedPayment;
-
-            var t = $timeout(function() {
-                $scope.$ionicGoBack();
-                //$state.go("menu.home.reservation");
-                $timeout.cancel(t);
-            }, 200);
-        };
-
-        $scope.isPaymentSelected = function(selected) {
-            return {
-                "egobie-payment-disabled": !selected
-            };
-        };
-
-        $scope.noPayment = function() {
-            return Object.keys($scope.payments).length === 0;
-        };
     });
+

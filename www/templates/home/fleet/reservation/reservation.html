@@ -1,16 +1,36 @@
 <ion-view hide-nav-bar="true" cache-view="false"
-          ng-app="app.home.resident.reservation"
+          ng-app="app.home.fleet.reservation"
           ng-controller="reservationOrderCtrl">
-    <ion-header-bar class="egobie-header-bar">
+    <ion-header-bar class="egobie-payment-header-bar">
         <button class="button button-icon icon ion-ios-arrow-back"
                 ng-click="$ionicGoBack()"></button>
         <h1 class="title">RESERVATION</h1>
+        <button class="button button-icon icon ion-android-add"
+                ng-click="showAddReservation()"></button>
     </ion-header-bar>
     <div class="egobie-bg-mask">
         <div class="egobie-bg-mask-1"></div>
         <div class="egobie-bg-mask-2"></div>
     </div>
     <ion-content padding="true" class="has-footer">
+        <ion-list>
+            <ion-item class="egobie-empty-reservation"
+                      ng-show="noReservation()">
+                <i class="icon ion-android-checkmark-circle icon-1"></i>
+                <p class="no">No reservation</p>
+                <p class="add">Click <i class="icon ion-android-add icon-2"></i> to add a new one</p>
+            </ion-item>
+            <ion-item ng-repeat="(id, reservation) in order.reservations">
+                <i>id = {{id}}</i>
+                <i>carCount = {{reservation.car_count}}</i>
+                <p>services</p>
+                <i ng-repeat="sid in reservation.services">{{getService(sid)}}</i>
+                <p>addons</p>
+                <i ng-repeat="addon in reservation.addons">{{getAddon(addon.id)}}, amount {{addon.amount}}</i>
+            </ion-item>
+        </ion-list>
+
+        <!--
         <ion-list class="egobie-resident-order"
                   ng-controller="serviceSelectCtl">
             <ion-item class="item-divider item-icon-right"
@@ -24,7 +44,9 @@
                    ng-click="unselectService($event, service)"></i>
             </div>
         </ion-list>
+        -->
 
+        <!--
         <ion-list class="egobie-resident-order"
                   ng-controller="addonSelectCtl">
             <ion-item class="item-divider item-icon-right"
@@ -101,12 +123,13 @@
                 <i class="icon ion-ios-time"></i>{{order.getRealTime()}}
             </ion-item>
         </ion-list>
+        -->
     </ion-content>
     <ion-footer-bar class="bar-dark egobie-resident-footer"
                     ng-controller="orderCtrl"
                     ng-click="placeOrderSheet()">
         <h1 class="title">
-            Make Reservation
+            Place Order
             <span ng-show="order.price > 0"> ${{order.getRealPrice()}}</span>
         </h1>
     </ion-footer-bar>

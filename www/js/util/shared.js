@@ -47,7 +47,7 @@ angular.module("util.shared", ["util.url"])
         ];
 
         var services = {};
-        var addons = [];
+        var addons = {};
 
         var carWash = [];
         var oilChange = [];
@@ -56,7 +56,8 @@ angular.module("util.shared", ["util.url"])
         var serviceNames = {
             "CAR_WASH": "Car Wash",
             "OIL_CHANGE": "Lube Service",
-            "DETAILING": "Detailing"
+            "DETAILING": "Detailing",
+            "EXTRA": "Extra Services"
         };
 
         var regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -154,11 +155,21 @@ angular.module("util.shared", ["util.url"])
             },
 
             addAddons: function(data) {
-                addons = data;
+                if (data) {
+                    Array.prototype.forEach.call(data, function(addon) {
+                        // Used for selection
+                        addons[addon.id] = addon;
+                        addons[addon.id].checked = false;
+                    });
+                }
             },
 
             getAddons: function() {
                 return addons;
+            },
+
+            getAddon: function(id) {
+                return addons[id];
             },
 
             addServices: function(data) {
