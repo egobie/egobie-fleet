@@ -53,7 +53,7 @@ $Advance: #567CC0;
         color: $Title;
         height: 40px;
         border: 0;
-        margin-top: 35px;
+        margin-top: 25px;
         margin-bottom: 30px;
         border-bottom: 1px solid $Title-Border-Bottom;
         background: transparent;
@@ -76,17 +76,19 @@ $Advance: #567CC0;
             &.left {
                 background-color: $Left-Bar !important;
                 width: 3px;
-                height: 40px;
+                height: 30px;
             }
 
             &.middle {
                 width: 70%;
+                margin-left: 10px;
 
                 p {
                     &.name {
                         height: 18px;
                         line-height: 18px;
-                        font-size: 12px;
+                        font-size: 16px;
+                        font-weight: 600;
                         display: block;
                         overflow: visible;
 
@@ -107,24 +109,6 @@ $Advance: #567CC0;
                         font-size: 11px;
                         display: block;
                         overflow: visible;
-                    }
-
-                    &.price {
-                        padding: 0px;
-                        height: 50px;
-                        font-size: 25px;
-                        line-height: 40px;
-                        margin-left: 10px;
-                        margin-right: 10px;
-                        float: left;
-
-                        &:before {
-                            @extend .egobie-price-before;
-                        }
-
-                        &:after {
-                            @extend .egobie-price-after;
-                        }
                     }
                 }
             }

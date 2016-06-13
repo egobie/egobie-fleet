@@ -33,15 +33,6 @@ angular.module('app.setting', ['ionic', 'util.shared', 'util.url'])
             });
         };
 
-        $scope.showEditHome = function() {
-            $ionicModal.fromTemplateUrl('templates/setting/home.html', {
-                scope: $scope
-            }).then(function(modal) {
-                $scope.editHomeModal = modal;
-                $scope.editHomeModal.show();
-            });
-        };
-
         $scope.showEditWork = function() {
             $ionicModal.fromTemplateUrl('templates/setting/work.html', {
                 scope: $scope

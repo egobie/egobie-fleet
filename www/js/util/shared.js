@@ -152,6 +152,10 @@ angular.module("util.shared", ["util.url"])
                 return states;
             },
 
+            addAddons: function(data) {
+                
+            },
+
             addServices: function(data) {
                 var self = this;
 

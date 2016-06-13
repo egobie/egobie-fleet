@@ -13,7 +13,7 @@
         <ion-list>
             <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title egobie-margin-top-15"
                       ng-click="toggleShownService('CAR_WASH')">
-                <!-- <i class="icon ion-ios-arrow-down"></i> -->{{serviceNames["CAR_WASH"].toUpperCase()}}
+                {{serviceNames["CAR_WASH"].toUpperCase()}}
             </ion-item>
             <ion-item menu-close="" class="egobie-service-item"
                       ng-repeat="service in carWash"
@@ -21,17 +21,15 @@
                       ng-show="isShownService('CAR_WASH')">
                 <div class="left"></div>
                 <div class="middle">
-                    <p class="price">{{service.price}}</p>
-                    <p class="name">{{service.name}}</p>
-                    <p class="note">{{service.note}}</p>
-                    <p class="time">Estimated Time : {{service.time}} mins</p>
+                    <p class="name">{{service.name}} <span ng-show="service.note">{{service.note}}</span></p>
+                    <p class="time">Estimated Time : {{service.time}} mins (per vehicle)</p>
                 </div>
                 <div class="icon ion-ios-arrow-right right"></div>
             </ion-item>
 
             <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title"
                       ng-click="toggleShownService('OIL_CHANGE')">
-                <!-- <i class="icon ion-ios-arrow-down"></i> -->{{serviceNames["OIL_CHANGE"].toUpperCase()}}
+                {{serviceNames["OIL_CHANGE"].toUpperCase()}}
             </ion-item>
             <ion-item menu-close="" class="egobie-service-item"
                       ng-repeat="service in oilChange"
@@ -39,33 +37,11 @@
                       ng-show="isShownService('OIL_CHANGE')">
                 <div class="left"></div>
                 <div class="middle">
-                    <p class="price">{{service.price}}</p>
-                    <p class="name">{{service.name}}</p>
-                    <p class="note">{{service.note}}</p>
-                    <p class="time">Estimated Time : {{service.time}}</p>
+                    <p class="name">{{service.name}} <span ng-show="service.note">{{service.note}}</span></p>
+                    <p class="time">Estimated Time : {{service.time}} mins (per vehicle)</p>
                 </div>
                 <div class="icon ion-ios-arrow-right right"></div>
             </ion-item>
-
-            <!--
-            <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title"
-                      ng-click="toggleShownService('DETAILING')">
-                {{serviceNames["DETAILING"].toUpperCase()}}
-            </ion-item>
-            <ion-item menu-close="" class="egobie-service-item"
-                      ng-repeat="service in detailing"
-                      ng-click="showService(service)"
-                      ng-show="isShownService('DETAILING')">
-                <div class="left"></div>
-                <div class="middle">
-                    <p class="price">{{service.price}}</p>
-                    <p class="name">{{service.name}}<span class="note">{{service.note}}</span></p>
-                    <p class="note">{{service.note}}</p>
-                    <p class="time">Estimated Time : {{service.time}}</p>
-                </div>
-                <div class="icon ion-ios-arrow-right right"></div>
-            </ion-item>
-            -->
         </ion-list>
     </ion-content>
 </ion-view>

@@ -16,12 +16,12 @@ angular.module('util.url', [])
             signUp: host + "/signup/fleet",
 
             updateUser: host + "/user/update/user",
-            updateHome: host + "/user/update/home",
             updateWork: host + "/user/update/work",
             updatePassword: host + "/user/update/password",
             feedback: host + "/user/feedback",
 
-            services: host + "/service",
+            services: host + "/fleet/service",
+            addons: host + "/fleet/addon",
             userReservations: host + "/service/reservation",
 
             openings: host + "/service/opening",

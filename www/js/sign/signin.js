@@ -23,7 +23,7 @@ angular.module('app.sign.in', ['ionic', 'util.shared', 'util.url'])
                 .success(function(data, status, headers, config) {
                     shared.refreshUser(data);
 
-                    if (shared.isResidential()) {
+                    if (shared.isFleet()) {
                         $state.go('menu.home.resident');
                     } else {
                         $state.go('menu.task');

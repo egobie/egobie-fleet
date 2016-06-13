@@ -28,7 +28,6 @@ angular
         'app.setting',
         'app.setting.user',
         'app.setting.password',
-        'app.setting.home',
         'app.setting.work',
 
         'app.car',
@@ -40,7 +39,6 @@ angular
         'app.myservice.reservation',
 
         'app.notification',
-        'app.coupon',
 
         'app.payment',
         'app.payment.add',

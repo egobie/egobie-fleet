@@ -22,21 +22,24 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
                 templateUrl: 'templates/menu/menu.html',
                 abstract: true,
                 resolve: {
-                    resolveUserCars: function(requestUserCars) {
-                        return requestUserCars.promise;
-                    },
-                    resolveCarMakers: function(requestCarMakers) {
-                        return requestCarMakers.promise;
-                    },
-                    resolveCarModels: function(requestCarModels) {
-                        return requestCarModels.promise;
-                    },
+//                    resolveUserCars: function(requestUserCars) {
+//                        return requestUserCars.promise;
+//                    },
+//                    resolveCarMakers: function(requestCarMakers) {
+//                        return requestCarMakers.promise;
+//                    },
+//                    resolveCarModels: function(requestCarModels) {
+//                        return requestCarModels.promise;
+//                    },
                     resolveServices: function(requestServices) {
                         return requestServices.promise;
                     },
-                    resolveUserPayments: function(requestUserPayments) {
-                        return requestUserPayments.promise;
+                    resolveAddons: function(requestAddons) {
+                        return requestAddons.promise;
                     }
+//                    resolveUserPayments: function(requestUserPayments) {
+//                        return requestUserPayments.promise;
+//                    }
                 }
             });
     })
@@ -44,7 +47,7 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
     .controller('menuCtrl', function($scope, shared) {
         $scope.user = {
             name: shared.getUser().first || "Welcome",
-            isResidential: shared.isResidential()
+            isFleet: shared.isFleet()
         };
 
         $scope.badge = {
@@ -63,8 +66,4 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
         }, function(newValue) {
             $scope.badge.history = newValue;
         });
-
-        $scope.signOut = function() {
-            shared.signOut();
-        };
     });
