@@ -15,12 +15,9 @@ angular
         'app.menu',
 
         'app.home',
-        'app.home.resident',
-        'app.home.resident.demand',
-        'app.home.resident.reservation',
-
-        'app.home.mall',
-        'app.home.business',
+        'app.home.fleet',
+        'app.home.fleet.demand',
+        'app.home.fleet.reservation',
 
         'app.service',
         'app.service.detail',

@@ -1,4 +1,4 @@
-angular.module('app.home.resident.demand', ['ionic', 'app.home.resident', 'util.shared', 'util.url'])
+angular.module('app.home.fleet.demand', ['ionic', 'app.home.fleet', 'util.shared', 'util.url'])
 
     .controller('demandCtrl', function($scope, $state, $http, shared, url,
             orderService, orderCar, orderPayment, orderOpening, orderAddon, order, demandOrder) {

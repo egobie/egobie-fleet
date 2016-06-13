@@ -1,4 +1,4 @@
-angular.module('app.home.resident', ['ionic', 'util.shared'])
+angular.module('app.home.fleet', ['ionic', 'util.shared'])
 
     .service('orderOpening', function() {
         return {

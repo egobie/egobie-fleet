@@ -24,7 +24,7 @@ angular.module('app.sign.in', ['ionic', 'util.shared', 'util.url'])
                     shared.refreshUser(data);
 
                     if (shared.isFleet()) {
-                        $state.go('menu.home.resident');
+                        $state.go('menu.home.fleet');
                     } else {
                         $state.go('menu.task');
                     }

@@ -1,4 +1,4 @@
-angular.module('app.home.resident.reservation', ['ionic', 'app.home.resident', 'util.shared', 'util.url'])
+angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.shared', 'util.url'])
 
     .controller('reservationOrderCtrl', function($scope, shared, order) {
         shared.goReservation();
