@@ -42,6 +42,20 @@
                 </div>
                 <div class="icon ion-ios-arrow-right right"></div>
             </ion-item>
+
+            <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title"
+                      ng-click="toggleShownService('EXTRA')">
+                EXTRA SERVICES
+            </ion-item>
+            <ion-item menu-close="" class="egobie-service-item"
+                      ng-repeat="addon in addons"
+                      ng-show="isShownService('EXTRA')">
+                <div class="left"></div>
+                <div class="middle">
+                    <p class="name">{{addon.name}}</p>
+                    <p class="note">{{addon.note}}</p>
+                </div>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

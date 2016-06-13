@@ -47,6 +47,7 @@ angular.module("util.shared", ["util.url"])
         ];
 
         var services = {};
+        var addons = [];
 
         var carWash = [];
         var oilChange = [];
@@ -153,7 +154,11 @@ angular.module("util.shared", ["util.url"])
             },
 
             addAddons: function(data) {
-                
+                addons = data;
+            },
+
+            getAddons: function() {
+                return addons;
             },
 
             addServices: function(data) {
