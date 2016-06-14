@@ -1,6 +1,6 @@
 angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'util.url'])
 
-    .controller('serviceSelectCtl', function($scope, $ionicModal, shared, orderService, fleetOrder) {
+    .controller('serviceSelectCtl', function($scope, $ionicModal, $timeout, shared, orderService, fleetOrder) {
         $scope.services = orderService.services;
         $scope.addons = shared.getAddons();
         $scope.serviceNames = shared.getServiceNames();
@@ -10,6 +10,7 @@ angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'u
         $scope.newReservation = {
             selected: 0,
             carCount: 0,
+            title: "NEW RESERVATION",
             isValid: function() {
                 return this.selected > 0 && this.carCount > 0;
             }
@@ -30,6 +31,9 @@ angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'u
         $scope.hideAddReservation = function() {
             $scope.clearReservation();
             $scope.addReservationModal.hide();
+            $timeout(function() {
+                $scope.addReservationModal.remove();
+            }, 200);
         };
 
         $scope.selectService = function() {
@@ -52,7 +56,11 @@ angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'u
             }
 
             if ($scope.newReservation.isValid()) {
-                fleetOrder.add($scope.newReservation.carCount, services, addons);
+                if ($scope.current) {
+                    fleetOrder.edit($scope.current.id, $scope.newReservation.carCount, services, addons);
+                } else {
+                    fleetOrder.add($scope.newReservation.carCount, services, addons);
+                }
 
                 $scope.hideAddReservation();
                 // TODO demand addons
@@ -120,4 +128,40 @@ angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'u
                 "egobie-button-disabled": !$scope.newReservation.isValid()
             };
         };
+
+        $scope.initService = function() {
+            if ($scope.current) {
+                var addons = [];
+
+                $scope.newReservation.carCount = $scope.current.car_count;
+                $scope.newReservation.title = "EDIT RESERVATION";
+
+                Array.prototype.forEach.call($scope.current.addons, function(addon) {
+                    addons.push(addon.id);
+                });
+
+                for (var _i = 0; _i < $scope.carWash.length; _i++) {
+                    if ($scope.current.services.indexOf($scope.carWash[_i].id) >= 0) {
+                        $scope.carWash[_i].checked = true;
+                        $scope.newReservation.selected++;
+                    }
+                }
+
+                for (var _i = 0; _i < $scope.oilChange.length; _i++) {
+                    if ($scope.current.services.indexOf($scope.oilChange[_i].id) >= 0 ) {
+                        $scope.oilChange[_i].checked = true;
+                        $scope.newReservation.selected++;
+                    }
+                }
+
+                for (var _i in $scope.addons) {
+                    if (addons.indexOf($scope.addons[_i].id) >= 0) {
+                        $scope.addons[_i].checked = true;
+                        $scope.newReservation.selected++;
+                    }
+                }
+            }
+        };
+
+        $scope.initService();
     });

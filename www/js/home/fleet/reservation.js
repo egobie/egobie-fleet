@@ -1,6 +1,6 @@
 angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.shared', 'util.url'])
 
-    .controller('reservationOrderCtrl', function($scope, $ionicModal, shared, fleetOrder) {
+    .controller('reservationOrderCtrl', function($scope, $ionicModal, $ionicActionSheet, shared, fleetOrder) {
         $scope.order = fleetOrder;
 
         $scope.$watch(function() {
@@ -9,27 +9,64 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
             $scope.order = newValue;
         });
 
-        $ionicModal.fromTemplateUrl('templates/home/fleet/service.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.addReservationModal = modal;
-        });
+        $scope._createReservationModal = function() {
+            $ionicModal.fromTemplateUrl('templates/home/fleet/service.html', {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.addReservationModal = modal;
+                $scope.addReservationModal.show();
+            });
+        };
 
         $scope.showAddReservation = function() {
-            $scope.addReservationModal.show();
+            $scope.current = null;
+            $scope._createReservationModal();
+        };
+
+        $scope.showEditReservation = function(reservation) {
+            $scope.current = reservation;
+            $scope._createReservationModal();
         };
 
         $scope.noReservation = function() {
             return Object.keys($scope.order.reservations).length === 0;
         };
 
-        $scope.getService = function(id) {
+        $scope.showReservationActionSheet = function(id, reservation) {
+            $scope.hideReservationActionSheet = $ionicActionSheet.show({
+                titleText: 'Manage Reservation',
+
+                buttons: [
+                    { text: 'Edit' }
+                ],
+                buttonClicked: function(index) {
+                    $scope.hideReservationActionSheet();
+
+                    if (index === 0) {
+                        $scope.showEditReservation(reservation);
+                    }
+                },
+
+                destructiveText: 'Delete',
+                destructiveButtonClicked: function() {
+                    fleetOrder.remove(id);
+                    $scope.hideReservationActionSheet();
+                },
+
+                cancelText: 'Cancel',
+                cancel: function() {
+                    
+                }
+            });
+        };
+
+        $scope.getServiceName = function(id) {
             var service = shared.getService(id);
 
             return service.name + (service.note ? " (" + service.note + ")" : "");
         };
 
-        $scope.getAddon = function(id) {
+        $scope.getAddonName = function(id) {
             var addon = shared.getAddon(id);
 
             return addon.name + (addon.note ? " (" + addon.note + ")" : "");

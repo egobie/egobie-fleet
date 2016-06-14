@@ -18,15 +18,16 @@
                       ng-show="noReservation()">
                 <i class="icon ion-android-checkmark-circle icon-1"></i>
                 <p class="no">No reservation</p>
-                <p class="add">Click <i class="icon ion-android-add icon-2"></i> to add a new one</p>
+                <p class="add">Click <i class="icon ion-android-add icon-2"></i> to add one or more</p>
             </ion-item>
-            <ion-item ng-repeat="(id, reservation) in order.reservations">
+            <ion-item ng-repeat="(id, reservation) in order.reservations"
+                      ng-click="showReservationActionSheet(id, reservation)">
                 <i>id = {{id}}</i>
                 <i>carCount = {{reservation.car_count}}</i>
                 <p>services</p>
-                <i ng-repeat="sid in reservation.services">{{getService(sid)}}</i>
+                <i ng-repeat="sid in reservation.services">{{getServiceName(sid)}}</i>
                 <p>addons</p>
-                <i ng-repeat="addon in reservation.addons">{{getAddon(addon.id)}}, amount {{addon.amount}}</i>
+                <i ng-repeat="addon in reservation.addons">{{getAddonName(addon.id)}}, amount {{addon.amount}}</i>
             </ion-item>
         </ion-list>
 

@@ -24,12 +24,12 @@ angular.module('util.url', [])
             addons: host + "/fleet/addon",
             fleetReservations: host + "/fleet/reservation",
 
-            openings: host + "/service/opening",
-            ondemand: host + "/service/now",
+            openings: host + "/fleet/opening",
+            ondemand: host + "/fleet/now",
             addService: host + "/service/add",
             placeOrder: host + "/fleet/order",
-            cancelOrder: host + "/service/cancel",
-            forceCancelOrder: host + "/service/cancel/force",
+            cancelOrder: host + "/fleet/cancel",
+            forceCancelOrder: host + "/fleet/cancel/force",
 
             demandService: host + "/fleet/demand",
             readService: host + "/fleet/read/",

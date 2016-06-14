@@ -65,10 +65,16 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
             add: function(carCount, services, addons) {
                 this._id++;
                 this.reservations[this._id] = {
+                    id: this._id,
                     car_count: carCount,
                     services: services,
                     addons: addons
                 };
+            },
+            edit: function(id, carCount, services, addons) {
+                this.reservations[id].car_count = carCount;
+                this.reservations[id].services = services;
+                this.reservations[id].addons = addons;
             },
             remove: function(id) {
                 delete this.reservations[id];
