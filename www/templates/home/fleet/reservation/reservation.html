@@ -20,14 +20,33 @@
                 <p class="no">No reservation</p>
                 <p class="add">Click <i class="icon ion-android-add icon-2"></i> to add one or more</p>
             </ion-item>
-            <ion-item ng-repeat="(id, reservation) in order.reservations"
+            <ion-item class="egobie-reservation-order-list"
+                      ng-repeat="(id, reservation) in order.reservations"
                       ng-click="showReservationActionSheet(id, reservation)">
-                <i>id = {{id}}</i>
-                <i>carCount = {{reservation.car_count}}</i>
-                <p>services</p>
-                <i ng-repeat="sid in reservation.services">{{getServiceName(sid)}}</i>
-                <p>addons</p>
-                <i ng-repeat="addon in reservation.addons">{{getAddonName(addon.id)}}, amount {{addon.amount}}</i>
+                <div class="top">
+                    <div class="services">
+                        <div class="items">
+                            <p class="title">Services</p>
+                            <p class="value"
+                               ng-repeat="sid in reservation.services">
+                                {{getServiceName(sid)}}
+                                <span>{{getServiceNote(sid)}}</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="addons">
+                        <div class="items">
+                            <p class="title">Extra Services</p>
+                            <p class="value"
+                               ng-repeat="addon in reservation.addons">
+                                {{getAddonName(addon.id)}}
+                                <span>{{getAddonNote(addon.id)}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <p class="bottom">{{reservation.car_count}}</p>
             </ion-item>
         </ion-list>
 

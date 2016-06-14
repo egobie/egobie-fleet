@@ -63,13 +63,19 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
         $scope.getServiceName = function(id) {
             var service = shared.getService(id);
 
-            return service.name + (service.note ? " (" + service.note + ")" : "");
+            return service.name + " (" + shared.getServiceType(service.type) + ")";
+        };
+
+        $scope.getServiceNote = function(id) {
+            return shared.getService(id).note;
         };
 
         $scope.getAddonName = function(id) {
-            var addon = shared.getAddon(id);
+            return shared.getAddon(id).name;
+        };
 
-            return addon.name + (addon.note ? " (" + addon.note + ")" : "");
+        $scope.getAddonNote = function(id) {
+            return shared.getAddon(id).note;
         };
     })
 

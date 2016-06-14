@@ -10515,6 +10515,53 @@ a.button {
   background: url("../img/reserve.jpg") no-repeat center center;
   background-size: cover; }
 
+.egobie-reservation-order-list {
+  padding: 0px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.26); }
+  .egobie-reservation-order-list .top {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px; }
+    .egobie-reservation-order-list .top .services, .egobie-reservation-order-list .top .addons {
+      display: inline-block; }
+      .egobie-reservation-order-list .top .services .items .title, .egobie-reservation-order-list .top .addons .items .title {
+        font-size: 12px; }
+      .egobie-reservation-order-list .top .services .items .value, .egobie-reservation-order-list .top .addons .items .value {
+        font-size: 10px;
+        color: #000000;
+        overflow: visible; }
+        .egobie-reservation-order-list .top .services .items .value span, .egobie-reservation-order-list .top .addons .items .value span {
+          display: block;
+          padding-left: 5px;
+          color: #1BB3EC; }
+        .egobie-reservation-order-list .top .services .items .value:before, .egobie-reservation-order-list .top .addons .items .value:before {
+          content: "- "; }
+    .egobie-reservation-order-list .top .services {
+      width: 40%;
+      margin-left: 10px; }
+    .egobie-reservation-order-list .top .addons {
+      margin-left: 5px; }
+  .egobie-reservation-order-list .bottom {
+    width: 95%;
+    height: 30px;
+    line-height: 30px;
+    font-weight: 900;
+    text-align: right;
+    padding-right: 10px;
+    margin: 10px auto;
+    font-size: 18px;
+    border-top: 1px solid rgba(0, 0, 0, 0.31); }
+    .egobie-reservation-order-list .bottom:before {
+      content: "Vehicles:";
+      padding-right: 5px;
+      font-size: 15px;
+      height: 30px;
+      line-height: 30px;
+      font-weight: normal; }
+
 .egobie-resident-order div.note {
   border: 0px;
   padding-bottom: 15px;
