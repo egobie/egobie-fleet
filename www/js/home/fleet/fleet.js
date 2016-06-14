@@ -62,6 +62,7 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
         return {
             _id: 0,
             reservations: {},
+            type: "",
             add: function(carCount, services, addons) {
                 this._id++;
                 this.reservations[this._id] = {
@@ -78,6 +79,45 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
             },
             remove: function(id) {
                 delete this.reservations[id];
+            },
+            getServicesAndAddons: function() {
+                var id = 0;
+                var reservation = null;
+                var addonInfo = null;
+                var services = [];
+                var addons = [];
+
+                for (id in this.reservations) {
+                    reservation = this.reservations[id];
+
+                    if (reservation.services && reservation.services.length > 0) {
+                        services.push({
+                            car_count: reservation.car_count,
+                            service_ids: reservation.services
+                        });
+                    }
+
+                    if (reservation.addons && reservation.addons.length > 0) {
+                        addonInfo = {
+                            car_count: reservation.car_count,
+                            addons: []
+                        };
+
+                        Array.prototype.forEach.call(reservation.addons, function(addon) {
+                            addonInfo.addons.push({
+                                id: addon.id,
+                                amount: addon.amount
+                            });
+                        });
+
+                        addons.push(addonInfo);
+                    }
+                }
+
+                return {
+                    services: services,
+                    addons: addons
+                };
             },
             clear: function() {
                 this._id = 0;
@@ -120,47 +160,6 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
             clear: function() {
                 this.price = 0;
                 this.time = 0;
-            }
-        };
-    })
-
-    .service('orderAddon', function(order) {
-        return {
-            addons: {},
-            add: function(addons) {
-                for (var i = 0; i < addons.length; i++) {
-                    if (addons[i].name in this.addons) {
-                        this.addons[addons[i].name].count += 1;
-                    } else {
-                        this.addons[addons[i].name] = {
-                            count: 0,
-                            addon: null
-                        };
-                        this.addons[addons[i].name].count = 1;
-                        this.addons[addons[i].name].checked = false;
-                        this.addons[addons[i].name].addon = addons[i];
-                    }
-                }
-            },
-            remove: function(addons) {
-                for (var i = 0; i < addons.length; i++) {
-                    if (addons[i].name in this.addons) {
-                        this.addons[addons[i].name].count -= 1;
-
-                        if (this.addons[addons[i].name].count <= 0) {
-                            if (this.addons[addons[i].name].checked) {
-                                order.price -= this.addons[addons[i].name].addon.price * this.addons[addons[i].name].addon.amount;
-                                order.time -= this.addons[addons[i].name].addon.time;
-                                this.addons[addons[i].name].addon.amount = 1;
-                            }
-
-                            delete this.addons[addons[i].name];
-                        }
-                    }
-                }
-            },
-            clear: function() {
-                this.addons = {};
             }
         };
     })

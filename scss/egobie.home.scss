@@ -84,11 +84,14 @@
         background-size: cover;
     }
 
-    &-reservation-order-list {
+    &-fleet-order-list {
+        width: 95%;
         padding: 0px;
         border-radius: 10px;
         margin-bottom: 10px;
         padding-bottom: 5px;
+        margin-left: auto;
+        margin-right: auto;
         box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.26);
 
         .top {
@@ -154,7 +157,7 @@
         }
     }
 
-    &-resident-order {
+    &-fleet-order {
         div.note {
             border: 0px;
             padding-bottom: 15px;
@@ -233,24 +236,10 @@
             border-radius: 0px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.60);
             padding-left: 0px;
+            margin-bottom: 5px;
 
             span {
                 font-size: 12px;
-            }
-        }
-
-        .button {
-            width: 95% !important;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid rgba(0, 0, 0, 0.35);
-
-            &:before {
-                color: #FF1919;
-            }
-
-            span {
-                font-size: 13px;
             }
         }
     }

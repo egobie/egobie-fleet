@@ -16,6 +16,7 @@ angular
 
         'app.home',
         'app.home.service',
+        'app.home.opening',
         'app.home.fleet',
         'app.home.fleet.demand',
         'app.home.fleet.reservation',
