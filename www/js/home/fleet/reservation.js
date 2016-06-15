@@ -75,7 +75,7 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
         };
     })
 
-    .controller('orderCtrl', function($scope, $state, $ionicActionSheet, $http, shared, url, fleetOrder) {
+    .controller('orderCtrl', function($scope, $state, $ionicActionSheet, $http, shared, url, orderOpening, fleetOrder) {
         $scope.validateRequest = function(request) {
             if (request.car_id <= 0) {
                 shared.alert("Please choose a vehicle");
@@ -87,8 +87,8 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
                 return false;
             }
 
-            if (request.opening <= 0) {
-                shared.alert("Please choose a date");
+            if (request.opening <= 0 && (request.day === "" || request.hour === "")) {
+                shared.alert("Please choose/input a date");
                 return false;
             }
 
@@ -104,19 +104,19 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
             var orders = fleetOrder.getServicesAndAddons();
             var request = {
                 note: "test",
-                opening: 1,
                 services: orders.services,
                 addons: orders.addons,
-                day: "",
-                hour: ""
+                opening: orderOpening.id,
+                day: orderOpening.day,
+                hour: orderOpening.start.substring(0, orderOpening.start.length - 4)
             };
-
-            console.log(request);
-            return;
 
             if (!$scope.validateRequest(request)) {
                 return;
             }
+
+            console.log(request);
+            return;
 
             $scope.hideReservationSheet = $ionicActionSheet.show({
                 titleText: 'We will send estimated price to you later. We require you to cancel the reservation 24 hours ahead, otherwise we will charge 50% of the appointment cost.',
@@ -153,7 +153,7 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
         };
 
         $scope.$watch(function() {
-            return orderOpening.id;
+            return orderOpening.day + orderOpening.start;
         }, function(newValue, oldValue) {
             $scope.opening.day = orderOpening.day;
             $scope.opening.start = orderOpening.start;

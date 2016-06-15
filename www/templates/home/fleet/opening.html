@@ -13,7 +13,29 @@
         <div class="egobie-bg-mask-2"></div>
     </div>
     <ion-content overflow-scroll="true" class="has-header">
-        <!--<ion-list class="egobie-opening-list-left"></ion-list>-->
+        <ion-list class="egobie-fleet-opening">
+            <ion-item class="item-divider item-icon-right">
+                INPUT DATETIME YOU DESIRE
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-calendar"></i>
+                <input type="text" placeholder="YYYY-MM-DD"
+                       ng-model="desiredDate.day"/>
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-clock"></i>
+                <input type="text" placeholder="HH:MM"
+                       ng-model="desiredDate.hour"/>
+            </ion-item>
+            <button class="button button-block button-dark"
+                    ng-click="saveDesiredDate()">SAVE</button>
+        </ion-list>
+
+        <ion-list class="egobie-fleet-opening">
+            <ion-item class="item-divider item-icon-right">
+                or SELECT FROM AVAILABLE DATES
+            </ion-item>
+        </ion-list>
         <ion-list class="list-margin-top-10 egobie-opening-list-right">
             <ion-item class="egobie-opening-list"
                       ng-repeat="opening in openings"

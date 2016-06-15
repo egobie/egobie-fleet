@@ -5,6 +5,10 @@ angular.module('app.home.opening', ['ionic', 'app.home.fleet', 'util.shared', 'u
         $scope.showIndex = -1;
         $scope.selectedRange = null;
         $scope.getTime = shared.getTime;
+        $scope.desiredDate = {
+            day: "",
+            hour: ""
+        };
 
         var orders = fleetOrder.getServicesAndAddons();
         var types = {};
@@ -43,6 +47,44 @@ angular.module('app.home.opening', ['ionic', 'app.home.fleet', 'util.shared', 'u
                     shared.alert(data);
                     $scope.hideOpeningModal();
                 });
+        };
+
+        $scope.saveDesiredDate = function() {
+            var now = new Date();
+            var date = new Date($scope.desiredDate.day + " " + $scope.desiredDate.hour);
+            var month = 0;
+            var day = 0;
+            var hour = 0;
+            var min = 0;
+            var later = null;
+            var min_later = 0;
+            var hour_later = 0;
+
+            if (date.toDateString() === "Invalid Date" || now > date) {
+                shared.alert("Invalid input datetime");
+            } else {
+                later = new Date(date);
+                month = date.getMonth() + 1;
+                day = date.getDate();
+                hour = date.getHours();
+                min = date.getMinutes() < 30 ? 0 : 30;
+                later.setMinutes(min + 30);
+                hour_later = later.getHours();
+                min_later = later.getMinutes();
+
+                orderOpening.id = -1;
+                orderOpening.start = (hour < 10 ? "0" + hour : hour) + ":" +
+                        (min < 10 ? "0" + min : min) + (hour < 12 ? " A.M" : " P.M");
+                orderOpening.end = (hour_later < 10 ? "0" + hour_later : hour_later) + ":" +
+                        (min_later < 10 ? "0" + min_later : min_later) + (hour_later < 12 ? " A.M" : " P.M");
+                orderOpening.day = date.getFullYear() + "-" + (month < 10 ? ("0" + month) : month) +
+                        "-" + (day < 10 ? ("0" + day) : day);
+
+                var t = $timeout(function() {
+                    $scope.hideOpeningModal();
+                    $timeout.cancel(t);
+                }, 200);
+            }
         };
 
         $scope.goToOrder = function(id, day, start, end) {

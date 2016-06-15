@@ -12,14 +12,12 @@
     </div>
     <ion-content padding="true" class="egobie-service-list has-footer">
         <ion-list>
-            <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title egobie-margin-top-15">
-                VEHICLES
-            </ion-item>
-            <ion-item>
-                <span>HOW MANY VEHICLES DO YOU HAVE?</span>
+            <ion-item class="item-divider item-icon-right egobie-service-title">VEHICLES</ion-item>
+            <div class="egobie-fleet-car">
+                <div class="name">How many vehicles do you have?</div>
                 <input type="number" maxlength="3"
                        ng-model="newReservation.carCount"/>
-            </ion-item>
+            </div>
 
             <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title egobie-margin-top-15">
                 {{serviceNames["CAR_WASH"].toUpperCase()}}

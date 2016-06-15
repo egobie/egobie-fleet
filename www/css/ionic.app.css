@@ -10374,7 +10374,7 @@ a.button {
 .egobie-margin-left-3 {
   margin-left: 3px; }
 
-.egobie-margin-top-5, .egobie-fleet-order .item {
+.egobie-margin-top-5, .egobie-fleet-opening .item, .egobie-fleet-order .item {
   margin-top: 5px; }
 
 .egobie-margin-top-15 {
@@ -10564,6 +10564,67 @@ a.button {
       height: 30px;
       line-height: 30px;
       font-weight: normal; }
+
+.egobie-fleet-car {
+  display: flex;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.5); }
+  .egobie-fleet-car .name {
+    display: inline-block;
+    line-height: 40px;
+    height: 40px;
+    padding-left: 10px; }
+  .egobie-fleet-car input {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.6); }
+
+.egobie-fleet-opening {
+  display: flex;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  border-radius: 5px; }
+  .egobie-fleet-opening .list {
+    width: 100%; }
+  .egobie-fleet-opening input {
+    display: inline-block;
+    width: 200px;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: left;
+    padding-left: 10px;
+    background: transparent;
+    border-left: 1px solid rgba(0, 0, 0, 0.6); }
+  .egobie-fleet-opening .item {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2px;
+    height: 40px;
+    background: transparent;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.5); }
+    .egobie-fleet-opening .item i:before {
+      font-size: 25px; }
+  .egobie-fleet-opening .item-divider {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 0px;
+    border-radius: 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    padding-left: 0px;
+    margin-bottom: 5px;
+    overflow: visible; }
+    .egobie-fleet-opening .item-divider span {
+      font-size: 12px; }
 
 .egobie-fleet-order div.note {
   border: 0px;
