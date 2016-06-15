@@ -73,12 +73,11 @@ angular.module('app.home.opening', ['ionic', 'app.home.fleet', 'util.shared', 'u
                 min_later = later.getMinutes();
 
                 orderOpening.id = -1;
-                orderOpening.start = (hour < 10 ? "0" + hour : hour) + ":" +
-                        (min < 10 ? "0" + min : min) + (hour < 12 ? " A.M" : " P.M");
-                orderOpening.end = (hour_later < 10 ? "0" + hour_later : hour_later) + ":" +
-                        (min_later < 10 ? "0" + min_later : min_later) + (hour_later < 12 ? " A.M" : " P.M");
-                orderOpening.day = date.getFullYear() + "-" + (month < 10 ? ("0" + month) : month) +
-                        "-" + (day < 10 ? ("0" + day) : day);
+                orderOpening.start = shared.twoDigits(hour) + ":" + shared.twoDigits(min) +
+                        (hour < 12 ? " A.M" : " P.M");
+                orderOpening.end = shared.twoDigits(hour_later) + ":" + shared.twoDigits(min_later) +
+                        (hour_later < 12 ? " A.M" : " P.M");
+                orderOpening.day = date.getFullYear() + "-" + shared.twoDigits(month) + "-" + shared.twoDigits(day);
 
                 var t = $timeout(function() {
                     $scope.hideOpeningModal();

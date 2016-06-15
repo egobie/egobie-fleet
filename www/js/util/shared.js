@@ -331,6 +331,17 @@ angular.module("util.shared", ["util.url"])
                 }
             },
 
+            twoDigits: function(i) {
+                return (i < 10 ? "0" : "") + i;
+            },
+
+            toHourMin: function(time) {
+                var hour = parseInt(time / 60);
+                var min = time % 60;
+
+                return (hour > 0 ? hour + " HOUR " : "") + (min > 0 ? min + " MIN " : "");
+            },
+
             showLoading: function () {
                 $ionicLoading.show({
                     template: '<ion-spinner icon="bubbles"></ion-spinner>',

@@ -1,13 +1,36 @@
 angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.shared', 'util.url'])
 
-    .controller('reservationOrderCtrl', function($scope, $ionicModal, $ionicActionSheet, shared, fleetOrder) {
+    .controller('reservationOrderCtrl', function($scope, $ionicModal, $ionicActionSheet, shared, orderOpening, fleetOrder) {
         $scope.order = fleetOrder;
+        $scope.opening = {
+            day: orderOpening.day,
+            start: orderOpening.start,
+            end: orderOpening.end
+        };
 
         $scope.$watch(function() {
             return $scope.order;
         }, function (newValue, oldValue) {
             $scope.order = newValue;
         });
+
+        $scope.$watch(function() {
+            return orderOpening.day + orderOpening.start;
+        }, function(newValue, oldValue) {
+            $scope.opening.day = orderOpening.day;
+            $scope.opening.start = orderOpening.start;
+            $scope.opening.end = orderOpening.end;
+        });
+
+        $scope.showOpeningModal = function() {
+            $ionicModal.fromTemplateUrl("templates/home/fleet/opening.html", {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.openingModal = modal;
+                $scope.openingModal.show();
+                shared.openDate();
+            });
+        };
 
         $scope._createReservationModal = function() {
             $ionicModal.fromTemplateUrl('templates/home/fleet/service.html', {
@@ -76,30 +99,6 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
     })
 
     .controller('orderCtrl', function($scope, $state, $ionicActionSheet, $http, shared, url, orderOpening, fleetOrder) {
-        $scope.validateRequest = function(request) {
-            if (request.car_id <= 0) {
-                shared.alert("Please choose a vehicle");
-                return false;
-            }
-
-            if (request.payment_id <= 0) {
-                shared.alert("Please choose a payment method");
-                return false;
-            }
-
-            if (request.opening <= 0 && (request.day === "" || request.hour === "")) {
-                shared.alert("Please choose/input a date");
-                return false;
-            }
-
-            if (!request.services.length) {
-                shared.alert("Please choose at least one service");
-                return false;
-            }
-
-            return true;
-        };
-
         $scope.placeOrderSheet = function() {
             var orders = fleetOrder.getServicesAndAddons();
             var request = {
@@ -114,9 +113,6 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
             if (!$scope.validateRequest(request)) {
                 return;
             }
-
-            console.log(request);
-            return;
 
             $scope.hideReservationSheet = $ionicActionSheet.show({
                 titleText: 'We will send estimated price to you later. We require you to cancel the reservation 24 hours ahead, otherwise we will charge 50% of the appointment cost.',
@@ -143,30 +139,28 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
                 }
             });
         };
-    })
 
-    .controller('openingSelectCtrl', function($scope, $ionicModal, shared, orderOpening) {
-        $scope.opening = {
-            day: orderOpening.day,
-            start: orderOpening.start,
-            end: orderOpening.end
-        };
+        $scope.validateRequest = function(request) {
+            if (request.car_id <= 0) {
+                shared.alert("Please choose a vehicle");
+                return false;
+            }
 
-        $scope.$watch(function() {
-            return orderOpening.day + orderOpening.start;
-        }, function(newValue, oldValue) {
-            $scope.opening.day = orderOpening.day;
-            $scope.opening.start = orderOpening.start;
-            $scope.opening.end = orderOpening.end;
-        });
+            if (request.payment_id <= 0) {
+                shared.alert("Please choose a payment method");
+                return false;
+            }
 
-        $scope.showOpeningModal = function() {
-            $ionicModal.fromTemplateUrl("templates/home/fleet/opening.html", {
-                scope: $scope
-            }).then(function(modal) {
-                $scope.openingModal = modal;
-                $scope.openingModal.show();
-                shared.openDate();
-            });
+            if (request.opening <= 0 && (request.day === "" || request.hour === "")) {
+                shared.alert("Please choose/input a date");
+                return false;
+            }
+
+            if (!request.services.length) {
+                shared.alert("Please choose at least one service");
+                return false;
+            }
+
+            return true;
         };
     });

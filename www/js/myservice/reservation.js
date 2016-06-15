@@ -3,6 +3,7 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
     .controller('myReservationCtrl', function($scope, $ionicModal, $ionicPopup, $ionicActionSheet, $http, shared, url) {
         shared.goReservation();
 
+        $scope.toHourMin = shared.toHourMin;
         $scope.charges = {};
         $scope.order = {
             service_id: 0,
@@ -32,47 +33,47 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
                 destructiveText: 'Cancel Reservation',
                 destructiveButtonClicked: $scope.cancel,
                 buttons: [
-                    {text: 'Add Service'}
+//                    {text: 'Add Service'}
                 ],
                 buttonClicked: function(index) {
-                    if (index === 0) {
-                        var chargeIds = [];
-                        var service = null;
-
-                        $scope.charges = {};
-                        $scope.order.service_id = reservation.id;
-                        $scope.order.real_price = reservation.price;
-                        $scope.order.price = 0;
-                        $scope.order.discount = 1.0;
-
-                        for (var i in reservation.addons) {
-                            if (reservation.addons[i].time === 0) {
-                                chargeIds.push(reservation.addons[i].id);
-                            }
-
-                            $scope.order.price += reservation.addons[i].price;
-                        }
-
-                        for (var i in reservation.services) {
-                            service = shared.getService(reservation.services[i].id);
-
-                            if (service && service.charge) {
-                                for (var j in service.charge) {
-                                    if (service.charge[j].max === 1 && chargeIds.indexOf(service.charge[j].id) < 0) {
-                                        $scope.charges[service.charge[j].name] = service.charge[j];
-                                        $scope.charges[service.charge[j].name].checked = false;
-                                    }
-                                }
-
-                                $scope.order.price += service.price;
-                            }
-                        }
-
-                        $scope.order.discount = ((reservation.price / $scope.order.price) < 1 ? 0.9 : 1.0);
-                        $scope.showAddServiceModel();
-
-                        return true;
-                    }
+//                    if (index === 0) {
+//                        var chargeIds = [];
+//                        var service = null;
+//
+//                        $scope.charges = {};
+//                        $scope.order.service_id = reservation.id;
+//                        $scope.order.real_price = reservation.price;
+//                        $scope.order.price = 0;
+//                        $scope.order.discount = 1.0;
+//
+//                        for (var i in reservation.addons) {
+//                            if (reservation.addons[i].time === 0) {
+//                                chargeIds.push(reservation.addons[i].id);
+//                            }
+//
+//                            $scope.order.price += reservation.addons[i].price;
+//                        }
+//
+//                        for (var i in reservation.services) {
+//                            service = shared.getService(reservation.services[i].id);
+//
+//                            if (service && service.charge) {
+//                                for (var j in service.charge) {
+//                                    if (service.charge[j].max === 1 && chargeIds.indexOf(service.charge[j].id) < 0) {
+//                                        $scope.charges[service.charge[j].name] = service.charge[j];
+//                                        $scope.charges[service.charge[j].name].checked = false;
+//                                    }
+//                                }
+//
+//                                $scope.order.price += service.price;
+//                            }
+//                        }
+//
+//                        $scope.order.discount = ((reservation.price / $scope.order.price) < 1 ? 0.9 : 1.0);
+//                        $scope.showAddServiceModel();
+//
+//                        return true;
+//                    }
                 },
                 cancelText: 'Close',
                 cancel: function() {
@@ -212,6 +213,10 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
                     'min': true
                 };
             }
+        };
+
+        $scope.isWaiting = function(reservation) {
+            return reservation.status === "WAITING";
         };
 
         $scope.isWill = function(reservation) {

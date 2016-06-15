@@ -11212,7 +11212,7 @@ a.button {
         .egobie-reservation-list .top .right .plate-reserve .plate .value {
           margin-bottom: 5px;
           font-weight: bold; }
-  .egobie-reservation-list .bottom-will, .egobie-reservation-list .bottom-delay, .egobie-reservation-list .bottom-in-progress {
+  .egobie-reservation-list .bottom-wait, .egobie-reservation-list .bottom-will, .egobie-reservation-list .bottom-delay, .egobie-reservation-list .bottom-in-progress {
     width: 95%;
     height: 30px;
     line-height: 30px;
@@ -11221,7 +11221,7 @@ a.button {
     padding-right: 10px;
     margin: 10px auto;
     border-top: 1px solid rgba(0, 0, 0, 0.31); }
-  .egobie-reservation-list .bottom-will, .egobie-reservation-list .bottom-delay, .egobie-reservation-list .bottom-in-progress {
+  .egobie-reservation-list .bottom-wait, .egobie-reservation-list .bottom-will, .egobie-reservation-list .bottom-delay, .egobie-reservation-list .bottom-in-progress {
     font-size: 18px;
     margin-bottom: 0px; }
   .egobie-reservation-list .bottom-in-progress {

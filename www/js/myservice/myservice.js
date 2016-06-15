@@ -72,7 +72,7 @@ angular.module('app.myservice', ['ionic', 'util.shared', 'util.url'])
             }
 
             $http
-                .post(url.userHistories, shared.getRequestBody({
+                .post(url.fleetHistories, shared.getRequestBody({
                     page: 0
                 }))
                 .success(function(data, status, headers, config) {
@@ -111,20 +111,9 @@ angular.module('app.myservice', ['ionic', 'util.shared', 'util.url'])
             }
 
             $http
-                .post(url.userReservations, shared.getRequestBody({}))
+                .post(url.fleetReservations, shared.getRequestBody({}))
                 .success(function(data, status, headers, config) {
                     shared.hideLoading();
-
-                    if (data) {
-                        Array.prototype.forEach.call(data, function(reservation) {
-                            if (reservation.services) {
-                                Array.prototype.forEach.call(reservation.services, function(service) {
-                                    service.full_type = shared.getServiceType(service.type);
-                                });
-                            }                      
-                        });
-                    }
-
                     $scope.reservations = data;
                 })
                 .error(function(data, status, headers, config) {
