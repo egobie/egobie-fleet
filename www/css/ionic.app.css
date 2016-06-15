@@ -11163,6 +11163,10 @@ a.button {
       height: inherit;
       margin: 15px 5px 0px 5px;
       border-right: 1px solid #000000; }
+      .egobie-reservation-list .top .left .na {
+        font-size: 20px;
+        font-weight: 700;
+        padding-left: 5px; }
       .egobie-reservation-list .top .left .price {
         font-size: 14px;
         height: 28px;

@@ -24,7 +24,10 @@
                       ng-click="showCancelSheet(reservation)">
                 <div class="top">
                     <div class="left">
-                        <p class="price">{{reservation.price}}</p>
+                        <p class="na"
+                           ng-show="reservation.price <= 0">N/A</p>
+                        <p class="price"
+                           ng-show="reservation.price > 0">{{reservation.price}}</p>
                     </div>
                     <div class="right">
                         <div class="time-services">
