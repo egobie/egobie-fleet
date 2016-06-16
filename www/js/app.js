@@ -47,6 +47,7 @@ angular
         'app.about.feedback',
 
         'app.sale',
+        'app.order',
 
         'util.shared',
         'util.url',

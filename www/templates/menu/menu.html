@@ -54,11 +54,13 @@
                 </ion-item>
 
                 <ion-item ui-sref="menu.sale" menu-close="" class="item item-icon-left egobie-menu-item">
-                    <i class="icon egobie-service-off"></i><span>USERS</span>
+                    <i class="icon egobie-home-off"></i><span>USERS</span>
                 </ion-item>
 
-                <ion-item ui-sref="menu.service" menu-close="" class="item item-icon-left egobie-menu-item">
-                    <i class="icon egobie-service-off"></i><span>EGOBIE SERVICES</span>
+                <ion-item ui-sref="menu.order" menu-close="" class="item item-icon-left egobie-menu-item">
+                    <i class="icon egobie-history-off"></i><span>ORDERS</span>
+                    <span class="badge badge-assertive"
+                          ng-show="badge.history > 0">{{badge.history}}</span>
                 </ion-item>
 
                 <ion-item ui-sref="menu.setting" menu-close="" class="item item-icon-left egobie-menu-item">

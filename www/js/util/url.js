@@ -10,10 +10,12 @@ angular.module('util.url', [])
 
             newFleetUser: host + "/sale/fleet/new",
             allFleetUser: host + "/sale/fleet/all",
-            checkUsername: host + "/check/name",
+            fleetOrder: host + "/sale/fleet/order",
+            fleetOrderDetail: host + "/sale/fleet/order/detail",
 
             signIn: host + "/signin",
             signUp: host + "/signup/fleet",
+            checkUsername: host + "/check/name",
 
             updateUser: host + "/user/update/user",
             updateWork: host + "/user/update/work",

@@ -59,16 +59,16 @@ angular.module('app.myservice', ['ionic', 'util.shared', 'util.url'])
         });
 
         $scope.loadHistories = function(animation) {
-            if ($scope.intervals.history) {
-                $interval.cancel($scope.intervals.history);
-            }
-
-            $scope.intervals.history = $interval(function() {
-                $scope.loadHistories(false);
-            }, 60000);
-
             if (animation) {
                 shared.showLoading();
+
+                if ($scope.intervals.history) {
+                    $interval.cancel($scope.intervals.history);
+                }
+
+                $scope.intervals.history = $interval(function() {
+                    $scope.loadHistories(false);
+                }, 60000);
             }
 
             $http
@@ -98,16 +98,16 @@ angular.module('app.myservice', ['ionic', 'util.shared', 'util.url'])
         };
 
         $scope.loadReservations = function(animation) {
-            if ($scope.intervals.reservation) {
-                $interval.cancel($scope.intervals.reservation);
-            }
-
-            $scope.intervals.reservation = $interval(function() {
-                $scope.loadReservations(false);
-            }, 60000);
-
             if (animation) {
                 shared.showLoading();
+
+                if ($scope.intervals.reservation) {
+                    $interval.cancel($scope.intervals.reservation);
+                }
+
+                $scope.intervals.reservation = $interval(function() {
+                    $scope.loadReservations(false);
+                }, 60000);
             }
 
             $http
@@ -121,6 +121,14 @@ angular.module('app.myservice', ['ionic', 'util.shared', 'util.url'])
                     shared.alert(data);
                 });
         };
+
+        $scope.intervals.history = $interval(function() {
+            $scope.loadHistories(false);
+        }, 60000);
+
+        $scope.intervals.reservation = $interval(function() {
+            $scope.loadReservations(false);
+        }, 60000);
 
         $scope.loadReservations(true);
         $scope.loadHistories(false);

@@ -13736,8 +13736,7 @@ a.button {
             padding-left: 10px;
             color: #1BB3EC; }
     .egobie-user-list .top .phone-email {
-      display: inline-block;
-      margin-left: 10px; }
+      display: inline-block; }
       .egobie-user-list .top .phone-email .phone, .egobie-user-list .top .phone-email .email {
         padding-left: 11px; }
         .egobie-user-list .top .phone-email .phone .title, .egobie-user-list .top .phone-email .email .title {

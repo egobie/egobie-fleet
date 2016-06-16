@@ -15,6 +15,10 @@ angular.module('app.setting', ['ionic', 'util.shared', 'util.url'])
     .controller('settingCtrl', function($scope, $ionicModal, shared) {
         shared.goSetting();
 
+        $scope.user = {
+            isFleet: shared.isFleet()
+        };
+
         $scope.showEditUser = function() {
             $ionicModal.fromTemplateUrl('templates/setting/user.html', {
                 scope: $scope
