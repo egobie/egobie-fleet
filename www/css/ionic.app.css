@@ -13721,18 +13721,20 @@ a.button {
     padding: 10px; }
     .egobie-user-list .top .info {
       display: inline-block;
-      width: 60%; }
-      .egobie-user-list .top .info .business .title, .egobie-user-list .top .info .contact .title, .egobie-user-list .top .info .status .title {
-        font-size: 12px; }
-      .egobie-user-list .top .info .business .value, .egobie-user-list .top .info .contact .value, .egobie-user-list .top .info .status .value {
-        font-size: 11px;
-        color: #000000;
-        font-weight: 900;
+      width: 100px; }
+      .egobie-user-list .top .info .business, .egobie-user-list .top .info .contact, .egobie-user-list .top .info .status {
         overflow: visible; }
-        .egobie-user-list .top .info .business .value span, .egobie-user-list .top .info .contact .value span, .egobie-user-list .top .info .status .value span {
-          display: block;
-          padding-left: 10px;
-          color: #1BB3EC; }
+        .egobie-user-list .top .info .business .title, .egobie-user-list .top .info .contact .title, .egobie-user-list .top .info .status .title {
+          font-size: 12px; }
+        .egobie-user-list .top .info .business .value, .egobie-user-list .top .info .contact .value, .egobie-user-list .top .info .status .value {
+          font-size: 11px;
+          color: #000000;
+          font-weight: 900;
+          overflow: visible; }
+          .egobie-user-list .top .info .business .value span, .egobie-user-list .top .info .contact .value span, .egobie-user-list .top .info .status .value span {
+            display: block;
+            padding-left: 10px;
+            color: #1BB3EC; }
     .egobie-user-list .top .phone-email {
       display: inline-block;
       margin-left: 10px; }
@@ -13758,6 +13760,65 @@ a.button {
     border-top: 1px solid rgba(0, 0, 0, 0.31); }
     .egobie-user-list .bottom span {
       display: block; }
+
+.egobie-new-user-form .item-divider {
+  font-size: 20px;
+  margin-top: 15px;
+  height: 30px !important;
+  padding-bottom: 0px !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important; }
+
+.egobie-new-user-form .item {
+  display: flex;
+  height: 50px;
+  width: 300px;
+  padding: 0px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent;
+  border: 0px; }
+  .egobie-new-user-form .item i.icon-mask {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #050a10;
+    z-index: -1; }
+  .egobie-new-user-form .item i.icon {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: #FFFFFF;
+    display: inline-block;
+    padding-left: 14px;
+    padding-top: 10px; }
+  .egobie-new-user-form .item input, .egobie-new-user-form .item select {
+    display: inline-block;
+    color: #FFFFFF;
+    background-color: rgba(12, 21, 23, 0.6);
+    height: 50px;
+    width: 100%;
+    padding-left: 14px;
+    font-size: 13px;
+    margin-left: 5px;
+    border: 0px;
+    border-radius: 0px; }
+    .egobie-new-user-form .item input::-webkit-input-placeholder, .egobie-new-user-form .item select::-webkit-input-placeholder {
+      color: #93999C; }
+    .egobie-new-user-form .item input::-moz-placeholder, .egobie-new-user-form .item select::-moz-placeholder {
+      color: #93999C; }
+    .egobie-new-user-form .item input:-moz-placeholder, .egobie-new-user-form .item select:-moz-placeholder {
+      color: #93999C; }
+    .egobie-new-user-form .item input:-ms-input-placeholder, .egobie-new-user-form .item select:-ms-input-placeholder {
+      color: #93999C; }
+  .egobie-new-user-form .item select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-left: 6px !important; }
+  .egobie-new-user-form .item input {
+    padding-left: 17px; }
 
 .egobie-user-active {
   color: #5CB85C !important; }

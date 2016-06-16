@@ -1,6 +1,6 @@
 <ion-modal-view hide-nav-bar="true" cache-view="false">
     <ion-header-bar class="egobie-header-bar">
-        <h1 class="title">"NEW USER"</h1>
+        <h1 class="title">NEW FLEET USER</h1>
         <button class="button button-icon icon ion-android-close"
                 ng-click="hideAddUser()"></button>
     </ion-header-bar>
@@ -8,8 +8,8 @@
         <div class="egobie-bg-mask-1"></div>
         <div class="egobie-bg-mask-2"></div>
     </div>
-    <ion-scroll padding="true" class="has-header has-footer egobie-user-form-bg">
-        <ion-list class="egobie-user-form">
+    <ion-scroll class="has-header has-footer" style="height: 98vh;">
+        <ion-list class="egobie-full-height egobie-new-user-form">
             <ion-item class="item-divider">BUSINESS INFO</ion-item>
             <ion-item>
                 <i class="icon-mask"></i>
@@ -19,7 +19,7 @@
             </ion-item>
             <ion-item>
                 <i class="icon-mask"></i>
-                <i class="icon ion-briefcase"></i>
+                <i class="icon"></i>
                 <input type="text" placeholder="Street"
                        ng-model="user.street"/>
             </ion-item>
@@ -32,7 +32,7 @@
             <ion-item>
                 <i class="icon-mask"></i>
                 <i class="icon"></i>
-                <select id="edithome-state" class="select-egobie"
+                <select class="select-egobie"
                         ng-model="user.state"
                         ng-options="state as fullname for (state, fullname) in states">
                     <option value="">Choose State</option>
@@ -41,7 +41,7 @@
             <ion-item>
                 <i class="icon-mask"></i>
                 <i class="icon"></i>
-                <input type="text" placeholder="Zip Code"
+                <input type="number" placeholder="Zip Code"
                        ng-model="user.zip"/>
             </ion-item>
 
@@ -67,7 +67,7 @@
             <ion-item>
                 <i class="icon-mask"></i>
                 <i class="icon ion-ios-telephone" style="padding-left: 16px;"></i>
-                <input type="text" placeholder="Phone Number"
+                <input type="number" placeholder="Phone Number"
                        ng-model="user.phone"/>
             </ion-item>
         </ion-list>

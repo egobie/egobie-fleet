@@ -24,20 +24,20 @@
                       ng-class="userBorderStyle(user.fleet_setup)">
                 <div class="top">
                     <div class="info">
-                        <div class="business">
-                            <p class="title">Business Name</p>
-                            <p class="value">{{user.fleet_name}}</p>
-                        </div>
-                        <div class="contact">
-                            <p class="title">Contact Name</p>
-                            <p class="value">{{user.first_name}} {{user.last_name}}</p>
-                        </div>
                         <div class="status">
                             <p class="title">Status</p>
                             <p class="value"
                                ng-class="userColorStyle(user.fleet_setup)">
                                 {{getUserStatus(user.fleet_setup)}}
                             </p>
+                        </div>
+                        <div class="contact">
+                            <p class="title">Contact Name</p>
+                            <p class="value">{{user.first_name}} {{user.last_name}}</p>
+                        </div>
+                        <div class="business">
+                            <p class="title">Business Name</p>
+                            <p class="value">{{user.fleet_name}}</p>
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
         </ion-list>
     </ion-content>
     <ion-footer-bar class="bar-dark"
-                    ng-click="addUser()">
+                    ng-click="showAddUser()">
         <h1 class="title">ADD NEW USER</h1>
     </ion-footer-bar>
 </ion-view>

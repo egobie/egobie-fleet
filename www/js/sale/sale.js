@@ -242,6 +242,8 @@ angular.module('app.sale', ['ionic', 'util.shared', 'util.url'])
                 shared.alert("Please input contact's phone number");
                 return false;
             }
+
+            return true;
         };
 
         $scope.clearUser = function() {
