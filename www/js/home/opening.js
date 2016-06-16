@@ -10,9 +10,6 @@ angular.module('app.home.opening', ['ionic', 'app.home.fleet', 'util.shared', 'u
             hour: ""
         };
 
-        var orders = fleetOrder.getServicesAndAddons();
-        var types = {};
-
         $scope.hideOpeningModal = function() {
             $scope.openingModal.hide();
         };
@@ -34,9 +31,7 @@ angular.module('app.home.opening', ['ionic', 'app.home.fleet', 'util.shared', 'u
 
             $http
                 .post(url.openings, shared.getRequestBody({
-                    services: orders.services,
-                    addons: orders.addons,
-                    types: Object.keys(types).length > 1 ? "BOTH" : Object.keys(types)[0]
+                    orders: fleetOrder.getOrders()
                 }))
                 .success(function(data, status, headers, config) {
                     shared.hideLoading();

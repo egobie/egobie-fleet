@@ -57,7 +57,7 @@ angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'u
 
             if ($scope.newReservation.isValid()) {
                 if ($scope.current) {
-                    fleetOrder.edit($scope.current.id, $scope.newReservation.carCount, services, addons);
+                    fleetOrder.edit($scope.current.order_id, $scope.newReservation.carCount, services, addons);
                 } else {
                     fleetOrder.add($scope.newReservation.carCount, services, addons);
                 }
@@ -141,14 +141,14 @@ angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'u
                 });
 
                 for (var _i = 0; _i < $scope.carWash.length; _i++) {
-                    if ($scope.current.services.indexOf($scope.carWash[_i].id) >= 0) {
+                    if ($scope.current.service_ids.indexOf($scope.carWash[_i].id) >= 0) {
                         $scope.carWash[_i].checked = true;
                         $scope.newReservation.selected++;
                     }
                 }
 
                 for (var _i = 0; _i < $scope.oilChange.length; _i++) {
-                    if ($scope.current.services.indexOf($scope.oilChange[_i].id) >= 0 ) {
+                    if ($scope.current.service_ids.indexOf($scope.oilChange[_i].id) >= 0 ) {
                         $scope.oilChange[_i].checked = true;
                         $scope.newReservation.selected++;
                     }

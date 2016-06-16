@@ -3,7 +3,7 @@
           ng-controller="reservationOrderCtrl">
     <ion-header-bar class="egobie-payment-header-bar">
         <button class="button button-icon icon ion-ios-arrow-back"
-                ng-click="$ionicGoBack()"></button>
+                ng-click="goBack()"></button>
         <h1 class="title">RESERVATION</h1>
     </ion-header-bar>
     <div class="egobie-bg-mask">
@@ -33,14 +33,14 @@
 
         <ion-list>
             <ion-item class="egobie-fleet-order-list"
-                      ng-repeat="(id, reservation) in order.reservations"
-                      ng-click="showReservationActionSheet(id, reservation)">
+                      ng-repeat="(id, o) in order.orders"
+                      ng-click="showReservationActionSheet(id, o)">
                 <div class="top">
                     <div class="services">
                         <div class="items">
                             <p class="title">Services</p>
                             <p class="value"
-                               ng-repeat="sid in reservation.services">
+                               ng-repeat="sid in o.service_ids">
                                 {{getServiceName(sid)}}
                                 <span>{{getServiceNote(sid)}}</span>
                             </p>
@@ -51,14 +51,14 @@
                         <div class="items">
                             <p class="title">Extra Services</p>
                             <p class="value"
-                               ng-repeat="addon in reservation.addons">
+                               ng-repeat="addon in o.addons">
                                 {{getAddonName(addon.id)}}
                                 <span>{{getAddonNote(addon.id)}}</span>
                             </p>
                         </div>
                     </div>
                 </div>
-                <p class="bottom">{{reservation.car_count}}</p>
+                <p class="bottom">{{o.car_count}}</p>
             </ion-item>
         </ion-list>
     </ion-content>

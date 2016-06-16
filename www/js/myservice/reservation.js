@@ -4,12 +4,29 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
         shared.goReservation();
 
         $scope.toHourMin = shared.toHourMin;
+        $scope.selectedReservation = null;
         $scope.charges = {};
         $scope.order = {
             service_id: 0,
             realPrice: 0,
             price: 0,
             discount: 1.0
+        };
+
+        $ionicModal.fromTemplateUrl('templates/myservice/history/detail.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.reservationModel = modal;
+        });
+
+        $scope.showReservation = function(reservation) {
+            $scope.selectedReservation = reservation;
+            $scope.reservationModel.show();
+        };
+
+        $scope.hideReservation = function() {
+            $scope.selectedReservation = null;
+            $scope.reservationModel.hide();
         };
 
         $ionicModal.fromTemplateUrl('templates/myservice/reservation/addservice.html', {
@@ -29,14 +46,18 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
         $scope.showCancelSheet = function(reservation) {
             $scope.order.service_id = reservation.id;
             $scope.hideCancelSheet = $ionicActionSheet.show({
-                titleText: 'Cancel Order',
+                titleText: 'Manage Reservation',
                 destructiveText: 'Cancel Reservation',
                 destructiveButtonClicked: $scope.cancel,
                 buttons: [
+                    {text: 'View'}
 //                    {text: 'Add Service'}
                 ],
                 buttonClicked: function(index) {
-//                    if (index === 0) {
+                    if (index === 0) {
+                        
+                    }
+//                    else if (index === 1) {
 //                        var chargeIds = [];
 //                        var service = null;
 //
@@ -119,8 +140,6 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
                 if (!sure) {
                     return;
                 }
-
-                console.log(url.forceCancelOrder);
 
                 shared.showLoading();
                 $http

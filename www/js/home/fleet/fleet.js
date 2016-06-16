@@ -61,67 +61,37 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
     .service('fleetOrder', function() {
         return {
             _id: 0,
-            reservations: {},
+            orders: {},
             type: "",
+            getOrders: function() {
+                var orders = [];
+
+                for (var _id in this.orders) {
+                    orders.push(this.orders[_id]);
+                }
+
+                return orders;
+            },
             add: function(carCount, services, addons) {
                 this._id++;
-                this.reservations[this._id] = {
-                    id: this._id,
+                this.orders[this._id] = {
+                    order_id: this._id,
                     car_count: carCount,
-                    services: services,
+                    service_ids: services,
                     addons: addons
                 };
             },
             edit: function(id, carCount, services, addons) {
-                this.reservations[id].car_count = carCount;
-                this.reservations[id].services = services;
-                this.reservations[id].addons = addons;
+                this.orders[id].car_count = carCount;
+                this.orders[id].service_ids = services;
+                this.orders[id].addons = addons;
             },
             remove: function(id) {
-                delete this.reservations[id];
-            },
-            getServicesAndAddons: function() {
-                var id = 0;
-                var reservation = null;
-                var addonInfo = null;
-                var services = [];
-                var addons = [];
-
-                for (id in this.reservations) {
-                    reservation = this.reservations[id];
-
-                    if (reservation.services && reservation.services.length > 0) {
-                        services.push({
-                            car_count: reservation.car_count,
-                            service_ids: reservation.services
-                        });
-                    }
-
-                    if (reservation.addons && reservation.addons.length > 0) {
-                        addonInfo = {
-                            car_count: reservation.car_count,
-                            addons: []
-                        };
-
-                        Array.prototype.forEach.call(reservation.addons, function(addon) {
-                            addonInfo.addons.push({
-                                id: addon.id,
-                                amount: addon.amount
-                            });
-                        });
-
-                        addons.push(addonInfo);
-                    }
-                }
-
-                return {
-                    services: services,
-                    addons: addons
-                };
+                delete this.orders[id];
             },
             clear: function() {
                 this._id = 0;
-                this.reservations = {};
+                this.orders = {};
             }
         };
     })

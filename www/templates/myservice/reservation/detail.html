@@ -1,0 +1,43 @@
+<ion-modal-view hide-nav-bar="true">
+    <ion-header-bar class="egobie-header-bar">
+        <h1 class="title">RESERVATION DETAIL</h1>
+        <button class="button button-icon icon ion-android-close"
+                ng-click="hideReservation()"></button>
+    </ion-header-bar>
+    <div class="egobie-bg-mask">
+        <div class="egobie-bg-mask-1"></div>
+        <div class="egobie-bg-mask-2"></div>
+    </div>
+    <ion-content padding="true" class="egobie-history-detail">
+        <ion-list>
+            <ion-item class="egobie-fleet-order-list"
+                      ng-repeat="(id, reservation) in order.reservations"
+                      ng-click="showReservationActionSheet(id, reservation)">
+                <div class="top">
+                    <div class="services">
+                        <div class="items">
+                            <p class="title">Services</p>
+                            <p class="value"
+                               ng-repeat="sid in reservation.services">
+                                {{getServiceName(sid)}}
+                                <span>{{getServiceNote(sid)}}</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="addons">
+                        <div class="items">
+                            <p class="title">Extra Services</p>
+                            <p class="value"
+                               ng-repeat="addon in reservation.addons">
+                                {{getAddonName(addon.id)}}
+                                <span>{{getAddonNote(addon.id)}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <p class="bottom">{{reservation.car_count}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>

@@ -79,6 +79,16 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
             });
         };
 
+        $scope.clearOrders = function() {
+            fleetOrder.clear();
+            orderOpening.clear();
+        };
+
+        $scope.goBack = function() {
+            $scope.clearOrders();
+            $scope.$ionicGoBack();
+        };
+
         $scope.getServiceName = function(id) {
             var service = shared.getService(id);
 
@@ -100,11 +110,9 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
 
     .controller('orderCtrl', function($scope, $state, $ionicActionSheet, $http, shared, url, orderOpening, fleetOrder) {
         $scope.placeOrderSheet = function() {
-            var orders = fleetOrder.getServicesAndAddons();
             var request = {
                 note: "test",
-                services: orders.services,
-                addons: orders.addons,
+                orders: fleetOrder.getOrders(),
                 opening: orderOpening.id,
                 day: orderOpening.day,
                 hour: orderOpening.start.substring(0, orderOpening.start.length - 4)
@@ -125,10 +133,12 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
                             shared.hideLoading();
 
                             $scope.hideReservationSheet();
+                            $scope.clearOrders();
                             $state.go("menu.myservice.reservation");
                         })
                         .error(function(data, status, headers, config) {
                             $scope.hideReservationSheet();
+                            $scope.clearOrders();
                             shared.hideLoading();
                             shared.alert(data);
                         });
@@ -140,23 +150,18 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
             });
         };
 
+        $scope.clearOrders = function() {
+            fleetOrder.clear();
+            orderOpening.clear();
+        };
+
         $scope.validateRequest = function(request) {
-            if (request.car_id <= 0) {
-                shared.alert("Please choose a vehicle");
-                return false;
-            }
-
-            if (request.payment_id <= 0) {
-                shared.alert("Please choose a payment method");
-                return false;
-            }
-
             if (request.opening <= 0 && (request.day === "" || request.hour === "")) {
                 shared.alert("Please choose/input a date");
                 return false;
             }
 
-            if (!request.services.length) {
+            if (!request.orders.length) {
                 shared.alert("Please choose at least one service");
                 return false;
             }
