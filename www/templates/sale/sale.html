@@ -1,0 +1,63 @@
+<ion-view hide-nav-bar="true" cache-view="false"
+          ng-app="app.sale"
+          ng-controller="saleCtrl">
+    <ion-header-bar class="egobie-header-bar">
+        <button class="button button-icon icon ion-navicon egobie-display-inherit" menu-toggle="left"></button>
+        <h1 class="title">USER LIST</h1>
+        <button class="button button-icon icon ion-android-refresh egobie-display-inherit"
+                ng-click="loadUsers()"></button>
+    </ion-header-bar>
+    <div class="egobie-bg-mask">
+        <div class="egobie-bg-mask-1"></div>
+        <div class="egobie-bg-mask-2"></div>
+    </div>
+    <ion-content padding="true" class="padding has-header has-footer">
+        <ion-list>
+            <ion-item class="egobie-empty-users"
+                      ng-show="noUser()">
+                <i class="icon ion-person icon-1"></i>
+                <p class="no">No Users</p>
+            </ion-item>
+
+            <ion-item class="egobie-user-list"
+                      ng-repeat="user in users"
+                      ng-class="userBorderStyle(user.fleet_setup)">
+                <div class="top">
+                    <div class="info">
+                        <div class="business">
+                            <p class="title">Business Name</p>
+                            <p class="value">{{user.fleet_name}}</p>
+                        </div>
+                        <div class="contact">
+                            <p class="title">Contact Name</p>
+                            <p class="value">{{user.first_name}} {{user.last_name}}</p>
+                        </div>
+                        <div class="status">
+                            <p class="title">Status</p>
+                            <p class="value">{{getUserStatus(user.fleet_setup)}}</p>
+                        </div>
+                    </div>
+
+                    <div class="phone-email">
+                        <div class="phone">
+                            <p class="title">Phone Number</p>
+                            <p class="value">{{user.phone_number}}</p>
+                        </div>
+                        <div class="email">
+                            <p class="title">Email Address</p>
+                            <p class="value">{{user.email}}</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="bottom">
+                    <span>{{user.work_address_street}}</span>
+                    <span>{{user.work_address_state}}, {{user.work_address_city}}, {{user.work_address_zip}}</span>
+                </p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar class="bar-dark"
+                    ng-click="addUser()">
+        <h1 class="title">ADD NEW USER</h1>
+    </ion-footer-bar>
+</ion-view>

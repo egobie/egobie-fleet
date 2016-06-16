@@ -26,7 +26,7 @@ angular.module('app.sign.in', ['ionic', 'util.shared', 'util.url'])
                     if (shared.isFleet()) {
                         $state.go('menu.home.fleet');
                     } else {
-                        $state.go('menu.task');
+                        $state.go('menu.sale');
                     }
                 })
                 .error(function(data, status, headers, config) {

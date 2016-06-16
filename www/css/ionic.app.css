@@ -13564,65 +13564,32 @@ a.button {
 * {
   font-family: eGobieFont !important; }
 
-.egobie-task-list {
-  padding: 0px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.26); }
-  .egobie-task-list .top {
-    display: flex;
-    padding: 10px; }
-    .egobie-task-list .top .status-time-services {
-      display: inline-block;
-      width: 60%; }
-      .egobie-task-list .top .status-time-services .status .title, .egobie-task-list .top .status-time-services .time .title, .egobie-task-list .top .status-time-services .services .title {
-        font-size: 12px; }
-      .egobie-task-list .top .status-time-services .status .value, .egobie-task-list .top .status-time-services .time .value, .egobie-task-list .top .status-time-services .services .value {
-        font-size: 11px;
-        color: #000000;
-        font-weight: 900;
-        overflow: visible; }
-        .egobie-task-list .top .status-time-services .status .value span, .egobie-task-list .top .status-time-services .time .value span, .egobie-task-list .top .status-time-services .services .value span {
-          display: block;
-          padding-left: 10px;
-          color: #1BB3EC; }
-      .egobie-task-list .top .status-time-services .services .value:before {
-        content: "- "; }
-    .egobie-task-list .top .customer-phone-plate-reserve {
-      display: inline-block;
-      margin-left: 10px; }
-      .egobie-task-list .top .customer-phone-plate-reserve .customer, .egobie-task-list .top .customer-phone-plate-reserve .phone, .egobie-task-list .top .customer-phone-plate-reserve .plate, .egobie-task-list .top .customer-phone-plate-reserve .reserve {
-        padding-left: 11px; }
-        .egobie-task-list .top .customer-phone-plate-reserve .customer .title, .egobie-task-list .top .customer-phone-plate-reserve .phone .title, .egobie-task-list .top .customer-phone-plate-reserve .plate .title, .egobie-task-list .top .customer-phone-plate-reserve .reserve .title {
-          display: block;
-          font-size: 12px; }
-        .egobie-task-list .top .customer-phone-plate-reserve .customer .value, .egobie-task-list .top .customer-phone-plate-reserve .phone .value, .egobie-task-list .top .customer-phone-plate-reserve .plate .value, .egobie-task-list .top .customer-phone-plate-reserve .reserve .value {
-          color: #000000;
-          font-size: 11px;
-          font-weight: 900;
-          overflow: visible; }
-      .egobie-task-list .top .customer-phone-plate-reserve .plate .value {
-        margin-bottom: 5px;
-        font-weight: 900; }
-  .egobie-task-list .bottom {
-    width: 95%;
-    font-size: 13px;
-    text-align: right;
-    padding-right: 10px;
-    margin: 10px auto 30px auto;
-    border-top: 1px solid rgba(0, 0, 0, 0.31); }
-    .egobie-task-list .bottom span {
-      display: block; }
+.egobie-tutorial {
+  height: 100%; }
 
-.egobie-task-border-done {
-  border-left: 5px solid #5CB85C; }
+.egobie-tutorial-slide {
+  padding-top: 80px;
+  text-align: center; }
 
-.egobie-task-border-progress {
-  border-left: 5px solid #5BC0DE; }
+.egobie-tutorial-1 {
+  background: url("../img/tutorial/tp1.svg") no-repeat center center fixed;
+  background-size: cover; }
 
-.egobie-task-border-reserved {
-  border-left: 5px solid #F0AD4E; }
+.egobie-tutorial-2 {
+  background: url("../img/tutorial/tp2.svg") no-repeat center center fixed;
+  background-size: cover; }
+
+.egobie-tutorial-3 {
+  background: url("../img/tutorial/tp3.svg") no-repeat center center fixed;
+  background-size: cover; }
+
+.egobie-tutorial-4 {
+  background: url("../img/tutorial/tp4.svg") no-repeat center center fixed;
+  background-size: cover; }
+
+.egobie-tutorial-5 {
+  background: url("../img/tutorial/tp5.svg") no-repeat center center fixed;
+  background-size: cover; }
 
 .egobie-button-disabled {
   opacity: 0.6; }
@@ -13722,29 +13689,78 @@ a.button {
 * {
   font-family: eGobieFont !important; }
 
-.egobie-tutorial {
-  height: 100%; }
+.egobie-empty-users {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px;
+  text-align: center;
+  border: 0px;
+  background: transparent; }
+  .egobie-empty-users .icon-1 {
+    display: block;
+    height: 150px;
+    width: 250px;
+    margin: auto;
+    margin-top: 50px;
+    font-size: 200px; }
+  .egobie-empty-users p.no {
+    font-size: 20px;
+    font-weight: 600;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 50px; }
 
-.egobie-tutorial-slide {
-  padding-top: 80px;
-  text-align: center; }
+.egobie-user-list {
+  padding: 0px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.26); }
+  .egobie-user-list .top {
+    display: flex;
+    padding: 10px; }
+    .egobie-user-list .top .info {
+      display: inline-block;
+      width: 60%; }
+      .egobie-user-list .top .info .business .title, .egobie-user-list .top .info .contact .title, .egobie-user-list .top .info .status .title {
+        font-size: 12px; }
+      .egobie-user-list .top .info .business .value, .egobie-user-list .top .info .contact .value, .egobie-user-list .top .info .status .value {
+        font-size: 11px;
+        color: #000000;
+        font-weight: 900;
+        overflow: visible; }
+        .egobie-user-list .top .info .business .value span, .egobie-user-list .top .info .contact .value span, .egobie-user-list .top .info .status .value span {
+          display: block;
+          padding-left: 10px;
+          color: #1BB3EC; }
+    .egobie-user-list .top .phone-email {
+      display: inline-block;
+      margin-left: 10px; }
+      .egobie-user-list .top .phone-email .phone, .egobie-user-list .top .phone-email .email {
+        padding-left: 11px; }
+        .egobie-user-list .top .phone-email .phone .title, .egobie-user-list .top .phone-email .email .title {
+          display: block;
+          font-size: 12px; }
+        .egobie-user-list .top .phone-email .phone .value, .egobie-user-list .top .phone-email .email .value {
+          color: #000000;
+          font-size: 11px;
+          font-weight: 900;
+          overflow: visible; }
+      .egobie-user-list .top .phone-email .plate .value {
+        margin-bottom: 5px;
+        font-weight: 900; }
+  .egobie-user-list .bottom {
+    width: 95%;
+    font-size: 13px;
+    text-align: right;
+    padding-right: 10px;
+    margin: 10px auto 30px auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.31); }
+    .egobie-user-list .bottom span {
+      display: block; }
 
-.egobie-tutorial-1 {
-  background: url("../img/tutorial/tp1.svg") no-repeat center center fixed;
-  background-size: cover; }
+.egobie-user-active {
+  border-left: 5px solid #5CB85C; }
 
-.egobie-tutorial-2 {
-  background: url("../img/tutorial/tp2.svg") no-repeat center center fixed;
-  background-size: cover; }
-
-.egobie-tutorial-3 {
-  background: url("../img/tutorial/tp3.svg") no-repeat center center fixed;
-  background-size: cover; }
-
-.egobie-tutorial-4 {
-  background: url("../img/tutorial/tp4.svg") no-repeat center center fixed;
-  background-size: cover; }
-
-.egobie-tutorial-5 {
-  background: url("../img/tutorial/tp5.svg") no-repeat center center fixed;
-  background-size: cover; }
+.egobie-user-not-active {
+  border-left: 5px solid #F0AD4E; }

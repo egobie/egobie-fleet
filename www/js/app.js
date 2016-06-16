@@ -46,7 +46,7 @@ angular
         'app.about',
         'app.about.feedback',
 
-        'app.task',
+        'app.sale',
 
         'util.shared',
         'util.url',
