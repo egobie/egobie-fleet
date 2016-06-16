@@ -107,10 +107,18 @@ $User-Not-Active: #F0AD4E;
     }
 
     &-user-active {
+        color: $User-Active !important;
+    }
+
+    &-user-active-border {
         border-left: 5px solid $User-Active;
     }
 
     &-user-not-active {
+        color: $User-Not-Active !important;
+    }
+
+    &-user-not-active-border {
         border-left: 5px solid $User-Not-Active;
     }
 }

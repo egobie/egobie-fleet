@@ -164,6 +164,18 @@ angular.module('app.sale', ['ionic', 'util.shared', 'util.url'])
         $scope.userBorderStyle = function(setup) {
             if (setup === 0) {
                 return {
+                    'egobie-user-not-active-border': true
+                };
+            } else if (setup === 1) {
+                return {
+                    'egobie-user-active-border': true
+                };
+            }
+        };
+
+        $scope.userColorStyle = function(setup) {
+            if (setup === 0) {
+                return {
                     'egobie-user-not-active': true
                 };
             } else if (setup === 1) {
