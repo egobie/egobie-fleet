@@ -1,26 +1,25 @@
-<ion-modal-view hide-nav-bar="true">
+<ion-modal-view hide-nav-bar="true" cache-view="false">
     <ion-header-bar class="egobie-header-bar">
         <h1 class="title">RESERVATION DETAIL</h1>
         <button class="button button-icon icon ion-android-close"
-                ng-click="hideReservation()"></button>
+                ng-click="hideReservationDetail()"></button>
     </ion-header-bar>
     <div class="egobie-bg-mask">
         <div class="egobie-bg-mask-1"></div>
         <div class="egobie-bg-mask-2"></div>
     </div>
-    <ion-content padding="true" class="egobie-history-detail">
+    <ion-content padding="true" class="padding">
         <ion-list>
             <ion-item class="egobie-fleet-order-list"
-                      ng-repeat="(id, reservation) in order.reservations"
-                      ng-click="showReservationActionSheet(id, reservation)">
+                      ng-repeat="(id, detail) in details">
                 <div class="top">
                     <div class="services">
                         <div class="items">
                             <p class="title">Services</p>
                             <p class="value"
-                               ng-repeat="sid in reservation.services">
-                                {{getServiceName(sid)}}
-                                <span>{{getServiceNote(sid)}}</span>
+                               ng-repeat="service in detail.services">
+                                {{service.name}} ({{service.type}})
+                                <span>{{service.note}}</span>
                             </p>
                         </div>
                     </div>
@@ -29,14 +28,14 @@
                         <div class="items">
                             <p class="title">Extra Services</p>
                             <p class="value"
-                               ng-repeat="addon in reservation.addons">
-                                {{getAddonName(addon.id)}}
-                                <span>{{getAddonNote(addon.id)}}</span>
+                               ng-repeat="addon in detail.addons">
+                                {{addon.name}}
+                                <span>{{addon.note}}</span>
                             </p>
                         </div>
                     </div>
                 </div>
-                <p class="bottom">{{reservation.car_count}}</p>
+                <p class="bottom">{{detail.car_count}}</p>
             </ion-item>
         </ion-list>
     </ion-content>

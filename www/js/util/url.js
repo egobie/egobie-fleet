@@ -23,6 +23,7 @@ angular.module('util.url', [])
             services: host + "/fleet/service",
             addons: host + "/fleet/addon",
             fleetReservations: host + "/fleet/reservation",
+            reservationDetail: host + "/fleet/reservation/detail",
 
             openings: host + "/fleet/opening",
             ondemand: host + "/fleet/now",

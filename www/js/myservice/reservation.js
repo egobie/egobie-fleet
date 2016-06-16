@@ -4,29 +4,29 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
         shared.goReservation();
 
         $scope.toHourMin = shared.toHourMin;
-        $scope.selectedReservation = null;
+        $scope.details = [];
         $scope.charges = {};
         $scope.order = {
-            service_id: 0,
+            id: 0,
             realPrice: 0,
             price: 0,
             discount: 1.0
         };
 
-        $ionicModal.fromTemplateUrl('templates/myservice/history/detail.html', {
+        $ionicModal.fromTemplateUrl('templates/myservice/reservation/detail.html', {
             scope: $scope
         }).then(function(modal) {
-            $scope.reservationModel = modal;
+            $scope.reservationDetailModel = modal;
         });
 
-        $scope.showReservation = function(reservation) {
-            $scope.selectedReservation = reservation;
-            $scope.reservationModel.show();
+        $scope.showReservationDetail = function(id) {
+            $scope.reservationDetailModel.show();
+            $scope.loadReservationDetails(id);
         };
 
-        $scope.hideReservation = function() {
-            $scope.selectedReservation = null;
-            $scope.reservationModel.hide();
+        $scope.hideReservationDetail = function() {
+            $scope.details = [];
+            $scope.reservationDetailModel.hide();
         };
 
         $ionicModal.fromTemplateUrl('templates/myservice/reservation/addservice.html', {
@@ -43,8 +43,25 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
             $scope.addServiceModel.hide();
         };
 
+        $scope.loadReservationDetails = function(id) {
+            shared.showLoading();
+
+            $http
+                .post(url.reservationDetail, shared.getRequestBody({
+                    fleet_service_id: id
+                }))
+                .success(function(data, status, headers, config) {
+                    shared.hideLoading();
+                    $scope.details = data;
+                })
+                .error(function(data, status, headers, config) {
+                    shared.hideLoading();
+                    shared.alert(data);
+                });
+        };
+
         $scope.showCancelSheet = function(reservation) {
-            $scope.order.service_id = reservation.id;
+            $scope.order.id = reservation.id;
             $scope.hideCancelSheet = $ionicActionSheet.show({
                 titleText: 'Manage Reservation',
                 destructiveText: 'Cancel Reservation',
@@ -55,7 +72,8 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
                 ],
                 buttonClicked: function(index) {
                     if (index === 0) {
-                        
+                        $scope.hideCancelSheet();
+                        $scope.showReservationDetail(reservation.id);
                     }
 //                    else if (index === 1) {
 //                        var chargeIds = [];
