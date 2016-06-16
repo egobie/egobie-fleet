@@ -131,22 +131,22 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
                 shared.showLoading();
                 $http
                     .post(url.cancelOrder, shared.getRequestBody({
-                        id: $scope.order.service_id
+                        id: $scope.order.id
                     }))
                     .success(function(data, status, headers, config) {
                         shared.hideLoading();
-
-                        if (status === 200) {
-                            $scope.hideCancelSheet();
-                            $scope.loadReservations();
-                        } else {
-                            $scope.forceCancel();
-                        }
+                        $scope.hideCancelSheet();
+                        $scope.loadReservations();
                     })
                     .error(function(data, status, headers, config) {
                         $scope.hideCancelSheet();
                         shared.hideLoading();
-                        shared.alert(data);
+
+                        if (data === "CANNOT") {
+                            $scope.forceCancel();
+                        } else {
+                            shared.alert(data);
+                        }
                     });
             });
         };
@@ -162,7 +162,7 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
                 shared.showLoading();
                 $http
                     .post(url.forceCancelOrder, shared.getRequestBody({
-                        id: $scope.order.service_id
+                        id: $scope.order.id
                     }))
                     .success(function(data, status, headers, config) {
                         shared.hideLoading();

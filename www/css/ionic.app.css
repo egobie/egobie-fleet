@@ -10531,7 +10531,8 @@ a.button {
     .egobie-fleet-order-list .top .services, .egobie-fleet-order-list .top .addons {
       display: inline-block; }
       .egobie-fleet-order-list .top .services .items .title, .egobie-fleet-order-list .top .addons .items .title {
-        font-size: 12px; }
+        font-size: 12px;
+        font-weight: 900; }
       .egobie-fleet-order-list .top .services .items .value, .egobie-fleet-order-list .top .addons .items .value {
         font-size: 10px;
         color: #000000;
