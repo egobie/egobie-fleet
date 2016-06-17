@@ -50,20 +50,9 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
             isFleet: shared.isFleet()
         };
 
-        $scope.badge = {
-            history: 0,
-            notification: 0
-        };
-
         $scope.$watch(function() {
             return shared.getUser().first;
         }, function(newValue) {
             $scope.user.name = newValue || "Welcome";
-        });
-
-        $scope.$watch(function() {
-            return shared.getUnratedHistory();
-        }, function(newValue) {
-            $scope.badge.history = newValue;
         });
     });
