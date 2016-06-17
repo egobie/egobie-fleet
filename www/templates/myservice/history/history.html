@@ -11,7 +11,7 @@
         <div class="egobie-bg-mask-1"></div>
         <div class="egobie-bg-mask-2"></div>
     </div>
-    <ion-content padding="true" overflow-scroll="true" class="has-tabs">
+    <ion-content padding="true" overflow-scroll="true">
         <ion-list>
             <ion-item class="egobie-empty-history"
                       ng-show="noHistory()">
@@ -52,16 +52,8 @@
                     </div>
                     <div class="egobie-other">
                         <div class="plate">
-                            <p class="title">PLATE</p>
-                            <p class="content">{{history.plate}}</p>
-                        </div>
-                        <div class="maker">
-                            <p class="title">MAKE</p>
-                            <p class="content">{{history.maker}}</p>
-                        </div>
-                        <div class="model">
-                            <p class="title">MODEL</p>
-                            <p class="content">{{history.model}}</p>
+                            <p class="title">Reservation ID.</p>
+                            <p class="content">{{history.reservation_id}}</p>
                         </div>
                     </div>
                 </div>

@@ -6,21 +6,14 @@ angular.module('app.sign.up', ['ionic', 'util.shared', 'util.url'])
             password1: "",
             password2: "",
             email: "",
-            coupon: ""
+            token: ""
         };
 
         $scope.nameInUse = false;
-        $scope.emailInUse = false;
 
         $scope.displayNameInUse = function() {
             return {
                 "egobie-display-none": !$scope.nameInUse
-            };
-        };
-
-        $scope.displayEmailInUse = function() {
-            return {
-                "egobie-display-none": !$scope.emailInUse
             };
         };
 
@@ -30,18 +23,9 @@ angular.module('app.sign.up', ['ionic', 'util.shared', 'util.url'])
             };
         };
 
-        $scope.inputEmailInUse = function() {
-            return {
-                "egobie-in-use": $scope.emailInUse
-            };
-        };
-
         $scope.signUp = function() {
             if ($scope.nameInUse) {
                 shared.alert("Username is in use");
-                return;
-            } else if ($scope.emailInUse) {
-                shared.alert("Email address is in use");
                 return;
             }
 
@@ -49,11 +33,10 @@ angular.module('app.sign.up', ['ionic', 'util.shared', 'util.url'])
                 "username": $scope.signUpForm.username,
                 "password": $scope.signUpForm.password1,
                 "email": $scope.signUpForm.email,
-                "phone_number": null,
-                "coupon": $scope.signUpForm.coupon
+                "token": $scope.signUpForm.token
             };
 
-            if (!validateUser(body.username, body.password, $scope.signUpForm.password2, body.email, body.coupon)) {
+            if (!validateUser(body.username, body.password, $scope.signUpForm.password2, body.email, body.token)) {
                 return;
             }
 
@@ -73,7 +56,6 @@ angular.module('app.sign.up', ['ionic', 'util.shared', 'util.url'])
                     shared.hideLoading();
                     shared.alert(data);
                 });
-//            $state.go('tutorial');
         };
 
         $scope.checkUsername = function() {
@@ -95,25 +77,7 @@ angular.module('app.sign.up', ['ionic', 'util.shared', 'util.url'])
             }
         };
 
-        $scope.checkEmail = function() {
-            if ($scope.signUpForm.email && shared.testEmail($scope.signUpForm.email)) {
-                $http
-                    .post(url.checkEmail, {
-                        "value": $scope.signUpForm.email
-                    })
-                    .success(function(data, status, headers, config) {
-                        $scope.emailInUse = (status !== 200);
-                    })
-                    .error(function(data, status, headers, config) {
-                        shared.alert(data);
-                        $scope.emailInUse = false;
-                    });
-            } else {
-                $scope.emailInUse = false;
-            }
-        };
-
-        function validateUser(username, password1, password2, email, coupon) {
+        function validateUser(username, password1, password2, email, token) {
             if (!username || username.length < 6) {
                 shared.alert("Username must be at least 6 characters!");
                 return false;
@@ -144,8 +108,8 @@ angular.module('app.sign.up', ['ionic', 'util.shared', 'util.url'])
                 return false;
             }
 
-            if (coupon && !shared.testCoupon(coupon)) {
-                shared.alert("Invalid Invitation Code!");
+            if (!token || !shared.testFleetToken(token)) {
+                shared.alert("Invalid Token!");
                 return false;
             }
 

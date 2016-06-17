@@ -11,7 +11,7 @@
         <div class="egobie-bg-mask-1"></div>
         <div class="egobie-bg-mask-2"></div>
     </div>
-    <ion-content padding="true" overflow-scroll="true" class="has-tabs">
+    <ion-content padding="true" overflow-scroll="true">
         <ion-list>
             <ion-item class="egobie-empty-reservation"
                       ng-show="noReservation()">
@@ -24,7 +24,10 @@
                       ng-click="showCancelSheet(reservation)">
                 <div class="top">
                     <div class="left">
-                        <p class="price">{{reservation.price}}</p>
+                        <p class="na"
+                           ng-show="reservation.price <= 0">N/A</p>
+                        <p class="price"
+                           ng-show="reservation.price > 0">{{reservation.price}}</p>
                     </div>
                     <div class="right">
                         <div class="time-services">
@@ -32,27 +35,13 @@
                                 <p class="title">Estimated Start:</p>
                                 <p class="value">{{reservation.reserve_start_time}}</p>
                             </div>
-                            <div class="services">
-                                <p class="title">Services</p>
-                                <p class="value"
-                                   ng-repeat="service in reservation.services">
-                                    {{service.name}} ({{service.full_type}})
-                                    <span ng-show="service.note !== ''">{{service.note}}</span>
-                                </p>
-                            </div>
-                            <div class="services"
-                                 ng-show="reservation.addons && reservation.addons.length > 0">
-                                <p class="title">Extra Services</p>
-                                <p class="value"
-                                   ng-repeat="addon in reservation.addons">{{addon.name}}</p>
+                            <div class="time">
+                                <p class="title">Estimated Time:</p>
+                                <p class="value">{{toHourMin(reservation.time)}}</p>
                             </div>
                         </div>
 
                         <div class="plate-reserve">
-                            <div class="plate">
-                                <p class="title">Plate No.</p>
-                                <p class="value">{{reservation.plate}}</p>
-                            </div>
                             <div class="reserve">
                                 <p class="title">Reservation ID</p>
                                 <p class="value">{{reservation.reservation_id}}</p>
@@ -60,6 +49,9 @@
                         </div>
                     </div>
                 </div>
+                <p class="bottom-wait"
+                   ng-show="isWaiting(reservation)">Waiting</p>
+
                 <p class="bottom-will"
                    ng-show="isWill(reservation)"
                    ng-class="unitStyle(reservation.unit)">{{reservation.how_long}}</p>

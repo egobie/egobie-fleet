@@ -5,6 +5,7 @@ angular.module('app.myservice.history', ['ionic', 'util.shared', 'util.url'])
 
         $scope.max = 5;
         $scope.selectedHistory = null;
+        $scope.details = [];
         $scope.historyModel = null;
         $scope.rating = {
             score: 0
@@ -27,7 +28,7 @@ angular.module('app.myservice.history', ['ionic', 'util.shared', 'util.url'])
             if ($scope.selectedHistory.available) {
                 $timeout(function() {
                     shared.readHistory();
-                    $scope.historyModel.show();
+                    $scope.showHistoryModal();
                 }, 500);
             }
         };
@@ -38,7 +39,7 @@ angular.module('app.myservice.history', ['ionic', 'util.shared', 'util.url'])
             } else {
                 var request = {
                     "id": $scope.selectedHistory.id,
-                    "service_id": $scope.selectedHistory.user_service_id,
+                    "service_id": $scope.selectedHistory.fleet_service_id,
                     "rating": $scope.selectedHistory.rating,
                     "note": $scope.selectedHistory.note
                 };
@@ -66,6 +67,23 @@ angular.module('app.myservice.history', ['ionic', 'util.shared', 'util.url'])
         }).then(function(modal) {
             $scope.historyModel = modal;
         });
+        
+        $scope.loadHistoryDetails = function(id) {
+            shared.showLoading();
+
+            $http
+                .post(url.reservationDetail, shared.getRequestBody({
+                    fleet_service_id: id
+                }))
+                .success(function(data, status, headers, config) {
+                    shared.hideLoading();
+                    $scope.details = data;
+                })
+                .error(function(data, status, headers, config) {
+                    shared.hideLoading();
+                    shared.alert(data);
+                });
+        };
 
         $scope.showHistory = function(history) {
             $scope.selectedHistory = history;
@@ -77,13 +95,19 @@ angular.module('app.myservice.history', ['ionic', 'util.shared', 'util.url'])
                 $scope.showRating();
             } else {
                 shared.readHistory();
-                $scope.historyModel.show();
+                $scope.showHistoryModal();
             }
         };
 
         $scope.hideHistory = function() {
             $scope.selectedHistory = null;
             $scope.historyModel.hide();
+            $scope.details = [];
+        };
+
+        $scope.showHistoryModal = function() {
+            $scope.loadHistoryDetails($scope.selectedHistory.fleet_service_id);
+            $scope.historyModel.show();
         };
 
         $scope.borderStyle = function(rating) {

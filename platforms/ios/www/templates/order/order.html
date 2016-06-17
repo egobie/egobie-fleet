@@ -1,0 +1,67 @@
+<ion-view hide-nav-bar="true" cache-view="false"
+          ng-app="app.order"
+          ng-controller="fleetOrderCtrl">
+    <ion-header-bar class="egobie-header-bar">
+        <button class="button button-icon icon ion-navicon egobie-display-inherit" menu-toggle="left"></button>
+        <h1 class="title">RESERVATION LIST</h1>
+        <button class="button button-icon icon ion-android-refresh"
+                ng-click="loadOrder(true)"></button>
+    </ion-header-bar>
+    <div class="egobie-bg-mask">
+        <div class="egobie-bg-mask-1"></div>
+        <div class="egobie-bg-mask-2"></div>
+    </div>
+    <ion-content padding="true" overflow-scroll="true">
+        <ion-list>
+            <ion-item class="egobie-empty-reservation"
+                      ng-show="noOrder()">
+                <i class="icon ion-android-checkmark-circle icon-1"></i>
+                <p class="no">No reservation</p>
+            </ion-item>
+
+            <ion-item class="egobie-reservation-list"
+                      ng-repeat="order in orders"
+                      ng-click="showOrderDetail(order)">
+                <div class="top">
+                    <div class="left">
+                        <p class="na"
+                           ng-show="order.price <= 0">N/A</p>
+                        <p class="price"
+                           ng-show="order.price > 0">{{order.price}}</p>
+                    </div>
+                    <div class="right">
+                        <div class="time-services">
+                            <div class="time">
+                                <p class="title">Estimated Start:</p>
+                                <p class="value">{{order.reserve_start_time}}</p>
+                            </div>
+                            <div class="time">
+                                <p class="title">Estimated Time:</p>
+                                <p class="value">{{toHourMin(order.time)}}</p>
+                            </div>
+                        </div>
+
+                        <div class="plate-reserve">
+                            <div class="reserve">
+                                <p class="title">Reservation ID</p>
+                                <p class="value">{{order.reservation_id}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="bottom-wait"
+                   ng-show="isWaiting(order)">Waiting</p>
+
+                <p class="bottom-will"
+                   ng-show="isWill(order)"
+                   ng-class="unitStyle(reservation.unit)">{{reservation.how_long}}</p>
+
+                <p class="bottom-delay"
+                   ng-show="isDelay(order)">Will start soon</p>
+
+                <p class="bottom-in-progress"
+                   ng-show="isInProgress(order)">In Progress</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

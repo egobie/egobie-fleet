@@ -24,10 +24,12 @@ angular.module('app.service', ['ionic', 'util.shared', 'util.url'])
         $scope.serviceShown = {
             "CAR_WASH": true,
             "OIL_CHANGE": true,
-            "DETAILING": true
+            "DETAILING": true,
+            "EXTRA": true
         };
 
         $scope.services = shared.getServices();
+        $scope.addons = shared.getAddons();
         $scope.carWash = shared.getCarWashServices();
         $scope.oilChange = shared.getOilChangeServices();
         $scope.detailing = shared.getDetailingServices();

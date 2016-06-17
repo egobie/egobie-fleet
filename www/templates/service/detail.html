@@ -12,10 +12,6 @@
     </div>
     <ion-content overflow-scroll="true" padding="true" class="padding">
         <ion-item class="egobie-service-detail-title">
-            <div class="left">
-                <p class="price">{{selectedService.price}}</p>
-                <p class="time">{{selectedService.time}}</p>
-            </div>
             <div class="right">
                 <p class="name">{{selectedService.name}}</p>
                 <p class="note">{{selectedService.note}}</p>
@@ -52,6 +48,7 @@
             </ion-item>
         </ion-list>
 
+        <!--
         <ion-list class="egobie-service-detail-list egobie-service-extra"
                   ng-show="selectedService.charge.length > 0">
             <ion-item class="detail-section">
@@ -70,7 +67,9 @@
                 </p>
             </ion-item>
         </ion-list>
+        -->
 
+        <!--
         <ion-list class="egobie-service-detail-list egobie-service-advance"
                   ng-show="selectedService.addons.length > 0">
             <ion-item class="detail-section">
@@ -90,5 +89,6 @@
                 </p>
             </ion-item>
         </ion-list>
+        -->
     </ion-content>
 </ion-modal-view>

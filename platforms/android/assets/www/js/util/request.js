@@ -1,35 +1,35 @@
 angular.module('util.request', ['util.shared', 'util.url'])
 
-    .service('requestUserCars', function($http, shared, url) {
-        var userCars = null;
-        var promise = null;
-
-        if (shared.isResidential()) {
-            promise = $http
-                .post(url.cars, shared.getRequestBody({}))
-                .success(function(data, status, headers, config) {
-                    userCars = data;
-                    shared.addUserCars(userCars);
-                })
-                .error(function(data, status, headers, config) {
-                    shared.hideLoading();
-                    shared.alert(data);
-                });
-        }
-
-        return {
-            promise: promise,
-            getData: function() {
-                return userCars;
-            }
-        };
-    })
+//    .service('requestUserCars', function($http, shared, url) {
+//        var userCars = null;
+//        var promise = null;
+//
+//        if (shared.isFleet()) {
+//            promise = $http
+//                .post(url.cars, shared.getRequestBody({}))
+//                .success(function(data, status, headers, config) {
+//                    userCars = data;
+//                    shared.addUserCars(userCars);
+//                })
+//                .error(function(data, status, headers, config) {
+//                    shared.hideLoading();
+//                    shared.alert(data);
+//                });
+//        }
+//
+//        return {
+//            promise: promise,
+//            getData: function() {
+//                return userCars;
+//            }
+//        };
+//    })
 
     .service('requestServices', function($http, shared, url) {
         var services = null;
         var promise = null;
         
-        if (shared.isResidential()) {
+        if (shared.isFleet()) {
             $http
                 .post(url.services, shared.getRequestBody({}))
                 .success(function(data, status, headers, config) {
@@ -49,16 +49,16 @@ angular.module('util.request', ['util.shared', 'util.url'])
         };
     })
 
-    .service('requestCarMakers', function($http, shared, url) {
-        var carMakers = null;
+    .service('requestAddons', function($http, shared, url) {
+        var addons = null;
         var promise = null;
-
-        if (shared.isResidential()) {
+        
+        if (shared.isFleet()) {
             $http
-                .post(url.carMaker, shared.getRequestBody({}))
+                .post(url.addons, shared.getRequestBody({}))
                 .success(function(data, status, headers, config) {
-                    carMakers = data;
-                    shared.addCarMakers(carMakers);
+                    addons = data;
+                    shared.addAddons(data);
                 })
                 .error(function(data, status, headers, config) {
                     shared.alert(data);
@@ -68,56 +68,80 @@ angular.module('util.request', ['util.shared', 'util.url'])
         return {
             promise: promise,
             getData: function() {
-                return carMakers;
-            }
-        };
-    })
-
-    .service('requestCarModels', function($http, shared, url) {
-        var carModels = null;
-        var promise = null;
-
-        if (shared.isResidential()) {
-            $http
-                .post(url.carModel, shared.getRequestBody({}))
-                .success(function(data, status, headers, config) {
-                    carModels = data;
-                    shared.addCarModels(carModels);
-                })
-                .error(function(data, status, headers, config) {
-                    shared.alert(data);
-                });
-        }
-
-        return {
-            promise: promise,
-            getData: function() {
-                return carModels;
-            }
-        };
-    })
-
-    .service('requestUserPayments', function($http, shared, url) {
-        var userPayments = null;
-        var promise = null;
-
-        if (shared.isResidential()) {
-            $http
-                .post(url.payments, shared.getRequestBody({}))
-                .success(function(data, status, headers, config) {
-                    userPayments = data;
-                    shared.addUserPayments(userPayments);
-                })
-                .error(function(data, status, headers, config) {
-                    shared.hideLoading();
-                    shared.alert(data);
-                });
-        }
-
-        return {
-            promise: promise,
-            getData: function() {
-                return userPayments;
+                return addons;
             }
         };
     });
+
+//    .service('requestCarMakers', function($http, shared, url) {
+//        var carMakers = null;
+//        var promise = null;
+//
+//        if (shared.isFleet()) {
+//            $http
+//                .post(url.carMaker, shared.getRequestBody({}))
+//                .success(function(data, status, headers, config) {
+//                    carMakers = data;
+//                    shared.addCarMakers(carMakers);
+//                })
+//                .error(function(data, status, headers, config) {
+//                    shared.alert(data);
+//                });
+//        }
+//
+//        return {
+//            promise: promise,
+//            getData: function() {
+//                return carMakers;
+//            }
+//        };
+//    })
+
+//    .service('requestCarModels', function($http, shared, url) {
+//        var carModels = null;
+//        var promise = null;
+//
+//        if (shared.isFleet()) {
+//            $http
+//                .post(url.carModel, shared.getRequestBody({}))
+//                .success(function(data, status, headers, config) {
+//                    carModels = data;
+//                    shared.addCarModels(carModels);
+//                })
+//                .error(function(data, status, headers, config) {
+//                    shared.alert(data);
+//                });
+//        }
+//
+//        return {
+//            promise: promise,
+//            getData: function() {
+//                return carModels;
+//            }
+//        };
+//    })
+
+//    .service('requestUserPayments', function($http, shared, url) {
+//        var userPayments = null;
+//        var promise = null;
+//
+//        if (shared.isFleet()) {
+//            $http
+//                .post(url.payments, shared.getRequestBody({}))
+//                .success(function(data, status, headers, config) {
+//                    userPayments = data;
+//                    shared.addUserPayments(userPayments);
+//                })
+//                .error(function(data, status, headers, config) {
+//                    shared.hideLoading();
+//                    shared.alert(data);
+//                });
+//        }
+//
+//        return {
+//            promise: promise,
+//            getData: function() {
+//                return userPayments;
+//            }
+//        };
+//    });

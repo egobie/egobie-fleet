@@ -15,12 +15,11 @@ angular
         'app.menu',
 
         'app.home',
-        'app.home.resident',
-        'app.home.resident.demand',
-        'app.home.resident.reservation',
-
-        'app.home.mall',
-        'app.home.business',
+        'app.home.service',
+        'app.home.opening',
+        'app.home.fleet',
+        'app.home.fleet.demand',
+        'app.home.fleet.reservation',
 
         'app.service',
         'app.service.detail',
@@ -28,7 +27,6 @@ angular
         'app.setting',
         'app.setting.user',
         'app.setting.password',
-        'app.setting.home',
         'app.setting.work',
 
         'app.car',
@@ -40,7 +38,6 @@ angular
         'app.myservice.reservation',
 
         'app.notification',
-        'app.coupon',
 
         'app.payment',
         'app.payment.add',
@@ -49,7 +46,8 @@ angular
         'app.about',
         'app.about.feedback',
 
-        'app.task',
+        'app.sale',
+        'app.order',
 
         'util.shared',
         'util.url',
@@ -73,4 +71,4 @@ angular
                 StatusBar.styleDefault();
             }
         });
-    })
+    });

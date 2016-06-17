@@ -2,14 +2,13 @@
           ng-app="app.sign.up"
           ng-controller="signUpCtrl">
     <div class="mask"></div>
-    <ion-scroll overflow-scroll="true" padding="true">
+    <ion-scroll padding="true" class="egobie-full-height">
         <ion-list class="list-inset">
             <img class="egobie-signup-logo" alt=""/>
             <div class="egobie-company">eGobie Car Services</div>
 
             <div class="egobie-notation">
                 <i ng-class="displayNameInUse()">Username is in use</i>
-                <i ng-class="displayEmailInUse()">Email address is in use</i>
             </div>
 
             <ion-item class="item-input egobie-signup-item">
@@ -32,14 +31,13 @@
             <ion-item class="item-input egobie-signup-item">
                 <i class="icon ion-email placeholder-icon"></i>
                 <input type="email" placeholder="Email Address"
-                       ng-class="inputEmailInUse()"
                        ng-model="signUpForm.email"
                        ng-change="checkEmail()"/>
             </ion-item>
             <ion-item class="item-input egobie-signup-item">
                 <i class="icon ion-pricetags placeholder-icon"></i>
-                <input type="text" placeholder="Invitation Code (Optional)" maxlength="5"
-                       ng-model="signUpForm.coupon"/>
+                <input type="text" placeholder="Fleet Token" maxlength="5"
+                       ng-model="signUpForm.token"/>
             </ion-item>
 
             <button class="button button-outline egobie-sign-button"

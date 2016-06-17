@@ -16,7 +16,7 @@
     &-on-demand {
         height: 51%;
     }
-    
+
     &-on-demand, &-reservation {
         padding: 0px;
         position: relative;
@@ -84,7 +84,162 @@
         background-size: cover;
     }
 
-    &-resident-order {
+    &-fleet-order-list {
+        width: 95%;
+        padding: 0px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.26);
+
+        .top {
+            display: flex;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            .services, .addons {
+                display: inline-block;
+
+                .items {
+                    .title {
+                        font-size: 12px;
+                        font-weight: 900;
+                    }
+
+                    .value {
+                        font-size: 10px;
+                        color: #000000;
+                        overflow: visible;
+
+                        span {
+                            display: block;
+                            padding-left: 5px;
+                            color: #1BB3EC;
+                        }
+
+                        &:before {
+                            content: "- ";
+                        }
+                    }
+                }
+            }
+
+            .services {
+                width: 45%;
+                margin-left: 10px;
+            }
+
+            .addons {
+                margin-left: 5px;
+            }
+        }
+
+        .bottom {
+            width: 95%;
+            height: 30px;
+            line-height: 30px;
+            font-weight: 900;
+            text-align: right;
+            padding-right: 10px;
+            margin: 10px auto;
+            font-size: 18px;
+            border-top: 1px solid rgba(0, 0, 0, 0.31);
+            
+            &:before {
+                content: "Vehicles:";
+                padding-right: 5px;
+                font-size: 15px;
+                height: 30px;
+                line-height: 30px;
+                font-weight: normal;
+            }
+        }
+    }
+
+    &-fleet-car {
+        display: flex;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+
+        .name {
+            display: inline-block;
+            line-height: 40px;
+            height: 40px;
+            padding-left: 10px;
+        }
+
+        input {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: auto;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.6);
+        }
+    }
+
+    &-fleet-opening {
+        display: flex;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        border-radius: 5px;
+
+        .list {
+            width: 100%;
+        }
+
+        input {
+            display: inline-block;
+            width: 200px;
+            margin-top: auto;
+            margin-bottom: auto;
+            text-align: left;
+            padding-left: 10px;
+            background: transparent;
+            border-left: 1px solid rgba(0, 0, 0, 0.6);
+        }
+
+        .item {
+            @extend .egobie-margin-top-5;
+
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 2px;
+            height: 40px;
+            background: transparent;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.5);
+
+            i:before {
+                font-size: 25px;
+            }
+        }
+
+        .item-divider {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border: 0px;
+            border-radius: 0px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.60);
+            padding-left: 0px;
+            margin-bottom: 5px;
+            overflow: visible;
+
+            span {
+                font-size: 12px;
+            }
+        }
+    }
+
+    &-fleet-order {
         div.note {
             border: 0px;
             padding-bottom: 15px;
@@ -163,24 +318,10 @@
             border-radius: 0px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.60);
             padding-left: 0px;
+            margin-bottom: 5px;
 
             span {
                 font-size: 12px;
-            }
-        }
-
-        .button {
-            width: 95% !important;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid rgba(0, 0, 0, 0.35);
-
-            &:before {
-                color: #FF1919;
-            }
-
-            span {
-                font-size: 13px;
             }
         }
     }
