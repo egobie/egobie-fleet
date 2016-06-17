@@ -15,6 +15,10 @@ angular.module('app.setting', ['ionic', 'util.shared', 'util.url'])
     .controller('settingCtrl', function($scope, $ionicModal, shared) {
         shared.goSetting();
 
+        $scope.user = {
+            isFleet: shared.isFleet()
+        };
+
         $scope.showEditUser = function() {
             $ionicModal.fromTemplateUrl('templates/setting/user.html', {
                 scope: $scope
@@ -30,15 +34,6 @@ angular.module('app.setting', ['ionic', 'util.shared', 'util.url'])
             }).then(function(modal) {
                 $scope.editPasswordModal = modal;
                 $scope.editPasswordModal.show();
-            });
-        };
-
-        $scope.showEditHome = function() {
-            $ionicModal.fromTemplateUrl('templates/setting/home.html', {
-                scope: $scope
-            }).then(function(modal) {
-                $scope.editHomeModal = modal;
-                $scope.editHomeModal.show();
             });
         };
 

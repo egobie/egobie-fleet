@@ -23,10 +23,10 @@ angular.module('app.sign.in', ['ionic', 'util.shared', 'util.url'])
                 .success(function(data, status, headers, config) {
                     shared.refreshUser(data);
 
-                    if (shared.isResidential()) {
-                        $state.go('menu.home.resident');
+                    if (shared.isFleet()) {
+                        $state.go('menu.home.fleet');
                     } else {
-                        $state.go('menu.task');
+                        $state.go('menu.sale');
                     }
                 })
                 .error(function(data, status, headers, config) {

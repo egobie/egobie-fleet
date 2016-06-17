@@ -1,54 +1,47 @@
 angular.module('util.url', [])
 
     .factory('url', function() {
-//        var host = "http://localhost:8000";
-        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
+        var host = "http://localhost:8000";
+//        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
 
         return {
             website: "http://www.egobie.com/",
             faq: "http://www.egobie.com/#!faq/aifir",
 
-            checkEmail: host + "/check/email",
-            checkUsername: host + "/check/name",
+            newFleetUser: host + "/sale/fleet/new",
+            allFleetUser: host + "/sale/fleet/all",
+            promotePrice: host + "/sale/fleet/price",
+            saleOrder: host + "/sale/fleet/order",
+            saleOrderDetail: host + "/sale/fleet/order/detail",
 
             signIn: host + "/signin",
-            signUp: host + "/signup",
-
-            carMaker: host + "/car/maker",
-            carModel: host + "/car/model",
-            cars: host + "/car/user",
-            newCar: host + "/car/new",
-            editCar: host + "/car/update",
-            deleteCar: host + "/car/delete",
-
-            payments: host + "/payment/user",
-            newPayment: host + "/payment/new",
-            editPayment: host + "/payment/update",
-            deletePayment: host + "/payment/delete",
-            pay: host + "/payment/pay",
+            signUp: host + "/signup/fleet",
+            checkUsername: host + "/check/name",
 
             updateUser: host + "/user/update/user",
-            updateHome: host + "/user/update/home",
             updateWork: host + "/user/update/work",
             updatePassword: host + "/user/update/password",
             feedback: host + "/user/feedback",
 
-            services: host + "/service",
-            userReservations: host + "/service/reservation",
+            services: host + "/fleet/service",
+            addons: host + "/fleet/addon",
+            fleetReservations: host + "/fleet/reservation",
+            reservationDetail: host + "/fleet/reservation/detail",
 
-            openings: host + "/service/opening",
-            ondemand: host + "/service/now",
+            openings: host + "/fleet/opening",
+            ondemand: host + "/fleet/now",
             addService: host + "/service/add",
-            placeOrder: host + "/service/order",
-            cancelOrder: host + "/service/cancel",
-            forceCancelOrder: host + "/service/cancel/force",
-            demandService: host + "/service/demand",
-            readService: host + "/service/read/",
-            demandAddon: host + "/service/demand/addon",
-            demandOpening: host + "/service/demand/opening/",
+            placeOrder: host + "/fleet/order",
+            cancelOrder: host + "/fleet/cancel",
+            forceCancelOrder: host + "/fleet/cancel/force",
 
-            userHistories: host + "/history",
-            ratingHistory: host + "/history/rating",
+            demandService: host + "/fleet/demand",
+            readService: host + "/fleet/read/",
+            demandAddon: host + "/fleet/demand/addon",
+            demandOpening: host + "/fleet/demand/opening/",
+
+            fleetHistories: host + "/fleet/history",
+            ratingHistory: host + "/fleet/history/rating",
 
             tasks: host + "/egobie/service/task",
             startTask: host + "/egobie/service/progress",

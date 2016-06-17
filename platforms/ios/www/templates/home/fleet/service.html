@@ -1,0 +1,76 @@
+<ion-modal-view hide-nav-bar="true" cache-view="false"
+                ng-app="app.home.service"
+                ng-controller="serviceSelectCtl">
+    <ion-header-bar class="egobie-header-bar">
+        <h1 class="title">{{newReservation.title}}</h1>
+        <button class="button button-icon icon ion-android-close"
+                ng-click="hideAddReservation()"></button>
+    </ion-header-bar>
+    <div class="egobie-bg-mask">
+        <div class="egobie-bg-mask-1"></div>
+        <div class="egobie-bg-mask-2"></div>
+    </div>
+    <ion-content padding="true" class="egobie-service-list has-footer">
+        <ion-list>
+            <ion-item class="item-divider item-icon-right egobie-service-title">VEHICLES</ion-item>
+            <div class="egobie-fleet-car">
+                <div class="name">How many vehicles do you have?</div>
+                <input type="number" maxlength="3"
+                       ng-model="newReservation.carCount"/>
+            </div>
+
+            <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title egobie-margin-top-15">
+                {{serviceNames["CAR_WASH"].toUpperCase()}}
+            </ion-item>
+            <ion-item menu-close="" class="egobie-service-item-select"
+                      ng-repeat="service in carWash"
+                      ng-class="isServiceSelected(service.checked)"
+                      ng-click="toggleService(service, carWash)">
+                <div class="left"></div>
+                <div class="middle">
+                    <p class="name">{{service.name}} <span ng-show="service.note">{{service.note}}</span></p>
+                    <p class="time">Estimated Time : {{service.time}} mins (per vehicle)</p>
+                </div>
+                <div class="icon ion-navicon right"
+                     ng-click="showService(service); $event.stopPropagation();"></div>
+            </ion-item>
+
+            <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title">
+                {{serviceNames["OIL_CHANGE"].toUpperCase()}}
+            </ion-item>
+            <ion-item menu-close="" class="egobie-service-item-select"
+                      ng-repeat="service in oilChange"
+                      ng-class="isServiceSelected(service.checked)"
+                      ng-click="toggleService(service, oilChange)">
+                <div class="left"></div>
+                <div class="middle">
+                    <p class="name">{{service.name}} <span ng-show="service.note">{{service.note}}</span></p>
+                    <p class="time">Estimated Time : {{service.time}} mins (per vehicle)</p>
+                </div>
+                <div class="icon ion-navicon right"
+                     ng-click="showService(service); $event.stopPropagation();"></div>
+            </ion-item>
+
+            <ion-item menu-close="" class="item-divider item-icon-right egobie-service-title"
+                      ng-click="toggleShownService('EXTRA')">
+                {{serviceNames["EXTRA"].toUpperCase()}}
+            </ion-item>
+            <ion-item menu-close="" class="egobie-service-item"
+                      ng-repeat="addon in addons"
+                      ng-class="isServiceSelected(addon.checked)"
+                      ng-click="toggleAddon(addon)">
+                <div class="left"></div>
+                <div class="middle">
+                    <p class="name">{{addon.name}}</p>
+                    <p class="note">{{addon.note}}</p>
+                    <p class="time">Estimated Time : {{addon.time}} mins (per vehicle)</p>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar class="bar-dark"
+                    ng-class="isDisabled()"
+                    ng-click="selectService()">
+        <h1 class="title">Save</h1>
+    </ion-footer-bar>
+</ion-modal-view>

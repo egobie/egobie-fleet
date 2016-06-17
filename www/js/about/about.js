@@ -15,6 +15,10 @@ angular.module('app.about', ['ionic', 'util.url', 'util.shared'])
     .controller('aboutCtrl', function($scope, $ionicModal, shared, url) {
         shared.goAbout();
 
+        $scope.user = {
+            isFleet: shared.isFleet()
+        };
+
         $scope.openWebsite = function() {
             window.open(url.website, "_blank", "location=no");
         };

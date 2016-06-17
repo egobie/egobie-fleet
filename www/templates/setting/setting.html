@@ -25,22 +25,15 @@
                 <i class="icon ion-ios-arrow-right"></i>
             </ion-item>
 
-            <ion-item class="item-divider">ADDRESS SETTINGS</ion-item>
+            <ion-item class="item-divider"
+                      ng-show="user.isFleet">ADDRESS SETTINGS</ion-item>
             <ion-item menu-close="" class="item-icon-left item-icon-right"
-                      ng-click="showEditHome()">
-                <i class="icon ion-ios-home" style="font-size: 35px;"></i>
-                <span>Home Address</span>
-                <i class="icon ion-ios-arrow-right"></i>
-            </ion-item>
-
-            <!--
-            <ion-item menu-close="" class="item-icon-left item-icon-right"
+                      ng-show="user.isFleet"
                       ng-click="showEditWork()">
                 <i class="icon ion-briefcase"></i>
-                <span>Work Address</span>
+                <span>Change Address</span>
                 <i class="icon ion-ios-arrow-right"></i>
             </ion-item>
-            -->
         </ion-list>
     </ion-content>
 </ion-view>

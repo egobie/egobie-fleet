@@ -18,108 +18,14 @@ angular.module('app.home', ['ionic', 'ionic.rating'])
                 }
             })
 
-            .state('menu.home.resident', {
-                url: '/resident',
+            .state('menu.home.fleet', {
+                url: '/fleet',
                 views: {
                     'resident-view': {
-                        templateUrl: 'templates/home/resident/resident.html'
-                    }
-                }
-            })
-
-            .state('menu.home.mall', {
-                url: '/mall',
-                views: {
-                    'mall-view': {
-                        templateUrl: 'templates/home/mall/mall.html'
-                    }
-                }
-            })
-
-            .state('menu.home.business', {
-                url: '/business',
-                views: {
-                    'business-view': {
-                        templateUrl: 'templates/home/business/business.html'
+                        templateUrl: 'templates/home/fleet/fleet.html'
                     }
                 }
             });
-    })
-
-    .factory('locations', function() {
-        return [
-            {
-                name: 'Woodbury',
-                rating: 1,
-                service: {
-                    carWash: 1,
-                    oilChange: 2,
-                    detail: 1
-                }
-            },
-            {
-                name: 'Garden State Plaza',
-                rating: 2.5,
-                service: {
-                    carWash: 1,
-                    oilChange: 2,
-                    detail: 1
-                }
-            },
-            {
-                name: 'New Bridge Landing',
-                rating: 4,
-                service: {
-                    carWash: 1,
-                    oilChange: 2,
-                    detail: 1
-                }
-            }
-        ];
-    })
-
-    .controller('locationsCtrl', function($scope, $state, $ionicActionSheet, locations) {
-
-        $scope.locations = locations;
-        $scope.max = 5;
-
-        $scope.labelStyle = function(rating) {
-            if (rating < 2) {
-                return {
-                    'label-warning': true
-                };
-            } else if (rating < 4) {
-                return {
-                    'label-info': true
-                };
-            } else {
-                return {
-                    'label-success': true
-                };
-            }
-        };
-
-        $scope.percent = function(value) {
-            return (100 * (value / $scope.max)) + '%';
-        };
-
-        $scope.showActionsheet = function(name) {
-
-            $scope.hideSheet = $ionicActionSheet.show({
-                titleText: 'Make a reservation',
-                buttons: [
-                    {text: 'Reserve'}
-                ],
-                buttonClicked: function(index) {
-                    $scope.hideSheet();
-                    $state.go('menu.home.two');
-                },
-                cancelText: 'Close',
-                cancel: function() {
-                    
-                }
-            });
-        };
     })
 
     .controller('reservationCtrl', function($scope, $ionicActionSheet) {

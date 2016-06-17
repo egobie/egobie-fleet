@@ -1,0 +1,73 @@
+<ion-view hide-nav-bar="true" cache-view="false"
+          ng-app="app.home.fleet.reservation"
+          ng-controller="reservationOrderCtrl">
+    <ion-header-bar class="egobie-payment-header-bar">
+        <button class="button button-icon icon ion-ios-arrow-back"
+                ng-click="goBack()"></button>
+        <h1 class="title">RESERVATION</h1>
+    </ion-header-bar>
+    <div class="egobie-bg-mask">
+        <div class="egobie-bg-mask-1"></div>
+        <div class="egobie-bg-mask-2"></div>
+    </div>
+    <ion-content padding="true" class="has-footer">
+        <ion-list class="egobie-fleet-order">
+            <ion-item class="item-divider item-icon-right"
+                      ng-click="showOpeningModal()">
+                Choose Datetime<i class="icon ion-android-add"></i>
+            </ion-item>
+            <ion-item class="item-icon-left" style="opacity: 0.50;">
+                <i class="icon ion-calendar"></i>{{opening.day}}
+            </ion-item>
+            <ion-item class="item-icon-left" style="opacity: 0.50;">
+                <i class="icon ion-clock"></i>{{opening.start}} to {{opening.end}}
+            </ion-item>
+        </ion-list>
+
+        <ion-list class="egobie-fleet-order">
+            <ion-item class="item-divider item-icon-right"
+                      ng-click="showAddReservation()">
+                Add Orders<i class="icon ion-android-add"></i>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-item class="egobie-fleet-order-list"
+                      ng-repeat="(id, o) in order.orders"
+                      ng-click="showReservationActionSheet(id, o)">
+                <div class="top">
+                    <div class="services">
+                        <div class="items">
+                            <p class="title">Services</p>
+                            <p class="value"
+                               ng-repeat="sid in o.service_ids">
+                                {{getServiceName(sid)}}
+                                <span>{{getServiceNote(sid)}}</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="addons">
+                        <div class="items">
+                            <p class="title">Extra Services</p>
+                            <p class="value"
+                               ng-repeat="addon in o.addons">
+                                {{getAddonName(addon.id)}}
+                                <span>{{getAddonNote(addon.id)}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <p class="bottom">{{o.car_count}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar class="bar-dark egobie-resident-footer"
+                    ng-controller="orderCtrl"
+                    ng-click="placeOrderSheet()">
+        <h1 class="title">
+            Make Reservation
+            <span ng-show="order.price > 0"> ${{order.getRealPrice()}}</span>
+        </h1>
+    </ion-footer-bar>
+</ion-view>
