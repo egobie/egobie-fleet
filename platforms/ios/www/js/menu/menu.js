@@ -22,21 +22,24 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
                 templateUrl: 'templates/menu/menu.html',
                 abstract: true,
                 resolve: {
-                    resolveUserCars: function(requestUserCars) {
-                        return requestUserCars.promise;
-                    },
-                    resolveCarMakers: function(requestCarMakers) {
-                        return requestCarMakers.promise;
-                    },
-                    resolveCarModels: function(requestCarModels) {
-                        return requestCarModels.promise;
-                    },
+//                    resolveUserCars: function(requestUserCars) {
+//                        return requestUserCars.promise;
+//                    },
+//                    resolveCarMakers: function(requestCarMakers) {
+//                        return requestCarMakers.promise;
+//                    },
+//                    resolveCarModels: function(requestCarModels) {
+//                        return requestCarModels.promise;
+//                    },
                     resolveServices: function(requestServices) {
                         return requestServices.promise;
                     },
-                    resolveUserPayments: function(requestUserPayments) {
-                        return requestUserPayments.promise;
+                    resolveAddons: function(requestAddons) {
+                        return requestAddons.promise;
                     }
+//                    resolveUserPayments: function(requestUserPayments) {
+//                        return requestUserPayments.promise;
+//                    }
                 }
             });
     })
@@ -44,12 +47,7 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
     .controller('menuCtrl', function($scope, shared) {
         $scope.user = {
             name: shared.getUser().first || "Welcome",
-            isResidential: shared.isResidential()
-        };
-
-        $scope.badge = {
-            history: 0,
-            notification: 0
+            isFleet: shared.isFleet()
         };
 
         $scope.$watch(function() {
@@ -57,14 +55,4 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
         }, function(newValue) {
             $scope.user.name = newValue || "Welcome";
         });
-
-        $scope.$watch(function() {
-            return shared.getUnratedHistory();
-        }, function(newValue) {
-            $scope.badge.history = newValue;
-        });
-
-        $scope.signOut = function() {
-            shared.signOut();
-        };
     });

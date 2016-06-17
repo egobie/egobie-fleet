@@ -30,6 +30,14 @@ angular.module('app.sale', ['ionic', 'util.shared', 'util.url'])
             zip: ""
         };
 
+        $scope.$watch(function() {
+            return shared.getSaleUsers().users;
+        }, function(newValue) {
+            var _users = shared.getSaleUsers();
+            $scope.users = _users.users;
+            $scope.total = _users.total;
+        });
+
         $ionicModal.fromTemplateUrl('templates/sale/new.html', {
             scope: $scope
         }).then(function(modal) {
@@ -117,28 +125,7 @@ angular.module('app.sale', ['ionic', 'util.shared', 'util.url'])
         };
 
         $scope.loadUsers = function(animation) {
-            if (animation) {
-                shared.showLoading();
-            }
-
-            $http
-                .post(url.allFleetUser, shared.getRequestBody({
-                    page: $scope.page
-                }))
-                .success(function(data, status, headers, config) {
-                    shared.hideLoading();
-                    $scope.total = 0;
-                    $scope.users = [];
-
-                    if (data) {
-                        $scope.total = data.total;
-                        $scope.users = data.users;
-                    }
-                })
-                .error(function(data, status, headers, config) {
-                    shared.hideLoading();
-                    shared.alert(data);
-                });
+            shared.loadSaleUsers(animation, 0);
         };
 
         $scope.addUser = function() {
@@ -256,7 +243,7 @@ angular.module('app.sale', ['ionic', 'util.shared', 'util.url'])
             $scope.user.city = "";
             $scope.user.state = "";
             $scope.user.zip = "";
-        }
+        };
 
         $scope.loadUsers(false);
     });

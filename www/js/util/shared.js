@@ -1,6 +1,6 @@
 angular.module("util.shared", ["util.url"])
 
-    .service("shared", function($rootScope, $window, $ionicPopup, $ionicLoading, $ionicHistory, $http, $state, url) {
+    .service("shared", function($rootScope, $window, $ionicPopup, $ionicLoading, $ionicHistory, $interval, $http, $state, url) {
 
         var user = {
             id: "",
@@ -52,6 +52,13 @@ angular.module("util.shared", ["util.url"])
         var carWash = [];
         var oilChange = [];
         var detailing = [];
+
+        var saleOrders = [];
+        var fleetOrders = [];
+        var saleUsers = {};
+
+        var saleOrderInteval = null;
+        var saleUserInteval = null;
 
         var serviceNames = {
             "CAR_WASH": "Car Wash",
@@ -278,6 +285,84 @@ angular.module("util.shared", ["util.url"])
                     .error(function(data, status, headers, config) {
                         this.alert("send demand for opening - " + data);
                     });
+            },
+
+            loadSaleOrders: function(animation) {
+                if (this.isFleet()) {
+                    return;
+                }
+
+                var self = this;
+
+                if (animation) {
+                    this.showLoading();
+
+                    if (saleOrderInteval) {
+                        $interval.cancel(saleOrderInteval);
+                    }
+
+                    saleOrderInteval = $interval(function() {
+                        self.loadSaleOrders(false);
+                    }, 15000);
+                }
+
+                $http
+                    .post(url.saleOrder, this.getRequestBody({}))
+                    .success(function(data, status, headers, config) {
+                        self.hideLoading();
+                        saleOrders = data;
+                    })
+                    .error(function(data, status, headers, config) {
+                        self.hideLoading();
+                        self.alert(data);
+                    });
+            },
+
+            getSaleOrders: function() {
+                return saleOrders;
+            },
+
+            loadSaleUsers: function(animation, page) {
+                if (this.isFleet()) {
+                    return;
+                }
+
+                var self = this;
+
+                if (animation) {
+                    this.showLoading();
+
+                    if (saleUserInteval) {
+                        $interval.cancel(saleUserInteval);
+                    }
+
+                    saleUserInteval = $interval(function() {
+                        self.loadSaleUsers(false, 0);
+                    }, 15000);
+                }
+
+                $http
+                    .post(url.allFleetUser, this.getRequestBody({
+                        page: page
+                    }))
+                    .success(function(data, status, headers, config) {
+                        self.hideLoading();
+                        saleUsers.total = 0;
+                        saleUsers.users = [];
+
+                        if (data) {
+                            saleUsers.total = data.total;
+                            saleUsers.users = data.users;
+                        }
+                    })
+                    .error(function(data, status, headers, config) {
+                        self.hideLoading();
+                        self.alert(data);
+                    });
+            },
+
+            getSaleUsers: function() {
+                return saleUsers;
             },
 
             getUnratedHistory: function() {

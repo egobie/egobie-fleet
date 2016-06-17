@@ -18,11 +18,17 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.egobie"
+        },
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "com.egobie"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.egobie639213"
+        },
+        "cordova-plugin-app-event": {
+            "PACKAGE_NAME": "com.egobie"
         }
     }
 }
