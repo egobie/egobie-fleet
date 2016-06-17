@@ -44,7 +44,7 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
             });
     })
 
-    .controller('menuCtrl', function($scope, $cordovaLocalNotification, $ionicPlatform, shared) {
+    .controller('menuCtrl', function($scope, $ionicPlatform, shared) {
         $scope.user = {
             name: shared.getUser().first || "Welcome",
             isFleet: shared.isFleet()

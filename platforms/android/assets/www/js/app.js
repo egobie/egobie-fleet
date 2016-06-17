@@ -71,4 +71,4 @@ angular
                 StatusBar.styleDefault();
             }
         });
-    })
+    });

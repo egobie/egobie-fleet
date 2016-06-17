@@ -1,4 +1,4 @@
-angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
+angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared'])
 
     .config(function($stateProvider, $ionicConfigProvider) {
         // Ionic uses AngularUI Router which uses the concept of states
@@ -44,7 +44,7 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
             });
     })
 
-    .controller('menuCtrl', function($scope, shared) {
+    .controller('menuCtrl', function($scope, $ionicPlatform, shared) {
         $scope.user = {
             name: shared.getUser().first || "Welcome",
             isFleet: shared.isFleet()
@@ -55,4 +55,11 @@ angular.module('app.menu', ['ionic', 'util.request', 'util.shared'])
         }, function(newValue) {
             $scope.user.name = newValue || "Welcome";
         });
+
+        $ionicPlatform.ready(function () {
+            
+        });
+
+        shared.loadSaleOrders(true);
+        shared.loadSaleUsers(true, 0);
     });

@@ -11,8 +11,8 @@ angular.module('util.url', [])
             newFleetUser: host + "/sale/fleet/new",
             allFleetUser: host + "/sale/fleet/all",
             promotePrice: host + "/sale/fleet/price",
-            fleetOrder: host + "/sale/fleet/order",
-            fleetOrderDetail: host + "/sale/fleet/order/detail",
+            saleOrder: host + "/sale/fleet/order",
+            saleOrderDetail: host + "/sale/fleet/order/detail",
 
             signIn: host + "/signin",
             signUp: host + "/signup/fleet",

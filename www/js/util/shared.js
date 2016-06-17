@@ -1,6 +1,7 @@
-angular.module("util.shared", ["util.url"])
+angular.module("util.shared", ["ngCordova", "util.url"])
 
-    .service("shared", function($rootScope, $window, $ionicPopup, $ionicLoading, $ionicHistory, $interval, $http, $state, url) {
+    .service("shared", function($rootScope, $window, $ionicPopup, $ionicLoading, $interval, 
+        $http, $cordovaLocalNotification, url) {
 
         var user = {
             id: "",
@@ -311,6 +312,24 @@ angular.module("util.shared", ["util.url"])
                     .success(function(data, status, headers, config) {
                         self.hideLoading();
                         saleOrders = data;
+
+                        if (saleOrders) {
+                            var price = 0;
+                            var reject = 0;
+
+                            Array.prototype.forEach.call(saleOrders, function(order) {
+                                if (order.status === "WAITING") {
+                                    price++;
+                                } else if (order.status === "REJECT") {
+                                    reject++;
+                                }
+                            });
+
+                            if (price !== 0 || reject !== 0) {
+                                self.notify("New Notification", price + " reservations are waiting for price, " +
+                                        reject + " reservations are rejected!");
+                            }
+                        }
                     })
                     .error(function(data, status, headers, config) {
                         self.hideLoading();
@@ -446,6 +465,16 @@ angular.module("util.shared", ["util.url"])
             alert: function(data) {
                 $ionicPopup.alert({
                     title: data
+                });
+            },
+
+            notify: function(title, message) {
+                $cordovaLocalNotification.schedule({
+                    id: 1,
+                    title: title,
+                    text: message
+                }).then(function (result) {
+                    
                 });
             },
 

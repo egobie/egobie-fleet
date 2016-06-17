@@ -16,21 +16,23 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
         $scope.toHourMin = shared.toHourMin;
         $scope.details = [];
         $scope.orders = [];
-        $scope.interval = null;
+
         $scope.current = {
             id: -1,
             price: 0,
             status: null
         };
 
+        $scope.$watch(function() {
+            return shared.getSaleOrders();
+        }, function(newValue) {
+            $scope.orders = newValue;
+        });
+
         $ionicModal.fromTemplateUrl('templates/order/detail.html', {
             scope: $scope
         }).then(function(modal) {
             $scope.orderDetailModel = modal;
-        });
-
-        $scope.$on('$destroy', function(event) {
-            $interval.cancel($scope.interval);
         });
 
         $scope.showOrderDetail = function(order) {
@@ -46,36 +48,11 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
             $scope.clear();
         };
 
-        $scope.loadOrder = function(animation) {
-            if (animation) {
-                shared.showLoading();
-                
-                if ($scope.interval) {
-                    $interval.cancel($scope.interval);
-                }
-
-                $scope.interval = $interval(function() {
-                    $scope.loadOrder(false);
-                }, 30000);
-            }
-
-            $http
-                .post(url.fleetOrder, shared.getRequestBody({}))
-                .success(function(data, status, headers, config) {
-                    shared.hideLoading();
-                    $scope.orders = data;
-                })
-                .error(function(data, status, headers, config) {
-                    shared.hideLoading();
-                    shared.alert(data);
-                });
-        };
-
         $scope.loadOrderDetail = function(id) {
             shared.showLoading();
 
             $http
-                .post(url.fleetOrderDetail, shared.getRequestBody({
+                .post(url.saleOrderDetail, shared.getRequestBody({
                     fleet_service_id: id
                 }))
                 .success(function(data, status, headers, config) {
@@ -86,6 +63,10 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
                     shared.hideLoading();
                     shared.alert(data);
                 });
+        };
+
+        $scope.loadOrder = function() {
+            shared.loadSaleOrders();
         };
 
         $scope.savePrice = function() {
