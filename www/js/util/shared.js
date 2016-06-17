@@ -296,6 +296,10 @@ angular.module("util.shared", ["util.url"])
                 return regPhone.test(phone);
             },
 
+            testNumeric: function(n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            },
+
             processOpening: function(openings) {
                 if (openings) {
                     Array.prototype.forEach.call(openings, function(opening) {

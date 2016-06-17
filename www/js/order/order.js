@@ -17,6 +17,11 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
         $scope.details = [];
         $scope.orders = [];
         $scope.interval = null;
+        $scope.current = {
+            id: -1,
+            price: 0,
+            status: null
+        };
 
         $ionicModal.fromTemplateUrl('templates/order/detail.html', {
             scope: $scope
@@ -28,14 +33,17 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
             $interval.cancel($scope.interval);
         });
 
-        $scope.showOrderDetail = function(id) {
+        $scope.showOrderDetail = function(order) {
             $scope.orderDetailModel.show();
-            $scope.loadOrderDetail(id);
+            $scope.loadOrderDetail(order.id);
+            $scope.current.id = order.id;
+            $scope.current.price = order.price;
+            $scope.current.status = order.status;
         };
 
         $scope.hideOrderDetail = function() {
-            $scope.details = [];
             $scope.orderDetailModel.hide();
+            $scope.clear();
         };
 
         $scope.loadOrder = function(animation) {
@@ -80,6 +88,27 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
                 });
         };
 
+        $scope.savePrice = function() {
+            if ($scope.isValid()) {
+                shared.showLoading();
+
+                $http
+                    .post(url.promotePrice, shared.getRequestBody({
+                        price: parseFloat($scope.current.price),
+                        fleet_service_id: $scope.current.id
+                    }))
+                    .success(function(data, status, headers, config) {
+                        shared.hideLoading();
+                        $scope.hideOrderDetail();
+                        $scope.loadOrder(true);
+                    })
+                    .error(function(data, status, headers, config) {
+                        shared.hideLoading();
+                        shared.alert(data);
+                    });
+            }
+        };
+
         $scope.unitStyle = function(unit) {
             if (unit === "DAY") {
                 return {
@@ -94,6 +123,24 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
                     'min': true
                 };
             }
+        };
+
+        $scope.isDisabled = function() {
+            return {
+                "egobie-button-disabled": !$scope.isValid()
+            };
+        };
+
+        $scope.isValid = function() {
+            return $scope.current.status === "WAITING" && $scope.current.price > 0 &&
+                shared.testNumeric($scope.current.price);
+        };
+
+        $scope.clear = function() {
+            $scope.details = [];
+            $scope.current.id = -1;
+            $scope.current.price = 0;
+            $scope.current.status = null;
         };
 
         $scope.isWaiting = function(reservation) {

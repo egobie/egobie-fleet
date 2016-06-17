@@ -13,8 +13,6 @@ angular.module('app.sale', ['ionic', 'util.shared', 'util.url'])
     })
 
     .controller('saleCtrl', function($scope, $http, $ionicModal, $ionicActionSheet, $ionicPopup, shared, url) {
-        console.log("sale");
-
         $scope.states = shared.getStates();
         $scope.users = [];
         $scope.total = 0;
@@ -238,8 +236,8 @@ angular.module('app.sale', ['ionic', 'util.shared', 'util.url'])
                 return false;
             }
 
-            if (!$scope.user.phone) {
-                shared.alert("Please input contact's phone number");
+            if (!shared.testPhone($scope.user.phone)) {
+                shared.alert("Invalid phone number");
                 return false;
             }
 

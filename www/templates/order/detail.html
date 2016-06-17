@@ -8,8 +8,14 @@
         <div class="egobie-bg-mask-1"></div>
         <div class="egobie-bg-mask-2"></div>
     </div>
-    <ion-content padding="true" class="padding">
+    <ion-content padding="true" class="padding has-header has-footer">
         <ion-list>
+            <div class="egobie-fleet-price">
+                <div class="name">Estimated Price</div>
+                <input type="text" placeholder="0.00"
+                       ng-model="current.price"/>
+            </div>
+
             <ion-item class="egobie-fleet-order-list"
                       ng-repeat="(id, detail) in details">
                 <div class="top">
@@ -39,4 +45,9 @@
             </ion-item>
         </ion-list>
     </ion-content>
+    <ion-footer-bar class="bar-dark"
+                    ng-class="isDisabled()"
+                    ng-click="savePrice()">
+        <h1 class="title">Save</h1>
+    </ion-footer-bar>
 </ion-modal-view>
