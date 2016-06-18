@@ -44,7 +44,7 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
             });
     })
 
-    .controller('menuCtrl', function($scope, $location, $window, $ionicHistory, $timeout, $state, shared) {
+    .controller('menuCtrl', function($scope, $ionicHistory, $timeout, $window, $state, shared) {
         $scope.user = {
             name: shared.getUser().first || "Welcome",
             isFleet: shared.isFleet()
@@ -58,17 +58,20 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
 
         $scope.signOut = function() {
             shared.showLoading();
-            $ionicHistory.clearCache();
-            $ionicHistory.clearHistory();
-            $ionicHistory.nextViewOptions({
-                disableBack: true,
-                historyRoot: true
-            });
 
-            $timeout(function () {
+            $timeout(function() {
                 shared.hideLoading();
                 $state.go('sign.in');
-                $window.location.reload(true);
+
+                $timeout(function () {
+                    $ionicHistory.clearCache();
+                    $ionicHistory.clearHistory();
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true,
+                        historyRoot: true
+                    });
+                    $window.location.reload();
+                }, 100);
             }, 300);
         };
 

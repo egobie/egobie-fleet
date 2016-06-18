@@ -44,7 +44,7 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
             });
     })
 
-    .controller('menuCtrl', function($scope, $ionicHistory, $timeout, $state, shared) {
+    .controller('menuCtrl', function($scope, $ionicHistory, $timeout, $window, $state, shared) {
         $scope.user = {
             name: shared.getUser().first || "Welcome",
             isFleet: shared.isFleet()
@@ -70,7 +70,8 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
                         disableBack: true,
                         historyRoot: true
                     });
-                }, 300);
+                    $window.location.reload();
+                }, 100);
             }, 300);
         };
 
