@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.egobie.fleet" version="1.0.0">
-  <name>eGobie Fleet</name>
+  <name>eGobieFleet</name>
   <description>eGobie Car Services</description>
   <author email="admin@egobie.com" href="http://www.egobie.com/">Bo Huang</author>
   <content src="index.html"/>
@@ -14,7 +14,6 @@
   <preference name="orientation" value="portrait"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
-  <gap:plugin name="de.appplant.cordova.plugin.local-notification" />
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
