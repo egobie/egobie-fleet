@@ -53,6 +53,37 @@ angular.module('app.sale', ['ionic', 'util.shared', 'util.url'])
             $scope.clearUser();
         };
 
+        $scope.showUserActionSheet = function(user) {
+            if (user.fleet_setup !== 0) {
+                return;
+            }
+
+            $scope.hideUserActionSheet = $ionicActionSheet.show({
+                titleText: "Re-send Invitation Email",
+                destructiveText: "Send Email",
+                destructiveButtonClicked: function() {
+                    shared.showLoading();
+                        $http
+                            .post(url.resendEmail, shared.getRequestBody({
+                                fleet_user_id: user.user_id
+                            }))
+                            .success(function(data, status, headers, config) {
+                                shared.hideLoading();
+                                $scope.hideUserActionSheet();
+                            })
+                            .error(function(data, status, headers, config) {
+                                $scope.hideUserActionSheet();
+                                shared.hideLoading();
+                                shared.alert(data);
+                            });
+                },
+                cancelText: 'Close',
+                cancel: function() {
+
+                }
+            }); 
+        };
+
         $scope.showStatusSheet = function(task) {
             if (task.status === "RESERVED") {
                 $scope.hideStatusSheet = $ionicActionSheet.show({
