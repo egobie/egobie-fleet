@@ -10837,6 +10837,11 @@ a.button {
   .egobie-menu-bg {
     background: url("../img/bg.jpg") no-repeat center center;
     background-size: cover; }
+    .egobie-menu-bg .sign-out {
+      display: block;
+      width: 80px;
+      margin-left: 20px;
+      margin-top: 5px; }
   .egobie-menu-bg * {
     color: #FFFFFF; }
   .egobie-menu-item, .egobie-menu-item-last {
@@ -13482,7 +13487,7 @@ a.button {
       background: rgba(12, 10, 12, 0.4); }
 
 .egobie-signin-logo {
-  /*content: logo($Logo-White);*/
+  content: url("../img/logo/white.png");
   margin-top: 50px; }
 
 .egobie-signup-logo {

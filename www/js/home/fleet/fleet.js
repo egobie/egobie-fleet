@@ -180,38 +180,11 @@ angular.module('app.home.fleet', ['ionic', 'util.shared'])
                 }
             })
 
-            .state('menu.home.residentCar', {
-                url: '/fleet/reservation/car',
-                views: {
-                    'resident-view': {
-                        templateUrl: 'templates/home/fleet/car.html'
-                    }
-                }
-            })
-
             .state('menu.home.residentService', {
                 url: '/fleet/reservation/service',
                 views: {
                     'resident-view': {
                         templateUrl: 'templates/home/fleet/service.html'
-                    }
-                }
-            })
-
-            .state('menu.home.residentAddon', {
-                url: '/fleet/reservation/addon',
-                views: {
-                    'resident-view': {
-                        templateUrl: 'templates/home/fleet/addon.html'
-                    }
-                }
-            })
-
-            .state('menu.home.residentPayment', {
-                url: '/fleet/reservation/payment',
-                views: {
-                    'resident-view': {
-                        templateUrl: 'templates/home/fleet/payment.html'
                     }
                 }
             });

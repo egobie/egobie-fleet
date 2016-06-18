@@ -13,6 +13,7 @@ angular.module('util.url', [])
             promotePrice: host + "/sale/fleet/price",
             saleOrder: host + "/sale/fleet/order",
             saleOrderDetail: host + "/sale/fleet/order/detail",
+            resendEmail: host + "/sale/fleet/resend",
 
             signIn: host + "/signin",
             signUp: host + "/signup/fleet",
