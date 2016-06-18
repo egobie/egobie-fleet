@@ -70,5 +70,9 @@ angular
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+            window.cordova.plugins.notification.local.registerPermission(function (granted) {
+                
+            });
         });
     });
