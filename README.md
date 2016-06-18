@@ -1,4 +1,4 @@
-# egobie-app
+# egobie-fleet
 
 # Plugin
 cordova plugin add cordova-plugin-inappbrowser
