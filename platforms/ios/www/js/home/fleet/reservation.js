@@ -69,6 +69,7 @@ angular.module('app.home.fleet.reservation', ['ionic', 'app.home.fleet', 'util.s
                 destructiveText: 'Delete',
                 destructiveButtonClicked: function() {
                     fleetOrder.remove(id);
+                    orderOpening.clear();
                     $scope.hideReservationActionSheet();
                 },
 
