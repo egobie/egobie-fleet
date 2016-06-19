@@ -18,6 +18,10 @@ angular.module('util.url', [])
             signIn: host + "/signin",
             signUp: host + "/signup/fleet",
             checkUsername: host + "/check/name",
+            resetPassword1: host + "/reset/step1",
+            resetPassword2: host + "/reset/step2",
+            resetPassword3: host + "/reset/step3",
+            resetResend: host + "/reset/resend",
 
             updateUser: host + "/user/update/user",
             updateWork: host + "/user/update/work",

@@ -13350,6 +13350,13 @@ a.button {
     margin-top: 15px;
     padding-bottom: 15px; }
 
+.egobie-user-form-bg div.note {
+  width: 90%;
+  margin: 10px auto 5px auto;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center; }
+
 .egobie-button-disabled {
   opacity: 0.6; }
 
