@@ -11,8 +11,28 @@
 
     &-reservation {
         height: 50%;
+        transform: scale(0.90);
+        margin-top: 20px;
     }
 
+    &-reservation-describe {
+        border: 0px;
+
+        .title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            text-align: center;
+            word-break:break-word;
+            display: inline-block;
+            white-space: normal;
+        }
+    }
+    
     &-on-demand {
         height: 51%;
     }
@@ -26,7 +46,7 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            background: rgba(0, 0, 0, 0.35);
+            /*background: rgba(0, 0, 0, 0.35);*/
         }
 
         .panel {

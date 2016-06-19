@@ -10460,7 +10460,22 @@ a.button {
   border-color: #000000 !important; }
 
 .egobie-reservation {
-  height: 50%; }
+  height: 50%;
+  transform: scale(0.9);
+  margin-top: 20px; }
+
+.egobie-reservation-describe {
+  border: 0px; }
+  .egobie-reservation-describe .title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 10px; }
+  .egobie-reservation-describe .content {
+    text-align: center;
+    word-break: break-word;
+    display: inline-block;
+    white-space: normal; }
 
 .egobie-on-demand {
   height: 51%; }
@@ -10473,7 +10488,7 @@ a.button {
     position: absolute;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.35); }
+    /*background: rgba(0, 0, 0, 0.35);*/ }
   .egobie-on-demand .panel, .egobie-reservation .panel {
     position: absolute;
     display: flex;
@@ -13487,7 +13502,7 @@ a.button {
     height: 100%;
     width: 100%;
     /*background: rgba(118, 67, 134, 0.60);*/
-    background: rgba(15, 16, 37, 0.55); }
+    background: rgba(0, 0, 0, 0.65); }
   .egobie-sign-bg .list {
     position: relative; }
     .egobie-sign-bg .list .mask {
@@ -13582,7 +13597,7 @@ a.button {
   display: block;
   position: absolute;
   margin: 10px auto 50px auto;
-  width: 300px;
+  width: 90%;
   left: 0px;
   right: 0px;
   bottom: 0px;
