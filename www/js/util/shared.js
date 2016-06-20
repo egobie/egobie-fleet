@@ -314,23 +314,22 @@ angular.module("util.shared", ["ngCordova", "util.url"])
                     .success(function(data, status, headers, config) {
                         self.hideLoading();
                         saleOrders = data;
+                        var price = 0;
 
                         if (saleOrders) {
-                            var price = 0;
-
                             Array.prototype.forEach.call(saleOrders, function(order) {
                                 if (order.status === "WAITING") {
                                     price++;
                                 }
                             });
 
-                            window.cordova.plugins.notification.badge.set(price);
-                            menuScope.badge.order = price;
-
                             if (price !== 0) {
                                 self.notify("New Reservations", price + " reservations are made by users.");
                             }
                         }
+
+                        window.cordova.plugins.notification.badge.set(price);
+                        menuScope.badge.order = price;
                     })
                     .error(function(data, status, headers, config) {
                         self.hideLoading();
