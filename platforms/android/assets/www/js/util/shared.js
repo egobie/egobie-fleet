@@ -315,19 +315,17 @@ angular.module("util.shared", ["ngCordova", "util.url"])
 
                         if (saleOrders) {
                             var price = 0;
-                            var reject = 0;
 
                             Array.prototype.forEach.call(saleOrders, function(order) {
                                 if (order.status === "WAITING") {
                                     price++;
-                                } else if (order.status === "REJECT") {
-                                    reject++;
                                 }
                             });
 
-                            if (price !== 0 || reject !== 0) {
-                                self.notify("New Notification", price + " reservations are waiting for price, " +
-                                        reject + " reservations are rejected!");
+                            window.cordova.plugins.notification.badge.set(price);
+
+                            if (price !== 0) {
+                                self.notify("New Reservations", price + " reservations are made by users.");
                             }
                         }
                     })
@@ -469,12 +467,14 @@ angular.module("util.shared", ["ngCordova", "util.url"])
             },
 
             notify: function(title, message) {
-                $cordovaLocalNotification.schedule({
+                //$cordovaLocalNotification.schedule({
+                cordova.plugins.notification.local.schedule({
                     id: 1,
                     title: title,
-                    text: message
+                    text: message,
+                    sound: "res://platform_default"
                 }).then(function (result) {
-                    console.log('Notification 1 triggered result - ', result);
+                    
                 });
             },
 

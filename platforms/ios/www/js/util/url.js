@@ -23,10 +23,10 @@ angular.module('util.url', [])
             resetPassword3: host + "/reset/step3",
             resetResend: host + "/reset/resend",
 
-            updateUser: host + "/user/update/user",
-            updateWork: host + "/user/update/work",
-            updatePassword: host + "/user/update/password",
-            feedback: host + "/user/feedback",
+            updateUser: host + "/fleet/update/user",
+            updateWork: host + "/fleet/update/work",
+            updatePassword: host + "/fleet/update/password",
+            feedback: host + "/fleet/feedback",
 
             services: host + "/fleet/service",
             addons: host + "/fleet/addon",
@@ -47,10 +47,6 @@ angular.module('util.url', [])
 
             fleetHistories: host + "/fleet/history",
             ratingHistory: host + "/fleet/history/rating",
-
-            tasks: host + "/egobie/service/task",
-            startTask: host + "/egobie/service/progress",
-            finishTask: host + "/egobie/service/done",
 
             goHome: host + "/action/go/home",
             goNotification: host + "/action/go/notification",
