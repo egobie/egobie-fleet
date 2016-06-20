@@ -10,6 +10,7 @@ angular
         'app.sign',
         'app.sign.in',
         'app.sign.up',
+        'app.sign.reset',
 
         'app.tutorial',
         'app.menu',
@@ -70,5 +71,11 @@ angular
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
+            window.cordova.plugins.notification.local.registerPermission(function (granted) {
+                
+            });
+
+            window.cordova.plugins.notification.badge.set(0);
         });
     });

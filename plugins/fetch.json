@@ -22,7 +22,7 @@
             "type": "registry",
             "id": "cordova-plugin-device"
         },
-        "is_top_level": false,
+        "is_top_level": true,
         "variables": {}
     },
     "cordova-plugin-inappbrowser": {
@@ -56,6 +56,23 @@
             "id": "cordova-plugin-app-event"
         },
         "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-badge": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/katzer/cordova-plugin-badge.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-vibration": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-vibration"
+        },
+        "is_top_level": true,
         "variables": {}
     }
 }

@@ -7,8 +7,8 @@
     </ion-header-bar>
     <ion-content overflow-scroll="true" class="egobie-whole-page">
         <ion-list class="egobie-whole-page">
-            <ion-item class="egobie-reservation"
-                      ng-click="gotoReservation()">
+            <ion-item class="egobie-reservation">
+                <!--
                 <div class="mask"></div>
                 <div class="panel">
                     <div class="left">
@@ -20,8 +20,22 @@
                         <i class="icon ion-arrow-right-c navigation"></i>
                     </div>
                 </div>
+                -->
             </ion-item>
 
+            <ion-item class="egobie-reservation-describe">
+                <p class="title">Make Reservation</p>
+                <!--
+                <p class="content">Make a reservation and we will provide</p>
+                <p class="content">timely service to you</p>
+                -->
+                <div class="content">Make a reservation and we will provide timely service to you</div>
+            </ion-item>
+
+            <button class="button egobie-start-to-use"
+                    ng-click="gotoReservation()">Continue</button>
+
+            <!--
             <ion-item class="egobie-on-demand"
                       ng-click="gotoOnDemand()">
                 <div class="mask"></div>
@@ -36,6 +50,7 @@
                     </div>
                 </div>
             </ion-item>
+            -->
         </ion-list>
     </ion-content>
 </ion-view>

@@ -32,12 +32,21 @@
         <param name="ios-package" onload="true" value="APPLocalNotification" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Badge">
+        <param name="ios-package" value="APPBadge" />
+    </feature>
+    <feature name="Vibration">
+        <param name="ios-package" value="CDVVibration" />
+    </feature>
     <name>eGobieFleet</name>
     <description>eGobie Car Services</description>
     <author email="admin@egobie.com" href="http://www.egobie.com/">Bo Huang</author>
     <content src="index.html" />
     <access origin="*" subdomains="true" />
     <allow-navigation href="http://*/*" />
+    <gap:plugin name="de.appplant.cordova.plugin.local-notification" />
+    <gap:plugin name="de.appplant.cordova.plugin.badge" source="npm" />
+    <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.3" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />
     <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
