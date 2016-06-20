@@ -1,6 +1,6 @@
 angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'util.url'])
 
-    .controller('serviceSelectCtl', function($scope, $ionicModal, $timeout, shared, orderService, fleetOrder) {
+    .controller('serviceSelectCtl', function($scope, $ionicModal, $timeout, shared, orderService, orderOpening, fleetOrder) {
         $scope.services = orderService.services;
         $scope.addons = shared.getAddons();
         $scope.serviceNames = shared.getServiceNames();
@@ -29,14 +29,26 @@ angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'u
         });
 
         $scope.hideAddReservation = function() {
+            orderOpening.clear();
             $scope.clearReservation();
             $scope.addReservationModal.hide();
+
             $timeout(function() {
                 $scope.addReservationModal.remove();
             }, 200);
         };
 
         $scope.selectService = function() {
+            if ($scope.newReservation.selected <= 0) {
+                shared.alert("Please choose at least one service");
+                return;
+            }
+
+            if ($scope.newReservation.carCount <= 0) {
+                shared.alert("Please input vehicle numbers");
+                return;
+            }
+
             var services = [];
             var addons = [];
 
@@ -55,17 +67,15 @@ angular.module('app.home.service', ['ionic', 'app.home.fleet', 'util.shared', 'u
                 }
             }
 
-            if ($scope.newReservation.isValid()) {
-                if ($scope.current) {
-                    fleetOrder.edit($scope.current.order_id, $scope.newReservation.carCount, services, addons);
-                } else {
-                    fleetOrder.add($scope.newReservation.carCount, services, addons);
-                }
-
-                $scope.hideAddReservation();
-                // TODO demand addons
-                shared.demandService(services);
+            if ($scope.current) {
+                fleetOrder.edit($scope.current.order_id, $scope.newReservation.carCount, services, addons);
+            } else {
+                fleetOrder.add($scope.newReservation.carCount, services, addons);
             }
+
+            $scope.hideAddReservation();
+            // TODO demand addons
+            shared.demandService(services);
         };
 
         $scope.clearReservation = function() {

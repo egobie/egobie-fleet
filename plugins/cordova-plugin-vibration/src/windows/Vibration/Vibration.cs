@@ -1,4 +1,4 @@
-/*
+﻿/*
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
        distributed with this work for additional information
@@ -15,20 +15,41 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
- */
+*/
 
-package com.egobie;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using Windows.Phone.Devices.Notification;
 
-import android.os.Bundle;
-import org.apache.cordova.*;
-
-public class MainActivity extends CordovaActivity
+namespace Vibration
 {
-    @Override
-    public void onCreate(Bundle savedInstanceState)
+    public sealed class Vibration
     {
-        super.onCreate(savedInstanceState);
-        // Set by <content src="index.html" /> in config.xml
-        loadUrl(launchUrl);
+        private static VibrationDevice _vibrationDevice = VibrationDevice.GetDefault();
+
+        public static void vibrate([ReadOnlyArray()] object[] args)
+        {
+            // set default
+            int duration = 200;
+
+            try 
+            {
+                duration = Convert.ToInt32(args[0]);
+            }
+            catch 
+            { 
+
+            }
+
+            _vibrationDevice.Vibrate(TimeSpan.FromMilliseconds(duration));
+        }
+
+        public static void cancelVibration()
+        {
+            _vibrationDevice.Cancel();
+        }
     }
 }

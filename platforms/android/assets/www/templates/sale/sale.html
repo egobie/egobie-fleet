@@ -21,7 +21,8 @@
 
             <ion-item class="egobie-user-list"
                       ng-repeat="user in users"
-                      ng-class="userBorderStyle(user.fleet_setup)">
+                      ng-class="userBorderStyle(user.fleet_setup)"
+                      ng-click="showUserActionSheet(user)">
                 <div class="top">
                     <div class="info">
                         <div class="status">

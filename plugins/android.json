@@ -21,12 +21,18 @@
         },
         "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.egobie"
-        }
-    },
-    "dependent_plugins": {
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.egobie639213"
         },
+        "cordova-plugin-badge": {
+            "PACKAGE_NAME": "com.egobie"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        }
+    },
+    "dependent_plugins": {
         "cordova-plugin-app-event": {
             "PACKAGE_NAME": "com.egobie"
         }

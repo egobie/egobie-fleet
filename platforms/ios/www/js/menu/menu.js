@@ -50,6 +50,10 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
             isFleet: shared.isFleet()
         };
 
+        $scope.badge = {
+            order: 0
+        };
+
         $scope.$watch(function() {
             return shared.getUser().first;
         }, function(newValue) {
@@ -75,6 +79,7 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
             }, 300);
         };
 
+        shared.setMenuScope($scope);
         shared.loadSaleOrders(true);
         shared.loadSaleUsers(true, 0);
     });

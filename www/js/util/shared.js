@@ -1,7 +1,7 @@
 angular.module("util.shared", ["ngCordova", "util.url"])
 
     .service("shared", function($rootScope, $window, $ionicPopup, $ionicLoading, $interval, 
-        $http, $cordovaLocalNotification, url) {
+        $http, $cordovaVibration, url) {
 
         var user = {
             id: "",
@@ -46,6 +46,8 @@ angular.module("util.shared", ["ngCordova", "util.url"])
             "January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December"
         ];
+
+        var menuScope = null;
 
         var services = {};
         var addons = {};
@@ -304,7 +306,7 @@ angular.module("util.shared", ["ngCordova", "util.url"])
 
                     saleOrderInteval = $interval(function() {
                         self.loadSaleOrders(false);
-                    }, 15000);
+                    }, 120000);
                 }
 
                 $http
@@ -312,24 +314,22 @@ angular.module("util.shared", ["ngCordova", "util.url"])
                     .success(function(data, status, headers, config) {
                         self.hideLoading();
                         saleOrders = data;
+                        var price = 0;
 
                         if (saleOrders) {
-                            var price = 0;
-                            var reject = 0;
-
                             Array.prototype.forEach.call(saleOrders, function(order) {
                                 if (order.status === "WAITING") {
                                     price++;
-                                } else if (order.status === "REJECT") {
-                                    reject++;
                                 }
                             });
 
-                            if (price !== 0 || reject !== 0) {
-                                self.notify("New Notification", price + " reservations are waiting for price, " +
-                                        reject + " reservations are rejected!");
+                            if (price !== 0) {
+                                self.notify("New Reservations", price + " reservations are made by users.");
                             }
                         }
+
+                        window.cordova.plugins.notification.badge.set(price);
+                        menuScope.badge.order = price;
                     })
                     .error(function(data, status, headers, config) {
                         self.hideLoading();
@@ -469,13 +469,20 @@ angular.module("util.shared", ["ngCordova", "util.url"])
             },
 
             notify: function(title, message) {
-                $cordovaLocalNotification.schedule({
+                // Vibrate 1s
+                //$cordovaVibration.vibrate(1000);
+                cordova.plugins.notification.local.schedule({
                     id: 1,
                     title: title,
-                    text: message
+                    text: message,
+                    sound: "res://platform_default"
                 }).then(function (result) {
                     
                 });
+            },
+
+            setMenuScope: function(menu) {
+                menuScope = menu;
             },
 
             goHome: function() {

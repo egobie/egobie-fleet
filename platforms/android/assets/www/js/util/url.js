@@ -1,8 +1,8 @@
 angular.module('util.url', [])
 
     .factory('url', function() {
-        var host = "http://localhost:8000";
-//        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
+//        var host = "http://localhost:8000";
+        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
 
         return {
             website: "http://www.egobie.com/",
@@ -13,15 +13,20 @@ angular.module('util.url', [])
             promotePrice: host + "/sale/fleet/price",
             saleOrder: host + "/sale/fleet/order",
             saleOrderDetail: host + "/sale/fleet/order/detail",
+            resendEmail: host + "/sale/fleet/resend",
 
             signIn: host + "/signin",
             signUp: host + "/signup/fleet",
             checkUsername: host + "/check/name",
+            resetPassword1: host + "/reset/step1",
+            resetPassword2: host + "/reset/step2",
+            resetPassword3: host + "/reset/step3",
+            resetResend: host + "/reset/resend",
 
-            updateUser: host + "/user/update/user",
-            updateWork: host + "/user/update/work",
-            updatePassword: host + "/user/update/password",
-            feedback: host + "/user/feedback",
+            updateUser: host + "/fleet/update/user",
+            updateWork: host + "/fleet/update/work",
+            updatePassword: host + "/fleet/update/password",
+            feedback: host + "/fleet/feedback",
 
             services: host + "/fleet/service",
             addons: host + "/fleet/addon",
@@ -42,10 +47,6 @@ angular.module('util.url', [])
 
             fleetHistories: host + "/fleet/history",
             ratingHistory: host + "/fleet/history/rating",
-
-            tasks: host + "/egobie/service/task",
-            startTask: host + "/egobie/service/progress",
-            finishTask: host + "/egobie/service/done",
 
             goHome: host + "/action/go/home",
             goNotification: host + "/action/go/notification",
