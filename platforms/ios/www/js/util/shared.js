@@ -47,6 +47,8 @@ angular.module("util.shared", ["ngCordova", "util.url"])
             "August", "September", "October", "November", "December"
         ];
 
+        var menuScope = null;
+
         var services = {};
         var addons = {};
 
@@ -304,7 +306,7 @@ angular.module("util.shared", ["ngCordova", "util.url"])
 
                     saleOrderInteval = $interval(function() {
                         self.loadSaleOrders(false);
-                    }, 15000);
+                    }, 120000);
                 }
 
                 $http
@@ -323,6 +325,7 @@ angular.module("util.shared", ["ngCordova", "util.url"])
                             });
 
                             window.cordova.plugins.notification.badge.set(price);
+                            menuScope.badge.order = price;
 
                             if (price !== 0) {
                                 self.notify("New Reservations", price + " reservations are made by users.");
@@ -468,7 +471,7 @@ angular.module("util.shared", ["ngCordova", "util.url"])
 
             notify: function(title, message) {
                 // Vibrate 1s
-                $cordovaVibration.vibrate(1000);
+                //$cordovaVibration.vibrate(1000);
                 cordova.plugins.notification.local.schedule({
                     id: 1,
                     title: title,
@@ -477,6 +480,10 @@ angular.module("util.shared", ["ngCordova", "util.url"])
                 }).then(function (result) {
                     
                 });
+            },
+
+            setMenuScope: function(menu) {
+                menuScope = menu;
             },
 
             goHome: function() {
