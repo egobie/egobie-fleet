@@ -7,6 +7,8 @@ angular.module('util.url', [])
         return {
             website: "http://www.egobie.com/",
             faq: "http://www.egobie.com/#!faq/aifir",
+            ios: "https://itunes.apple.com/us/app/egobie-fleet/id1125502163?mt=8",
+            android: "",
 
             newFleetUser: host + "/sale/fleet/new",
             allFleetUser: host + "/sale/fleet/all",
