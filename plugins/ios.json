@@ -1,0 +1,43 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "cordova-plugin-background-mode": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "cordova-plugin-badge": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-app-event": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        }
+    }
+}
