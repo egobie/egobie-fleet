@@ -17,8 +17,6 @@ angular.module('util.url', [])
             saleOrderDetail: host + "/sale/fleet/order/detail",
             resendEmail: host + "/sale/fleet/resend",
 
-            test: host + "/fleet/test",
-
             signIn: host + "/signin",
             signUp: host + "/signup/fleet",
             checkUsername: host + "/check/name",

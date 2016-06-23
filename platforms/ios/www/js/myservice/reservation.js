@@ -253,7 +253,7 @@ angular.module('app.myservice.reservation', ['ionic', 'util.shared', 'util.url']
         };
 
         $scope.isWaiting = function(reservation) {
-            return reservation.status === "WAITING";
+            return reservation.status === "WAITING" || reservation.status === "NOT_ASSIGNED";
         };
 
         $scope.isWill = function(reservation) {

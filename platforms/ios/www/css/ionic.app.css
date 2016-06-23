@@ -12671,6 +12671,9 @@ a.button {
 * {
   font-family: eGobieFont !important; }
 
+.egobie-not-assigned {
+  color: red !important; }
+
 .egobie-fleet-price {
   display: flex;
   width: 95%;

@@ -54,7 +54,6 @@ angular.module('app.home.opening', ['ionic', 'app.home.fleet', 'util.shared', 'u
             }
 
             var date = new Date(dates[0], dates[1] - 1, dates[2], dates[3], dates[4]);
-
             var month = 0;
             var day = 0;
             var hour = 0;
@@ -62,16 +61,6 @@ angular.module('app.home.opening', ['ionic', 'app.home.fleet', 'util.shared', 'u
             var later = null;
             var min_later = 0;
             var hour_later = 0;
-
-            $http.post(url.test, shared.getRequestBody({
-                body: "date string = '" + ($scope.desiredDate.day + " " + $scope.desiredDate.hour) + "'\n" +
-                        "date = " + date + "\n" +
-                        "toDateString = '" + date.toDateString() + "'\n"
-            })).success(function(data) {
-                console.log(data);
-            }).error(function(data) {
-                console.log("err - ", data);
-            });
 
             if (date.toDateString() === "Invalid Date" || now > date) {
                 shared.alert("Invalid input datetime");

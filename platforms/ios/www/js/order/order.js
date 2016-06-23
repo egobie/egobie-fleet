@@ -106,6 +106,12 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
             }
         };
 
+        $scope.statusStyle = function(status) {
+            return {
+                "egobie-not-assigned": status === "NOT_ASSIGNED"
+            };
+        };
+
         $scope.isDisabled = function() {
             return {
                 "egobie-button-disabled": !$scope.isValid()
@@ -113,8 +119,8 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
         };
 
         $scope.isValid = function() {
-            return $scope.current.status === "WAITING" && $scope.current.price > 0 &&
-                shared.testNumeric($scope.current.price);
+            return ($scope.current.status === "WAITING" || $scope.current.status === "NOT_ASSIGNED") &&
+                    $scope.current.price > 0 && shared.testNumeric($scope.current.price);
         };
 
         $scope.clear = function() {
@@ -122,22 +128,6 @@ angular.module('app.order', ['ionic', 'util.shared', 'util.url'])
             $scope.current.id = -1;
             $scope.current.price = 0;
             $scope.current.status = null;
-        };
-
-        $scope.isWaiting = function(reservation) {
-            return reservation.status === "WAITING";
-        };
-
-        $scope.isWill = function(reservation) {
-            return reservation.how_long > 0 && reservation.status === "RESERVED";
-        };
-
-        $scope.isDelay = function(reservation) {
-            return reservation.how_long < 0 && reservation.status === "RESERVED";
-        };
-
-        $scope.isInProgress = function(reservation) {
-            return reservation.status === "IN_PROGRESS";
         };
 
         $scope.noOrder = function() {
