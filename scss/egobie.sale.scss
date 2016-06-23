@@ -2,6 +2,10 @@
 
 .egobie {
 
+    &-not-assigned {
+        color: red !important;
+    }
+
     &-fleet-price {
         display: flex;
         width: 95%;
