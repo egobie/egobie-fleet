@@ -1,8 +1,8 @@
 angular.module('util.url', [])
 
     .factory('url', function() {
-//        var host = "http://localhost:8000";
-        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
+        var host = "http://localhost:8000";
+//        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
 
         return {
             website: "http://www.egobie.com/",
@@ -16,6 +16,8 @@ angular.module('util.url', [])
             saleOrder: host + "/sale/fleet/order",
             saleOrderDetail: host + "/sale/fleet/order/detail",
             resendEmail: host + "/sale/fleet/resend",
+
+            test: host + "/fleet/test",
 
             signIn: host + "/signin",
             signUp: host + "/signup/fleet",
