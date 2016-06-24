@@ -9,6 +9,14 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         },
@@ -21,15 +29,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"io.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
@@ -49,6 +53,12 @@
             },
             "AndroidManifest.xml": {
                 "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        }
+                    ],
                     "/manifest/application": [
                         {
                             "xml": "<service android:name=\"de.appplant.cordova.plugin.background.ForegroundService\" />",
@@ -83,12 +93,6 @@
                             "count": 1
                         }
                     ],
-                    "/*": [
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 1
-                        }
-                    ],
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" />",
@@ -108,29 +112,32 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.egobie639213"
-        },
-        "cordova-plugin-background-mode": {
-            "PACKAGE_NAME": "com.ionicframework.egobie639213"
-        },
         "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.egobie639213"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.ionicframework.egobie639213"
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "cordova-plugin-background-mode": {
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.egobie"
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-app-event": {
-            "PACKAGE_NAME": "com.egobie"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "de.appplant.cordova.plugin.local-notification": {
-            "PACKAGE_NAME": "com.egobie"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-badge": {
-            "PACKAGE_NAME": "com.egobie"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-vibration": {
             "PACKAGE_NAME": "com.egobie.fleet"
@@ -138,6 +145,21 @@
     },
     "dependent_plugins": {},
     "modules": [
+        {
+            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "clobbers": [
+                "cordova.InAppBrowser.open",
+                "window.open"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+            "id": "cordova-plugin-x-socialsharing.SocialSharing",
+            "clobbers": [
+                "window.plugins.socialsharing"
+            ]
+        },
         {
             "file": "plugins/cordova-plugin-device/www/device.js",
             "id": "cordova-plugin-device.device",
@@ -154,19 +176,12 @@
             ]
         },
         {
-            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+            "id": "ionic-plugin-keyboard.keyboard",
             "clobbers": [
-                "cordova.InAppBrowser.open",
-                "window.open"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
-            "id": "cordova-plugin-x-socialsharing.SocialSharing",
-            "clobbers": [
-                "window.plugins.socialsharing"
-            ]
+                "cordova.plugins.Keyboard"
+            ],
+            "runs": true
         },
         {
             "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
@@ -210,11 +225,12 @@
         }
     ],
     "plugin_metadata": {
+        "cordova-plugin-inappbrowser": "1.4.0",
+        "cordova-plugin-x-socialsharing": "5.1.1",
         "cordova-plugin-device": "1.1.2",
         "cordova-plugin-background-mode": "0.6.5",
-        "cordova-plugin-inappbrowser": "1.4.0",
-        "cordova-plugin-x-socialsharing": "5.1.0",
         "cordova-plugin-whitelist": "1.2.2",
+        "ionic-plugin-keyboard": "2.2.1",
         "cordova-plugin-app-event": "1.2.0",
         "de.appplant.cordova.plugin.local-notification": "0.8.4",
         "cordova-plugin-badge": "0.7.2",

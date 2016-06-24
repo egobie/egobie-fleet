@@ -9,6 +9,10 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
@@ -21,7 +25,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         },
                         {
@@ -41,7 +45,6 @@
             },
             "*-Info.plist": {
                 "parents": {
-                    "LSApplicationQueriesSchemes": [],
                     "UIBackgroundModes": [
                         {
                             "xml": "<array><string>audio</string></array>",
@@ -53,26 +56,29 @@
         }
     },
     "installed_plugins": {
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
         "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.ionicframework.egobie639213"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.egobie639213"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-background-mode": {
-            "PACKAGE_NAME": "com.ionicframework.egobie639213"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.egobie639213"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.egobie"
+            "PACKAGE_NAME": "com.egobie.fleet"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-app-event": {
-            "PACKAGE_NAME": "com.egobie"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "de.appplant.cordova.plugin.local-notification": {
-            "PACKAGE_NAME": "com.egobie"
+            "PACKAGE_NAME": "com.egobie.fleet"
         },
         "cordova-plugin-badge": {
             "PACKAGE_NAME": "com.egobie.fleet"
@@ -83,6 +89,15 @@
     },
     "dependent_plugins": {},
     "modules": [
+        {
+            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "pluginId": "cordova-plugin-inappbrowser",
+            "clobbers": [
+                "cordova.InAppBrowser.open",
+                "window.open"
+            ]
+        },
         {
             "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
             "id": "cordova-plugin-x-socialsharing.SocialSharing",
@@ -109,13 +124,13 @@
             ]
         },
         {
-            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-            "id": "cordova-plugin-inappbrowser.inappbrowser",
-            "pluginId": "cordova-plugin-inappbrowser",
+            "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
+            "id": "ionic-plugin-keyboard.keyboard",
+            "pluginId": "ionic-plugin-keyboard",
             "clobbers": [
-                "cordova.InAppBrowser.open",
-                "window.open"
-            ]
+                "cordova.plugins.Keyboard"
+            ],
+            "runs": true
         },
         {
             "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
@@ -164,11 +179,12 @@
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-x-socialsharing": "5.1.0",
+        "cordova-plugin-inappbrowser": "1.4.0",
+        "cordova-plugin-x-socialsharing": "5.1.1",
         "cordova-plugin-device": "1.1.2",
         "cordova-plugin-background-mode": "0.6.5",
-        "cordova-plugin-inappbrowser": "1.4.0",
         "cordova-plugin-whitelist": "1.2.2",
+        "ionic-plugin-keyboard": "2.2.1",
         "cordova-plugin-app-event": "1.2.0",
         "de.appplant.cordova.plugin.local-notification": "0.8.4",
         "cordova-plugin-badge": "0.7.2",

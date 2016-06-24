@@ -46,7 +46,14 @@ angular.module('app.home.opening', ['ionic', 'app.home.fleet', 'util.shared', 'u
 
         $scope.saveDesiredDate = function() {
             var now = new Date();
-            var date = new Date($scope.desiredDate.day + " " + $scope.desiredDate.hour);
+            var dates = ($scope.desiredDate.day + " " + $scope.desiredDate.hour).split(/[- :]/);
+
+            if (dates.length !== 5) {
+                shared.alert("Invalid input datetime");
+                return;
+            }
+
+            var date = new Date(dates[0], dates[1] - 1, dates[2], dates[3], dates[4]);
             var month = 0;
             var day = 0;
             var hour = 0;

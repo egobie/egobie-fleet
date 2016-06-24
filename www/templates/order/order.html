@@ -39,6 +39,11 @@
                                 <p class="title">Estimated Time:</p>
                                 <p class="value">{{toHourMin(order.time)}}</p>
                             </div>
+                            <div class="time">
+                                <p class="title">Assigned:</p>
+                                <p class="value"
+                                   ng-class="statusStyle(order.status)">{{order.status}}</p>
+                            </div>
                         </div>
 
                         <div class="plate-reserve">
@@ -49,18 +54,6 @@
                         </div>
                     </div>
                 </div>
-                <p class="bottom-wait"
-                   ng-show="isWaiting(order)">Waiting</p>
-
-                <p class="bottom-will"
-                   ng-show="isWill(order)"
-                   ng-class="unitStyle(reservation.unit)">{{reservation.how_long}}</p>
-
-                <p class="bottom-delay"
-                   ng-show="isDelay(order)">Will start soon</p>
-
-                <p class="bottom-in-progress"
-                   ng-show="isInProgress(order)">In Progress</p>
             </ion-item>
         </ion-list>
     </ion-content>
