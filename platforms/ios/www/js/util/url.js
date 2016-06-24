@@ -1,12 +1,14 @@
 angular.module('util.url', [])
 
     .factory('url', function() {
-//        var host = "http://localhost:8000";
-        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
+        var host = "http://localhost:8000";
+//        var host = "http://egobie-app-lb-1883256124.us-east-1.elb.amazonaws.com";
 
         return {
             website: "http://www.egobie.com/",
             faq: "http://www.egobie.com/#!faq/aifir",
+            ios: "https://itunes.apple.com/us/app/egobie-fleet/id1125502163?mt=8",
+            android: "https://play.google.com/store/apps/details?id=com.egobie.fleet",
 
             newFleetUser: host + "/sale/fleet/new",
             allFleetUser: host + "/sale/fleet/all",

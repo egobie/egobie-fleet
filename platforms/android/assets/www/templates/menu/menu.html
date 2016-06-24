@@ -59,6 +59,8 @@
 
                 <ion-item ui-sref="menu.order" menu-close="" class="item item-icon-left egobie-menu-item">
                     <i class="icon egobie-history-off"></i><span>RESERVATIONS</span>
+                    <span class="badge badge-assertive"
+                          ng-show="badge.order > 0">{{badge.order}}</span>
                 </ion-item>
 
                 <ion-item ui-sref="menu.setting" menu-close="" class="item item-icon-left egobie-menu-item">

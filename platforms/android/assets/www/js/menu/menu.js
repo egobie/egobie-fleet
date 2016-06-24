@@ -13,6 +13,10 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
         $ionicConfigProvider.backButton.text('');                  // default is 'Back'
         $ionicConfigProvider.backButton.previousTitleText(false);  // hides the 'Back' text
         // $ionicConfigProvider.templates.maxPrefetch(20);
+        // Make tabs bottom (for android)
+        $ionicConfigProvider.tabs.position('bottom');
+        // Make Header center (for android)
+        $ionicConfigProvider.navBar.alignTitle('center');
 
         $stateProvider
 
@@ -50,6 +54,10 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
             isFleet: shared.isFleet()
         };
 
+        $scope.badge = {
+            order: 0
+        };
+
         $scope.$watch(function() {
             return shared.getUser().first;
         }, function(newValue) {
@@ -75,6 +83,7 @@ angular.module('app.menu', ['ionic', 'ngCordova', 'util.request', 'util.shared']
             }, 300);
         };
 
+        shared.setMenuScope($scope);
         shared.loadSaleOrders(true);
         shared.loadSaleUsers(true, 0);
     });
