@@ -59,19 +59,20 @@ angular
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
-            if(window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-                // Open link
-                window.open = cordova.InAppBrowser.open;
+            if (window.cordova.plugins.Keyboard) {
+                window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
             }
 
-            if(window.StatusBar) {
+            // Open link
+            window.open = cordova.InAppBrowser.open;
+
+            if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
+                window.StatusBar.styleDefault();
             }
 
             // Enable background mode
-            cordova.plugins.backgroundMode.enable();
+            window.cordova.plugins.backgroundMode.enable();
 
             window.cordova.plugins.notification.local.registerPermission(function (granted) {
                 
